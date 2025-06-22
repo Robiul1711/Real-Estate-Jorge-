@@ -1,6 +1,7 @@
 import HomeBanner from "@/components/homeComponents/HomeBanner";
 import HowItWork from "@/components/homeComponents/HowItWork";
 import LatestProject from "@/components/homeComponents/LatestProject";
+import OurBlog from "@/components/homeComponents/OurBlog";
 import WhyChooseUs from "@/components/homeComponents/WhyChooseUs";
 import React from "react";
 import { ScrollRestoration } from "react-router-dom";
@@ -13,6 +14,7 @@ const Home = () => {
       <HowItWork />
       <WhyChooseUs />
       |<LatestProject />
+      <OurBlog />
     </>
   );
 };
