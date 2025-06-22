@@ -5,9 +5,12 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div className="section-padding-x py-10 md:py-20 bg-black text-white space-y-4">
-      <Link to="/">
-        <FooterIcon className="!text-white mb-5" />
-      </Link>
+      <div className="inline-block">
+        <Link to="/">
+          <FooterIcon className="!text-white mb-2" />
+        </Link>
+      </div>
+
       <p className="text-[#C7C7C7] text-lg">+1-800-555-1234</p>
       <p className="text-[#C7C7C7] text-lg">infolorem.com</p>
       <div className="flex flex-col md:flex-row justify-between items-center gap-4">
