@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 @import "tailwindcss";
@@ -9,11 +8,11 @@
 
 @theme {
   /* font */
-  --font-poppins: Poppins, sans-serif;
+  --font-geist: Geist, sans-serif;
 
   /* color */
 
-  --color-primary: green;
+  --color-primary: #002e33;
   --color-bg-custom: linear-gradient(red, yellow);
 
   /* breakpoint */
@@ -56,13 +55,6 @@
       transform: rotate(360deg);
     }
   }
-}
-:root {
-  /* Fonts */
-  --font-poppins: "Poppins", sans-serif;
-
-  /* Colors */
-  --color-Primary: #002e33;
 }
 
 /* radius */
