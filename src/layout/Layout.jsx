@@ -4,11 +4,11 @@ import { Outlet } from "react-router-dom";
 
 const Layout = () => {
   return (
-    <>
+    <div className="font-geist">
       <Navbar />
       <Outlet />
       <Footer />
-    </>
+    </div>
   );
 };
 
