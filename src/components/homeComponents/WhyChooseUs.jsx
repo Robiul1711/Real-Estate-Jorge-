@@ -18,7 +18,7 @@ const WhyChooseUs = () => {
         Our comprehensive services encompass luxury property sales, sustainable
         green building investments, and premium vacation rentals.
       </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-8 mt-8 ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8 ">
         <div className="bg-[#F3F3F3] text-[#2C2C2C] rounded-4xl p-8 shadow-md hover:shadow-lg transition-shadow duration-300">
           {/* Icon container */}
           <div className="p-4 bg-white rounded-full w-fit mb-6">
