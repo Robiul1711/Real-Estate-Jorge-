@@ -94,7 +94,14 @@ const OurBlog = () => {
         {blogData.map((item, index) => (
           <SwiperSlide key={index}>
             <div className="h-full">
-              <img className="w-full" src={item.image} alt="image" />
+              <div className="overflow-hidden rounded-t-lg">
+                <img
+                  className="w-full hover:scale-105 transform transition-all duration-500 ease-in-out"
+                  src={item.image}
+                  alt="image"
+                />
+              </div>
+
               <h2 className="text-xl md:text-2xl font-semibold my-4">
                 {item.title}
               </h2>

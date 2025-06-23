@@ -14,9 +14,9 @@ const Home = () => {
       <HomeBanner />
       <HowItWork />
       <WhyChooseUs />
-      |<LatestProject />
+      <LatestProject />
       <OurBlog />
-      <FAQ />
+      <FAQ/>
     </>
   );
 };

@@ -25,7 +25,13 @@ const LatestProject = () => {
         {[...Array(6)].map((_, index) => {
           return (
             <div key={index} className="bg-[#F3F3F3] p-5 rounded-2xl">
-              <img className="w-full" src={image} alt="image" />
+              <div className="overflow-hidden rounded-2xl">
+                <img
+                  className="w-full hover:scale-105 transform transition-all duration-500 ease-in-out"
+                  src={image}
+                  alt="image"
+                />
+              </div>
 
               <div className="flex justify-between mt-4 font-semibold text-[20px]">
                 <h2>The Westwood Residences</h2>
