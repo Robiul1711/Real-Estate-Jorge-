@@ -1,3 +1,4 @@
+import FAQ from "@/components/homeComponents/FAQ";
 import HomeBanner from "@/components/homeComponents/HomeBanner";
 import HowItWork from "@/components/homeComponents/HowItWork";
 import LatestProject from "@/components/homeComponents/LatestProject";
@@ -15,6 +16,7 @@ const Home = () => {
       <WhyChooseUs />
       |<LatestProject />
       <OurBlog />
+      <FAQ />
     </>
   );
 };
