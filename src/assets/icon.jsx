@@ -373,3 +373,33 @@ export const Unit = (props) => {
     </svg>
   );
 };
+
+export const Star = (props) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="17"
+      height="17"
+      viewBox="0 0 17 17"
+      fill="none"
+      {...props}
+    >
+      <g clip-path="url(#clip0_347_1044)">
+        <path
+          d="M8.62977 13.3111L13.834 16.4522L12.4529 10.5322L17.0508 6.54905L10.9961 6.03533L8.62977 0.452148L6.26347 6.0353L0.20874 6.54894L4.80662 10.5321L3.42559 16.4521L8.62977 13.3111Z"
+          fill="#F7C547"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_347_1044">
+          <rect
+            width="16.8421"
+            height="16"
+            fill="white"
+            transform="translate(0.20874 0.452148)"
+          />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+};
