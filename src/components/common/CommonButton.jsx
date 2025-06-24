@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-
-// react icons
 import { MdKeyboardArrowDown } from "react-icons/md";
+
 const CommonButton = ({ defaultText = "Select", options = [] }) => {
   const [actionButtonActive, setActionButtonActive] = useState(false);
   const [actionButtonText, setActionButtonText] = useState(defaultText);
@@ -15,7 +14,7 @@ const CommonButton = ({ defaultText = "Select", options = [] }) => {
     const handleClick = (event) => {
       if (
         !event.target.closest(".publishButtonOptions") &&
-        !event.target.closest(".publishButton")
+        !event.target.closest(".publishButtonWrapper")
       ) {
         setActionButtonActive(false);
       }
@@ -27,16 +26,22 @@ const CommonButton = ({ defaultText = "Select", options = [] }) => {
   }, []);
 
   return (
-    <div className="flex items-center rounded bg-transparent border border-[#fff] outline-none text-[#fff] justify-between relative my-3 w-[238px]">
-      <button className=" text-[1rem] px-6 py-1.5 transition-all duration-500 cursor-auto">
-        {actionButtonText}
-      </button>
-
+    <div className="flex items-center rounded bg-transparent border border-[#fff] outline-none text-[#fff] justify-between relative my-1 md:my-3 w-full md:w-[238px] publishButtonWrapper">
       <div
         onClick={() => setActionButtonActive(!actionButtonActive)}
-        className="bg-transparent w-[50px] py-1.5 flex items-center justify-center cursor-pointer rounded-r publishButton"
+        className="flex justify-between items-center w-full cursor-pointer publishButton"
       >
-        <MdKeyboardArrowDown className="text-[2rem]" />
+        <button className="text-[1rem] px-6 py-1.5 transition-all duration-500 cursor-pointer">
+          {actionButtonText}
+        </button>
+
+        <div className="bg-transparent w-[50px] py-1.5 flex items-center justify-center rounded-r">
+          <MdKeyboardArrowDown
+            className={`text-[2rem] transition-transform duration-300 ${
+              actionButtonActive ? "rotate-180" : "rotate-0"
+            }`}
+          />
+        </div>
       </div>
 
       <ul

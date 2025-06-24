@@ -25,7 +25,13 @@ const LatestProject = () => {
         {[...Array(6)].map((_, index) => {
           return (
             <div key={index} className="bg-[#F3F3F3] p-5 rounded-2xl">
-              <img className="w-full" src={image} alt="image" />
+              <div className="overflow-hidden rounded-2xl">
+                <img
+                  className="w-full hover:scale-105 transform transition-all duration-500 ease-in-out"
+                  src={image}
+                  alt="image"
+                />
+              </div>
 
               <div className="flex justify-between mt-4 font-semibold text-[20px]">
                 <h2>The Westwood Residences</h2>
@@ -75,8 +81,8 @@ const LatestProject = () => {
                 </div>
               </div>
 
-              <button className="w-full bg-black text-white py-3 rounded-xl cursor-pointer">
-                View Property
+              <button className="w-full bg-black text-white py-3 rounded-xl cursor-pointer relative overflow-hidden before:absolute before:w-full before:h-full before:top-0 before:left-0 before:bg-[#111827] before:translate-x-[-200px] hover:before:translate-x-0 before:translate-y-12 hover:before:translate-y-0 before:duration-300 before:z-[-1] z-0">
+                <span className="z-[1]">View Property</span>
               </button>
             </div>
           );
