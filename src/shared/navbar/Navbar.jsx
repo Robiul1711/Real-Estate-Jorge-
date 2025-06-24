@@ -81,17 +81,16 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <Link
-            to="/login"
-            className="hidden lg:inline-block text-black border border-black font-semibold py-2 px-4 rounded-md hover:opacity-90 transition"
-          >
-            Login
+          <Link to="/login">
+            <button className="text-[17px] font-medium px-6 rounded-md py-[7px] border border-primary relative before:absolute overflow-hidden before:translate-x-[-200px] hover:before:translate-x-0 before:z-[-1] before:translate-y-12 dark:text-black dark:border-black dark:z-0 dark:before:bg-black before:transition hover:before:translate-y-0 before:duration-300 hover:text-secondary  before:w-full before:h-full before:bg-[#111] before:top-0 before:left-0 cursor-pointer">
+              Login
+            </button>
           </Link>
-          <Link
-            to="/login"
-            className="hidden lg:inline-block bg-black border border-black text-white font-semibold py-2 px-4 rounded-md hover:opacity-90 transition"
-          >
-            Signup
+
+          <Link to="/sign-up">
+            <button className="text-[17px] font-medium px-6 rounded-md py-[7px] border border-primary relative before:absolute overflow-hidden before:translate-x-[-200px] hover:before:translate-x-0 before:z-[-1] before:translate-y-12 dark:text-black dark:border-black dark:z-0 dark:before:bg-black before:transition hover:before:translate-y-0 before:duration-300 hover:text-secondary  before:w-full before:h-full before:bg-[#111] before:top-0 before:left-0 cursor-pointer">
+              Signup
+            </button>
           </Link>
         </div>
 

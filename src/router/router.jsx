@@ -3,6 +3,10 @@ import AdminLayout from "@/layout/AdminLayout";
 import Layout from "@/layout/Layout";
 import About from "@/pages/about/About";
 import Agents from "@/pages/agents/Agents";
+import ForgotPassword from "@/pages/auth/ForgotPassword";
+import Login from "@/pages/auth/Login";
+import NewPassword from "@/pages/auth/NewPassword";
+import SignUp from "@/pages/auth/SignUp";
 import Home from "@/pages/home/Home";
 import Properties from "@/pages/properties/Properties";
 import Services from "@/pages/services/Services";
@@ -46,6 +50,22 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
     ],
+  },
+  {
+    path: "/sign-up",
+    element: <SignUp />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPassword />,
+  },
+  {
+    path: "/new-password",
+    element: <NewPassword />,
   },
 ]);
 

@@ -81,8 +81,8 @@ const LatestProject = () => {
                 </div>
               </div>
 
-              <button className="w-full bg-black text-white py-3 rounded-xl cursor-pointer">
-                View Property
+              <button className="w-full bg-black text-white py-3 rounded-xl cursor-pointer relative overflow-hidden before:absolute before:w-full before:h-full before:top-0 before:left-0 before:bg-[#111827] before:translate-x-[-200px] hover:before:translate-x-0 before:translate-y-12 hover:before:translate-y-0 before:duration-300 before:z-[-1] z-0">
+                <span className="z-[1]">View Property</span>
               </button>
             </div>
           );
