@@ -57,7 +57,6 @@ const SideBar = ({ sidebar, open, setOpen }) => {
         {/* Logo */}
         <Link to={"/"}>
           <div className="flex justify-center items-center">
-            {/* <img src={} alt="Safe" className="h-24 object-contain" /> */}
             <span>
               <FaReact size={40} color=" black" />
             </span>
@@ -78,8 +77,8 @@ const SideBar = ({ sidebar, open, setOpen }) => {
                 }}
                 className={`flex items-center gap-3 px-4 py-2 rounded-lg text-base font-medium transition-colors duration-200 ${
                   isActive(item?.activePaths)
-                    ? "bg-[#FFF] text-[#3F6534]"
-                    : "text-[#FFF] hover:bg-[#466b55] hover:text-[#ffffff]"
+                    ? "bg-[#2F2F2F] text-[#FFF]"
+                    : "text-black hover:bg-[#2F2F2F] hover:text-[#ffffff]"
                 }`}
               >
                 <span className="text-lg">{item?.icon}</span>
@@ -91,7 +90,7 @@ const SideBar = ({ sidebar, open, setOpen }) => {
                 <div
                   className={`flex items-center justify-between px-4 py-2 cursor-pointer w-full rounded-lg transition-all duration-200 ${
                     parentActive
-                      ? "bg-[#253E8E] text-white"
+                      ? "bg-[#253E8E] text-black"
                       : "text-gray-700 hover:bg-[#E3ECFF] hover:text-[#253E8E]"
                   }`}
                   onClick={() => toggleSubmenu(index)}

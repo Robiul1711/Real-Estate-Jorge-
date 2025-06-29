@@ -10,31 +10,59 @@ const AdminLayout = () => {
 
   const sideBar = [
     {
-        id: 1,
-        icon: <MdDashboard />,
-        text: "Dashboard",
-        path: "/dashboard", // main path (optional, if you still want to keep it)
-        activePaths: ["/dashboard", "/dashboard/settings", "/dashboard/analytics"], // all paths that should make this item active
-        sublink: false,
-      }
-      ,
+      id: 1,
+      icon: <MdDashboard />,
+      text: "Dashboard",
+      path: "/dashboard",
+      activePaths: [
+        "/dashboard",
+        "/dashboard/settings",
+        "/dashboard/analytics",
+      ],
+      sublink: false,
+    },
     {
-      id:2,
-      icon:<MdDashboard />,
-      text:"Admin Management",
-      path:"/dashboard/admin-list",
-      sublink:[
-        {
-          id:1,
-          text:"Admin List",
-          path:"/dashboard/admin-list",
-        },
-        {
-          id:1,
-          text:"Add New Admin",
-          path:"/dashboard/asdasd"
-        },
-      ]
+      id: 2,
+      icon: <MdDashboard />,
+      text: "Browse Opportunities",
+      path: "/dashboard/admin-list",
+      sublink: false,
+    },
+    {
+      id: 3,
+      icon: <MdDashboard />,
+      text: "My Investments",
+      path: "/dashboard/admin-list",
+      sublink: false,
+    },
+    {
+      id: 4,
+      icon: <MdDashboard />,
+      text: "Payment",
+      path: "/dashboard/admin-list",
+      sublink: false,
+    },
+    {
+      id: 5,
+      icon: <MdDashboard />,
+      text: "Documents",
+      path: "/dashboard/admin-list",
+      sublink: false,
+    },
+   
+     {
+      id: 6,
+      icon: <MdDashboard />,
+      text: "Support",
+      path: "/dashboard/admin-list",
+      sublink: false,
+    },
+     {
+      id: 7,
+      icon: <MdDashboard />,
+      text: "Setting",
+      path: "/dashboard/admin-list",
+      sublink: false,
     },
   ];
   const location = useLocation();
