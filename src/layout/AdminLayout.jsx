@@ -9,6 +9,7 @@ import {
 } from "@/assets/icon";
 import CommonNavbar from "@/pages/admin/CommonNavbar";
 import SideBar from "@/pages/admin/SideBar";
+import path from "path";
 import React, { useEffect, useState } from "react";
 import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
 const AdminLayout = () => {
@@ -26,6 +27,7 @@ const AdminLayout = () => {
       icon: <Calender />,
       text: "Opportunities",
       path: "/dashboard/browse-opportunities",
+      path2: "/dashboard/project-view-description/:id",
     },
     {
       id: 3,

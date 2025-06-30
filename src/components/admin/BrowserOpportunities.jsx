@@ -1,6 +1,7 @@
 import { Filter, Location, Sort, Unit } from "@/assets/icon";
 import React from "react";
 import image from "../../assets/images/project.png";
+import { Link } from "react-router-dom";
 
 const BrowserOpportunities = () => {
   return (
@@ -28,7 +29,7 @@ const BrowserOpportunities = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8">
         {[...Array(6)].map((_, index) => {
           return (
-            <div key={index} className="bg-[#F3F3F3] p-5 rounded-2xl">
+            <Link to={`/dashboard/project-view-description/${index}`} key={index} className="bg-[#F3F3F3] p-5 rounded-2xl">
               <div className="overflow-hidden rounded-2xl">
                 <img
                   className="w-full hover:scale-105 transform transition-all duration-500 ease-in-out"
@@ -88,7 +89,7 @@ const BrowserOpportunities = () => {
               <button className="w-full bg-black text-white py-3 rounded-xl cursor-pointer relative overflow-hidden before:absolute before:w-full before:h-full before:top-0 before:left-0 before:bg-[#111827] before:translate-x-[-200px] hover:before:translate-x-0 before:translate-y-12 hover:before:translate-y-0 before:duration-300 before:z-[-1] z-0">
                 <span className="z-[1]">View Property</span>
               </button>
-            </div>
+            </Link>
           );
         })}
       </div>

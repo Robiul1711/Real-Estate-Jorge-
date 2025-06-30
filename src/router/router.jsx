@@ -3,6 +3,7 @@ import Dashboard from "@/components/admin/Dashboard";
 import Documents from "@/components/admin/Documents";
 import MyInvestments from "@/components/admin/MyInvestments";
 import Payment from "@/components/admin/Payment";
+import ProjectViewdescription from "@/components/admin/ProjectViewdescription";
 import Settings from "@/components/admin/Settings";
 import Support from "@/components/admin/Support";
 import AdminLayout from "@/layout/AdminLayout";
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "browse-opportunities",
         element: <BrowserOpportunities />,
+      },
+      {
+        path: "project-view-description/:id",
+        element: <ProjectViewdescription />,
       },
       {
         path: "my-investments",
