@@ -1,5 +1,6 @@
 import { Complete, Process } from "@/assets/icon";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Payment = () => {
   return (
@@ -18,9 +19,11 @@ const Payment = () => {
           <p className="text-sm">Ready for investment</p>
         </div>
         <div className="flex flex-col">
-          <button className="px-3 py-2 text-[15px] bg-[#FFF] rounded-lg my-1 cursor-pointer">
-            Add Funds
-          </button>
+          <Link to="/dashboard/add-funds">
+            <button className="px-3 py-2 text-[15px] bg-[#FFF] rounded-lg my-1 cursor-pointer">
+              Add Funds
+            </button>
+          </Link>
           <button className="px-3 py-2 text-[15px] bg-[#FFF] rounded-lg my-1 cursor-pointer">
             Withdraw
           </button>
@@ -67,13 +70,27 @@ const Payment = () => {
             <h2 className="text-[#000000] text-[16px] font-semibold">
               Investment in Downtown Plaza
             </h2>
-            <button className="text-[#EAB308] bg-[#DCFCE7] text-sm font-medium px-3 py-1 rounded-2xl flex items-center gap-2">
+            <button className="text-[#854D0E] bg-[#FEF9C3] text-sm font-medium px-3 py-1 rounded-2xl flex items-center gap-2">
               <Process /> Processing
             </button>
           </div>
           <div className="flex items-center justify-between mt-2">
             <p className="text-[#4B5563] text-sm">Jun 15, 2024</p>
             <p className="text-[#000000] text-[16px] font-bold">$25,000</p>
+          </div>
+        </div>
+        <div className="bg-white p-5 rounded-lg">
+          <div className="flex items-center gap-4">
+            <h2 className="text-[#000000] text-[16px] font-semibold">
+              Withdrawal to Bank Account
+            </h2>
+            <button className="text-[#166534] bg-[#DCFCE7] text-sm font-medium px-3 py-1 rounded-2xl flex items-center gap-2">
+              <Complete /> Completed
+            </button>
+          </div>
+          <div className="flex items-center justify-between mt-2">
+            <p className="text-[#4B5563] text-sm">Jun 5, 2024</p>
+            <p className="text-[#DC2626] text-[16px] font-bold">-$5,000</p>
           </div>
         </div>
         <div className="bg-white p-5 rounded-lg">

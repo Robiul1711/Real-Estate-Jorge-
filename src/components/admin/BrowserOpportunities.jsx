@@ -7,9 +7,7 @@ const BrowserOpportunities = () => {
     <div>
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-semibold my-2">
-            Investment Opportunities
-          </h2>
+          <h2 className="text-3xl font-bold my-2">Investment Opportunities</h2>
           <p className="text-sm text-[#4B5563]">
             Discover your next profitable investment
           </p>
