@@ -1,5 +1,6 @@
 import { Complete, Process } from "@/assets/icon";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Payment = () => {
   return (
@@ -18,9 +19,11 @@ const Payment = () => {
           <p className="text-sm">Ready for investment</p>
         </div>
         <div className="flex flex-col">
-          <button className="px-3 py-2 text-[15px] bg-[#FFF] rounded-lg my-1 cursor-pointer">
-            Add Funds
-          </button>
+          <Link to="/dashboard/add-funds">
+            <button className="px-3 py-2 text-[15px] bg-[#FFF] rounded-lg my-1 cursor-pointer">
+              Add Funds
+            </button>
+          </Link>
           <button className="px-3 py-2 text-[15px] bg-[#FFF] rounded-lg my-1 cursor-pointer">
             Withdraw
           </button>

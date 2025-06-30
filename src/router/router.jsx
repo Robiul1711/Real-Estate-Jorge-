@@ -1,8 +1,10 @@
+import AddFunds from "@/components/admin/AddFunds";
 import BrowserOpportunities from "@/components/admin/BrowserOpportunities";
 import Dashboard from "@/components/admin/Dashboard";
 import Documents from "@/components/admin/Documents";
 import MyInvestments from "@/components/admin/MyInvestments";
 import Payment from "@/components/admin/Payment";
+import PaymentDetails from "@/components/admin/PaymentDetails";
 import Settings from "@/components/admin/Settings";
 import Support from "@/components/admin/Support";
 import AdminLayout from "@/layout/AdminLayout";
@@ -66,6 +68,14 @@ const router = createBrowserRouter([
       {
         path: "payment",
         element: <Payment />,
+      },
+      {
+        path: "add-funds",
+        element: <AddFunds />,
+      },
+      {
+        path: "payment-details",
+        element: <PaymentDetails />,
       },
       {
         path: "documents",
