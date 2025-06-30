@@ -1,27 +1,31 @@
-import React, { useEffect, useState } from "react";
+import { Filter, Location, Sort, Unit } from "@/assets/icon";
+import React from "react";
 import image from "../../assets/images/project.png";
-import { Location, Unit } from "@/assets/icon";
 
-const LatestProject = () => {
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setProgress(68);
-    }, 300);
-
-    return () => clearTimeout(timeout);
-  }, []);
+const BrowserOpportunities = () => {
   return (
-    <div className="section-padding-x section-padding-y">
-      <h2 className="text-[32px] md:text-4xl font-bold mb-4 text-center">
-        Our Latest Projects
-      </h2>
-      <p className="text-lg text-center md:text-[22px] w-full md:w-1/2 mx-auto">
-        Our comprehensive services encompass luxury property sales, sustainable
-        green building investments, and premium vacation rentals.
-      </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-12">
+    <div>
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-3xl font-semibold my-2">
+            Investment Opportunities
+          </h2>
+          <p className="text-sm text-[#4B5563]">
+            Discover your next profitable investment
+          </p>
+        </div>
+        <div className="flex items-center gap-4">
+          <button className="flex items-center gap-4 border font-medium bg-white rounded px-6 py-2">
+            <Filter />
+            Filter
+          </button>
+          <button className="flex items-center gap-3 border font-medium bg-white rounded px-6 py-2">
+            <Sort />
+            Sort by ROI
+          </button>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8">
         {[...Array(6)].map((_, index) => {
           return (
             <div key={index} className="bg-[#F3F3F3] p-5 rounded-2xl">
@@ -92,4 +96,4 @@ const LatestProject = () => {
   );
 };
 
-export default LatestProject;
+export default BrowserOpportunities;

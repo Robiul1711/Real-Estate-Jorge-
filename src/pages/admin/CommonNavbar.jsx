@@ -1,13 +1,13 @@
-import { IoIosNotifications } from "react-icons/io";
-import { CgProfile } from "react-icons/cg";
-import React, { use } from "react";
+import React from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import profile from "../../assets/images/profile.png";
+import { Notificartion } from "@/assets/icon";
 
 const CommonNavbar = ({ open, setOpen }) => {
   const { pathname } = useLocation();
   return (
-    <div className="flex items-center gap-5 justify-between w-full py-3 md:py-6 px-0  rounded-2xl">
+    <div className="flex items-center gap-5 justify-between w-full py-3 md:py-5 px-6  rounded-2xl bg-white">
       <div className="flex items-center gap-4">
         <span
           onClick={() => setOpen(!open)}
@@ -15,17 +15,20 @@ const CommonNavbar = ({ open, setOpen }) => {
         >
           <GiHamburgerMenu color="black" size={26} />
         </span>
-        <div className="flex items-center gap-4">
-          <p className=" text-black text-3xl font-bold">Admin Header</p>
+        <div className=" text-black">
+          <h1 className="text-3xl font-bold">Welcome Back, Jorge Franco!</h1>
+          <p className="mt-2 text-[#666666]">
+            Elevate your financial future with smart property investments.
+          </p>
         </div>
       </div>
 
-      <div className="flex items-start md:gap-4 gap-2">
+      <div className="flex items-center md:gap-6 gap-3">
         <span>
-          <IoIosNotifications color="black" size={24} />
+          <Notificartion color="black" size={24} />
         </span>
         <span>
-          <CgProfile color="black" size={24} />
+          <img className="w-12 h-12 rounded-full" src={profile} alt="image" />
         </span>
       </div>
     </div>
