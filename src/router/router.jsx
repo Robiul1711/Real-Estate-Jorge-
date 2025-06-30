@@ -1,4 +1,10 @@
+import BrowserOpportunities from "@/components/admin/BrowserOpportunities";
 import Dashboard from "@/components/admin/Dashboard";
+import Documents from "@/components/admin/Documents";
+import MyInvestments from "@/components/admin/MyInvestments";
+import Payment from "@/components/admin/Payment";
+import Settings from "@/components/admin/Settings";
+import Support from "@/components/admin/Support";
 import AdminLayout from "@/layout/AdminLayout";
 import Layout from "@/layout/Layout";
 import About from "@/pages/about/About";
@@ -46,11 +52,36 @@ const router = createBrowserRouter([
     element: <AdminLayout />,
     children: [
       {
-        path: "/dashboard",
+        index: true,
         element: <Dashboard />,
+      },
+      {
+        path: "browse-opportunities",
+        element: <BrowserOpportunities />,
+      },
+      {
+        path: "my-investments",
+        element: <MyInvestments />,
+      },
+      {
+        path: "payment",
+        element: <Payment />,
+      },
+      {
+        path: "documents",
+        element: <Documents />,
+      },
+      {
+        path: "support",
+        element: <Support />,
+      },
+      {
+        path: "setting",
+        element: <Settings />,
       },
     ],
   },
+
   {
     path: "/sign-up",
     element: <SignUp />,
