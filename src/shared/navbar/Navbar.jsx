@@ -18,6 +18,20 @@ const Navbar = () => {
 
   const toggleMobileMenu = () => setMobileOpen(!mobileOpen);
   const closeMobileMenu = () => setMobileOpen(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -36,8 +50,12 @@ const Navbar = () => {
   }, [mobileOpen]);
 
   return (
-    <header className="section-padding-x py-4 z-50 sticky bg-white/80 backdrop-blur-sm top-0 shadow-md">
-      <div className="flex items-center justify-between">
+    <header
+      className={`fixed top-0 left-0 section-padding-x right-0 z-50 w-full transition-all duration-300 ${
+        scrolled ? "bg-white shadow-md py-4" : "bg-transparent py-4 "
+      }`}
+    >
+      <div className="flex items-center justify-between w-full">
         {/* Logo */}
         <Link to="/" onClick={closeMobileMenu} className="text-center">
           <p>

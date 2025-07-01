@@ -22,7 +22,10 @@ const ProjectViewdescription = () => {
   return (
     <div>
       <div className="flex items-center gap-8 pb-8">
-        <Link className="flex items-center gap-2" to="/dashboard/browse-opportunities">
+        <Link
+          className="flex items-center gap-2"
+          to="/dashboard/browse-opportunities"
+        >
           <FaArrowLeftLong /> Back
         </Link>
         <div>
@@ -53,18 +56,16 @@ const ProjectViewdescription = () => {
               ))}
             </ul>
           </div>
-    <div className="mt-5">
-  {activeTab === "Description" && <Description />}
-  {activeTab === "Your Investment" && <YourInvestment />}
-  {activeTab === "Financial Information" && <FinancialInformation />}
-  {activeTab === "Documentation" && <Documentation />}
-</div>
-
+          <div className="mt-5">
+            {activeTab === "Description" && <Description />}
+            {activeTab === "Your Investment" && <YourInvestment />}
+            {activeTab === "Financial Information" && <FinancialInformation />}
+            {activeTab === "Documentation" && <Documentation />}
+          </div>
         </div>
         <div className="w-[30%]">
           <div className="sticky top-6">
-
-          <OpportunitiesRightSide />
+            <OpportunitiesRightSide />
           </div>
         </div>
       </div>

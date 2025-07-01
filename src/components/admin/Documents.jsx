@@ -2,10 +2,12 @@ import { Filter, Legal, Upload } from "@/assets/icon";
 import { Eye } from "lucide-react";
 import React from "react";
 import { HiArrowDownTray } from "react-icons/hi2";
+import { ScrollRestoration } from "react-router-dom";
 
 const Documents = () => {
   return (
     <div>
+      <ScrollRestoration />
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-3xl font-bold my-2">Documents</h2>

@@ -8,6 +8,7 @@ import {
   World,
 } from "@/assets/icon";
 import React, { useState } from "react";
+import { ScrollRestoration } from "react-router-dom";
 
 const Settings = () => {
   const [toggles, setToggles] = useState({
@@ -25,6 +26,7 @@ const Settings = () => {
   };
   return (
     <div>
+      <ScrollRestoration />
       <h2 className="text-3xl font-bold my-2 text-[#000000]">Settings</h2>
       <p className="text-sm text-[#4B5563]">
         Manage your account preferences and security settings

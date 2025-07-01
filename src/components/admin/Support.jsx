@@ -2,6 +2,7 @@ import { Chat, Complete, Email, Process, Question } from "@/assets/icon";
 import { Book, Phone } from "lucide-react";
 import React, { useState } from "react";
 import { IoIosArrowRoundForward } from "react-icons/io";
+import { ScrollRestoration } from "react-router-dom";
 const faqs = [
   {
     question: "How do I make my first investment?",
@@ -23,7 +24,7 @@ const faqs = [
     question: "When will I receive dividend payments?",
     short: "Dividend payments are typically distributed quarterly...",
     full: "Dividend payments are typically distributed quarterly, depending on the specific investment agreement. You’ll be notified and can view all payout details in your account.",
-  },    
+  },
 ];
 
 const Support = () => {
@@ -34,6 +35,7 @@ const Support = () => {
   };
   return (
     <div>
+      <ScrollRestoration />
       <h2 className="text-3xl font-bold my-2 text-[#000000]">Support Center</h2>
       <p className="text-sm text-[#4B5563]">
         Get help and support for your investment journey

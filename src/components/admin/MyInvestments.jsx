@@ -3,10 +3,12 @@ import { Calendar, Eye } from "lucide-react";
 import { CiLocationOn } from "react-icons/ci";
 import React from "react";
 import { IoAdd } from "react-icons/io5";
+import { ScrollRestoration } from "react-router-dom";
 
 const MyInvestments = () => {
   return (
     <div>
+      <ScrollRestoration />
       <div>
         <h2 className="text-3xl font-bold my-2 text-[#000000]">
           My Investments

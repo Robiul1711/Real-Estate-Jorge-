@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 const HomeBanner = () => {
   return (
-    <div className="section-padding-x pt-4 md:pt-12 relative">
+    <div className="section-padding-x pt-6 md:pt-22 relative">
       {/* Banner Image */}
       <div className="relative z-10 rounded-xl overflow-hidden">
         <img
