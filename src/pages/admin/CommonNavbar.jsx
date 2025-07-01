@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useLocation } from "react-router-dom";
 import profile from "../../assets/images/profile.png";
@@ -6,6 +6,20 @@ import { Notificartion } from "@/assets/icon";
 
 const CommonNavbar = ({ open, setOpen }) => {
   const { pathname } = useLocation();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   return (
     <div className="flex items-center gap-5 justify-between w-full py-3 md:py-5 px-6  rounded-2xl bg-white">
       <div className="flex items-center gap-4">
@@ -16,7 +30,9 @@ const CommonNavbar = ({ open, setOpen }) => {
           <GiHamburgerMenu color="black" size={26} />
         </span>
         <div className=" text-black">
-          <h1 className="text-3xl font-bold">Welcome Back, Jorge Franco!</h1>
+          <h1 className="text-3xl font-semibold">
+            Welcome Back, Jorge Franco!
+          </h1>
           <p className="mt-2 text-[#666666]">
             Elevate your financial future with smart property investments.
           </p>

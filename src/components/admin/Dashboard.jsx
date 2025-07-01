@@ -1,10 +1,12 @@
 import { Active, Arrow, Dollar, Return, Time } from "@/assets/icon";
 import React from "react";
 import { MdOutlineArrowForward } from "react-icons/md";
+import { ScrollRestoration } from "react-router-dom";
 
 const Dashboard = () => {
   return (
-    <div className="">
+    <>
+      <ScrollRestoration />
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
         <div className="bg-white p-5 rounded-2xl space-y-1 shadow-md hover:shadow-lg">
           <div className="flex items-center justify-between">
@@ -204,7 +206,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

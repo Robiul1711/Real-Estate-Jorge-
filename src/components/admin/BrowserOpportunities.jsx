@@ -1,11 +1,12 @@
 import { Filter, Location, Sort, Unit } from "@/assets/icon";
 import React from "react";
 import image from "../../assets/images/project.png";
-import { Link } from "react-router-dom";
+import { Link, ScrollRestoration } from "react-router-dom";
 
 const BrowserOpportunities = () => {
   return (
     <div>
+      <ScrollRestoration />
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-3xl font-bold my-2">Investment Opportunities</h2>
@@ -27,7 +28,11 @@ const BrowserOpportunities = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8">
         {[...Array(6)].map((_, index) => {
           return (
-            <Link to={`/dashboard/project-view-description/${index}`} key={index} className="bg-[#F3F3F3] p-5 rounded-2xl">
+            <Link
+              to={`/dashboard/project-view-description/${index}`}
+              key={index}
+              className="bg-[#F3F3F3] p-5 rounded-2xl"
+            >
               <div className="overflow-hidden rounded-2xl">
                 <img
                   className="w-full hover:scale-105 transform transition-all duration-500 ease-in-out"

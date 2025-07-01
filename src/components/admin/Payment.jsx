@@ -1,10 +1,11 @@
 import { Complete, Process } from "@/assets/icon";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, ScrollRestoration } from "react-router-dom";
 
 const Payment = () => {
   return (
     <div>
+      <ScrollRestoration />
       <h2 className="text-3xl font-bold my-2 text-[#000000]">
         Payment & Billing
       </h2>

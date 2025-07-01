@@ -21,6 +21,7 @@ import Properties from "@/pages/properties/Properties";
 import Services from "@/pages/services/Services";
 
 import { createBrowserRouter } from "react-router-dom";
+import PaymentSuccess from "@/components/admin/PaymentSuccess";
 
 const router = createBrowserRouter([
   {
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
       {
         path: "payment-details",
         element: <PaymentDetails />,
+      },
+      {
+        path: "payment-success",
+        element: <PaymentSuccess />,
       },
       {
         path: "documents",
