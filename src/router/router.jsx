@@ -21,6 +21,10 @@ import Properties from "@/pages/properties/Properties";
 import Services from "@/pages/services/Services";
 
 import { createBrowserRouter } from "react-router-dom";
+import InvestmentVerification from "@/components/admin/InvestmentVerification";
+import InvestmentTermsConditions from "@/components/admin/InvestmentTermsConditions ";
+import InvestmentConfirmation from "@/components/admin/InvestmentConfirmation";
+import InvestmentSuccess from "@/components/admin/InvestmentSuccess";
 import PaymentSuccess from "@/components/admin/PaymentSuccess";
 
 const router = createBrowserRouter([
@@ -66,6 +70,22 @@ const router = createBrowserRouter([
       {
         path: "project-view-description/:id",
         element: <ProjectViewdescription />,
+      },
+      {
+        path: "investment-verification",
+        element: <InvestmentVerification />,
+      },
+      {
+        path: "investment-terms-conditions",
+        element: <InvestmentTermsConditions />,
+      },
+      {
+        path: "investment-success",
+        element: <InvestmentSuccess />,
+      },
+      {
+        path: "investment-confirmation",
+        element: <InvestmentConfirmation />,
       },
       {
         path: "my-investments",
