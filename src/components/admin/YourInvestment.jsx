@@ -51,10 +51,10 @@ export default function YourInvestment() {
         {/* Results */}
         <div className="grid grid-cols-3 gap-2 text-center">
           <div>
-            <div className="text-2xl font-bold">${investment.toLocaleString()}</div>
+            <div className="text-2xl  font-bold">${investment.toLocaleString()}</div>
             <div className="text-sm text-gray-500">Your Investment</div>
           </div>
-          <div className="bg-gray-900 text-white rounded-lg p-3">
+          <div className="bg-custom-primary text-white rounded-lg p-3">
             <div className="text-xl font-bold">${totalReturns.toLocaleString()}</div>
             <div className="text-xs">Total Returns</div>
           </div>
@@ -87,7 +87,7 @@ export default function YourInvestment() {
           </div>
         </div>
 
-        <div className="mt-4 bg-gray-900 text-white rounded-lg p-3 flex justify-between items-center">
+        <div className="mt-4 bg-custom-primary text-white rounded-lg p-3 flex justify-between items-center">
           <span className="font-semibold">Total Return</span>
           <span className="font-bold">${totalReturns.toLocaleString()}</span>
         </div>

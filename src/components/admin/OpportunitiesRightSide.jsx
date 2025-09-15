@@ -14,7 +14,7 @@ const OpportunitiesRightSide = () => {
 
         {/* Company Info */}
         <div className="flex items-center gap-4 mt-4">
-          <MdCorporateFare className="text-5xl p-2 bg-black text-white rounded-full" />
+          <MdCorporateFare className="text-5xl p-2 bg-custom-primary text-white rounded-full" />
           <div>
             <p className="font-semibold">Premium Development Corp</p>
             <p className="text-sm text-gray-500">4.8</p>
@@ -49,7 +49,7 @@ const OpportunitiesRightSide = () => {
         </div>
 
         <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden mb-2">
-          <div className="h-full bg-black rounded-full transition-all duration-1000 ease-out" style={{ width: '68%' }} />
+          <div className="h-full bg-custom-primary rounded-full transition-all duration-1000 ease-out" style={{ width: '68%' }} />
         </div>
 
         <div className="flex justify-between text-sm font-semibold text-gray-500 mt-1">
@@ -91,7 +91,7 @@ const OpportunitiesRightSide = () => {
 
 <Link
   to="/dashboard/investment-verification"
-  className="block w-full mt-4 px-4 py-2 text-sm font-medium text-black bg-white border border-black rounded-lg transition duration-200 hover:bg-black hover:text-white text-center"
+  className="block w-full mt-4 px-4 py-2 text-sm font-medium text-white bg-custom-primary border  rounded-lg transition duration-200 hover:bg-black hover:text-white text-center"
 >
   Invest Now
 </Link>

@@ -31,14 +31,25 @@ const BrowserOpportunities = () => {
             <Link
               to={`/dashboard/project-view-description/${index}`}
               key={index}
-              className="bg-[#F3F3F3] p-5 rounded-2xl"
+              className="bg-[#F3F3F3] p-5 rounded-2xl "
             >
-              <div className="overflow-hidden rounded-2xl">
+           
+              <div className="overflow-hidden rounded-2xl relative">
                 <img
                   className="w-full hover:scale-105 transform transition-all duration-500 ease-in-out"
                   src={image}
                   alt="image"
                 />
+                   <div className="absolute top-0 left-0 p-4 flex justify-between w-full">
+                    <div>
+              <p className="bg-custom-primary py-1 px-3 rounded-full text-white"> internal investment</p>
+
+                    </div>
+              <div className="bg-white rounded-lg text-custom-primary flex-col p-2">
+              <p className="text-sm">EST. Profit</p>
+              <h1 className="text-2xl font-semibold">12.5%</h1>
+              </div>
+              </div>
               </div>
 
               <div className="flex justify-between mt-4 font-bold text-[20px]">
@@ -69,7 +80,7 @@ const BrowserOpportunities = () => {
 
               <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
                 <div
-                  className="bg-black h-full rounded-full transition-all duration-1000 ease-out"
+                  className="bg-custom-primary h-full rounded-full transition-all duration-1000 ease-out"
                   style={{ width: `68%` }}
                 />
               </div>
@@ -89,7 +100,7 @@ const BrowserOpportunities = () => {
                 </div>
               </div>
 
-              <button className="w-full bg-black text-white py-3 rounded-xl cursor-pointer relative overflow-hidden before:absolute before:w-full before:h-full before:top-0 before:left-0 before:bg-[#111827] before:translate-x-[-200px] hover:before:translate-x-0 before:translate-y-12 hover:before:translate-y-0 before:duration-300 before:z-[-1] z-0">
+              <button className="w-full bg-custom-primary text-white py-3 rounded-xl cursor-pointer relative overflow-hidden before:absolute before:w-full before:h-full before:top-0 before:left-0 before:bg-[#111827] before:translate-x-[-200px] hover:before:translate-x-0 before:translate-y-12 hover:before:translate-y-0 before:duration-300 before:z-[-1] z-0">
                 <span className="z-[1]">View Property</span>
               </button>
             </Link>
