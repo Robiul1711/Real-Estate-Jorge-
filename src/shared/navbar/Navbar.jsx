@@ -77,15 +77,15 @@ const Navbar = () => {
                         onClick={closeMobileMenu}
                         className={`transition duration-300 ${
                           isActive
-                            ? "text-[#002E33] font-bold"
-                            : "text-Light group-hover:text-[#002E33]"
+                            ? "text-custom-primary font-bold"
+                            : "text-Light group-hover:text-custom-primary"
                         }`}
                       >
                         {link.name}
                         <span
-                          className={`absolute left-0 -bottom-1 w-full h-0.5 bg-[#002E33] text-[#002E33] origin-left transition-transform duration-300 ${
+                          className={`absolute left-0 -bottom-1 w-full h-0.5 bg-custom-primary text-custom-primary origin-left transition-transform duration-300 ${
                             isActive
-                              ? "scale-x-100 text-[#002E33]"
+                              ? "scale-x-100 text-custom-primary"
                               : "scale-x-0 group-hover:scale-x-100 "
                           }`}
                         />
@@ -100,13 +100,13 @@ const Navbar = () => {
 
         <div className="flex items-center gap-4">
           <Link to="/login">
-            <button className="text-[17px] font-medium px-6 rounded-md py-[7px] border border-primary relative before:absolute overflow-hidden before:translate-x-[-200px] hover:before:translate-x-0 before:z-[-1] before:translate-y-12 dark:text-black dark:border-black dark:z-0 dark:before:bg-black before:transition hover:before:translate-y-0 before:duration-300 hover:text-secondary  before:w-full before:h-full before:bg-[#111] before:top-0 before:left-0 cursor-pointer">
+            <button className="text-[17px] font-medium px-6 rounded-md py-[7px] text-custom-primary border border-custom-primary relative before:absolute overflow-hidden before:translate-x-[-200px] hover:before:translate-x-0 before:z-[-1] before:translate-y-12 dark:text-custom-primary dark:border-custom-primary dark:z-0 dark:before:bg-custom-primary before:transition hover:before:translate-y-0 before:duration-300 hover:text-secondary  before:w-full before:h-full before:bg-custom-primary before:top-0 before:left-0 cursor-pointer">
               Login
             </button>
           </Link>
 
           <Link to="/sign-up">
-            <button className="text-[17px] font-medium px-6 rounded-md py-[7px] border border-primary relative before:absolute overflow-hidden before:translate-x-[-200px] hover:before:translate-x-0 before:z-[-1] before:translate-y-12 dark:text-black dark:border-black dark:z-0 dark:before:bg-black before:transition hover:before:translate-y-0 before:duration-300 hover:text-secondary  before:w-full before:h-full before:bg-[#111] before:top-0 before:left-0 cursor-pointer">
+            <button className="text-[17px] font-medium px-6 rounded-md py-[7px] text-custom-primary border border-custom-primary relative before:absolute overflow-hidden before:translate-x-[-200px] hover:before:translate-x-0 before:z-[-1] before:translate-y-12 dark:text-custom-primary dark:border-custom-primary dark:z-0 dark:before:bg-custom-primary before:transition hover:before:translate-y-0 before:duration-300 hover:text-secondary  before:w-full before:h-full before:bg-custom-primary before:top-0 before:left-0 cursor-pointer">
               Signup
             </button>
           </Link>
@@ -115,7 +115,7 @@ const Navbar = () => {
         {/* Mobile Toggle */}
 
         <button
-          className="lg:hidden text-[#002E33] z-50"
+          className="lg:hidden text-custom-primary z-50"
           onClick={toggleMobileMenu}
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
@@ -150,7 +150,7 @@ const Navbar = () => {
           <Link
             to="/contact"
             onClick={closeMobileMenu}
-            className="block w-full mt-4 bg-[#002E33] text-white font-medium py-2 px-4 rounded-full text-center hover:opacity-90 transition"
+            className="block w-full mt-4 bg-custom-primary text-white font-medium py-2 px-4 rounded-full text-center hover:opacity-90 transition"
           >
             Contact
           </Link>
