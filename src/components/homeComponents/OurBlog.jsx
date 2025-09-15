@@ -47,8 +47,8 @@ const OurBlog = () => {
   const nextRef = useRef(null);
 
   return (
-    <div className="section-padding-x py-10 md:pb-20 relative">
-      <h2 className="text-[32px] md:text-4xl font-bold mb-4 text-center">
+    <div className="section-padding-x py-4 relative">
+      <h2 className="text-[32px] md:text-4xl lg:text-[40px] font-bold mb-4 text-center">
         Our Blog
       </h2>
       <p className="text-lg text-center md:text-[22px] w-full md:w-1/2 mx-auto">
@@ -59,13 +59,13 @@ const OurBlog = () => {
       {/* Custom Arrows */}
       <button
         ref={prevRef}
-        className="hidden md:flex absolute left-14 top-1/2 -translate-y-1/2 z-10 p-2 bg-white shadow rounded-full border border-black hover:scale-105 transform transition-all duration-200 ease-in-out"
+        className="hidden md:flex absolute left-14 top-1/2 -translate-y-1/2 z-10 p-2 bg-white shadow rounded-full border border-black hover:scale-105 transform transition-all duration-200 ease-in-out cursor-pointer"
       >
         <MoveLeft />
       </button>
       <button
         ref={nextRef}
-        className="hidden md:flex absolute right-14 top-1/2 -translate-y-1/2 z-10 p-2 bg-white shadow rounded-full border border-black hover:scale-105 transform transition-all duration-200 ease-in-out"
+        className="hidden md:flex absolute right-14 top-1/2 -translate-y-1/2 z-10 p-2 bg-white shadow rounded-full border border-black hover:scale-105 transform transition-all duration-200 ease-in-out cursor-pointer"
       >
         <MoveRight />
       </button>
@@ -93,7 +93,7 @@ const OurBlog = () => {
       >
         {blogData.map((item, index) => (
           <SwiperSlide key={index}>
-            <div className="h-full">
+            <div className="h-full border rounded-lg">
               <div className="overflow-hidden rounded-t-lg">
                 <img
                   className="w-full hover:scale-105 transform transition-all duration-500 ease-in-out"
@@ -102,10 +102,12 @@ const OurBlog = () => {
                 />
               </div>
 
-              <h2 className="text-xl md:text-2xl font-semibold my-4">
-                {item.title}
-              </h2>
-              <p className="text-[#656565]">{item.text}</p>
+              <div className="p-6">
+                <h2 className="text-xl md:text-2xl font-semibold my-4">
+                  {item.title}
+                </h2>
+                <p className="text-[#656565]">{item.text}</p>
+              </div>
             </div>
           </SwiperSlide>
         ))}

@@ -11,7 +11,7 @@ import React from "react";
 const WhyChooseUs = () => {
   return (
     <div className="section-padding-x pb-6">
-      <h2 className="text-[32px] md:text-4xl font-bold mb-4 text-center">
+      <h2 className="text-[32px] md:text-4xl lg:text-[40px] font-bold mb-4 text-center">
         Why Choose Us
       </h2>
       <p className="text-lg text-center md:text-[22px] w-full md:w-1/2 mx-auto">

@@ -1,92 +1,202 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import image from "../../assets/images/project.png";
 import { Location, Unit } from "@/assets/icon";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import CommonBtn from "../common/CommonButton";
+
+const projects = [
+  {
+    id: 1,
+    title: "The Westwood Residences",
+    price: "$50K - $250K",
+    desc: "Premium apartment complex in downtown Seattle with 120 units and high rental demand.",
+    location: "Seattle, WA",
+    units: "120 Units",
+    profit: "12.5%",
+    funding: 68,
+    return: "12% IRR",
+    min: "$5000",
+    terms: "5 Years",
+    status: "In Studio",
+    image: image,
+  },
+  {
+    id: 2,
+    title: "Greenwood Villas",
+    price: "$70K - $300K",
+    desc: "Luxury villas in a suburban eco-friendly community surrounded by greenery.",
+    location: "Portland, OR",
+    units: "80 Units",
+    profit: "15%",
+    funding: 55,
+    return: "14% IRR",
+    min: "$7000",
+    terms: "6 Years",
+    status: "Open",
+    image: image,
+  },
+  {
+    id: 3,
+    title: "Harborview Condos",
+    price: "$40K - $200K",
+    desc: "Modern condos with waterfront views, located near major tech hubs.",
+    location: "San Francisco, CA",
+    units: "200 Units",
+    profit: "10%",
+    funding: 72,
+    return: "11% IRR",
+    min: "$4000",
+    terms: "4 Years",
+    status: "In Studio",
+    image: image,
+  },
+  {
+    id: 4,
+    title: "Sunset Apartments",
+    price: "$60K - $220K",
+    desc: "Affordable housing project with strong rental demand in urban areas.",
+    location: "Austin, TX",
+    units: "150 Units",
+    profit: "13%",
+    funding: 64,
+    return: "13% IRR",
+    min: "$6000",
+    terms: "5 Years",
+    status: "Coming Soon",
+    image: image,
+  },
+  {
+    id: 5,
+    title: "Skyline Towers",
+    price: "$100K - $400K",
+    desc: "High-rise luxury apartments with city skyline views and top-tier amenities.",
+    location: "New York, NY",
+    units: "300 Units",
+    profit: "18%",
+    funding: 80,
+    return: "16% IRR",
+    min: "$10,000",
+    terms: "7 Years",
+    status: "Open",
+    image: image,
+  },
+  {
+    id: 6,
+    title: "Palm Grove Resort",
+    price: "$80K - $350K",
+    desc: "Premium vacation rental resort near the beach with high tourist demand.",
+    location: "Miami, FL",
+    units: "90 Units",
+    profit: "20%",
+    funding: 60,
+    return: "18% IRR",
+    min: "$8000",
+    terms: "6 Years",
+    status: "In Studio",
+    image: image,
+  },
+];
 
 const LatestProject = () => {
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setProgress(68);
-    }, 300);
-
-    return () => clearTimeout(timeout);
-  }, []);
   return (
-    <div className="section-padding-x section-padding-y">
-      <h2 className="text-[32px] md:text-4xl font-bold mb-4 text-center">
+    <div className="section-padding-x py-8 lg:py-12">
+      <h2 className="text-[32px] md:text-4xl lg:text-[40px] font-bold mb-4 text-center">
         Our Latest Projects
       </h2>
       <p className="text-lg text-center md:text-[22px] w-full md:w-1/2 mx-auto">
         Our comprehensive services encompass luxury property sales, sustainable
         green building investments, and premium vacation rentals.
       </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-12">
-        {[...Array(6)].map((_, index) => {
-          return (
-            <div key={index} className="bg-[#F3F3F3] p-5 rounded-2xl">
-              <div className="overflow-hidden rounded-2xl">
+      <Swiper
+        loop={true}
+        spaceBetween={20}
+        slidesPerView={1}
+        breakpoints={{
+          640: { slidesPerView: 1.2 }, // mobile
+          768: { slidesPerView: 2 }, // tablet
+          1024: { slidesPerView: 3 }, // desktop
+        }}
+        grabCursor={true}
+      >
+        {projects.map((project) => (
+          <SwiperSlide key={project.id} className="py-6 lg:py-12">
+            <div className="bg-[#F3F3F3] p-5 rounded-2xl min-h-[760px] flex flex-col">
+              <div className="overflow-hidden rounded-2xl relative">
                 <img
                   className="w-full hover:scale-105 transform transition-all duration-500 ease-in-out"
-                  src={image}
-                  alt="image"
+                  src={project.image}
+                  alt={project.title}
                 />
-              </div>
 
-              <div className="flex justify-between mt-4 font-bold text-[20px]">
-                <h2>The Westwood Residences</h2>
-                <h2>$50K - $250K</h2>
-              </div>
-
-              <p className="text-[#4B5563] py-2">
-                Premium apartment complex in downtown Seattle with 120 units and
-                high rental demand.
-              </p>
-
-              <div className="flex items-center gap-4 flex-wrap">
-                <div className="flex items-center gap-2">
-                  <Location />
-                  <p className="text-sm text-[#4B5563]">Seattle, WA</p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Unit />
-                  <p className="text-sm text-[#4B5563]">120 Units</p>
+                {/* Top badge + profit */}
+                <div className="absolute top-2 flex justify-between w-full px-2">
+                  <button className="bg-custom-primary py-1 px-2 text-white rounded-lg text-sm h-fit">
+                    {project.status}
+                  </button>
+                  <div className="bg-white p-2 rounded-lg border">
+                    <h2 className="text-custom-primary text-sm">EST. Profit</h2>
+                    <p className="text-custom-primary text-lg font-bold">
+                      {project.profit}
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              <div className="flex justify-between py-3 font-medium text-[17px]">
-                <h3 className="text-[#4B5563]">Funding Progress</h3>
-                <h3>68% Complete</h3>
-              </div>
-
-              <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
-                <div
-                  className="bg-black h-full rounded-full transition-all duration-1000 ease-out"
-                  style={{ width: `68%` }}
-                />
-              </div>
-
-              <div className="flex justify-between flex-wrap py-2 gap-y-3">
-                <div className="py-3 font-medium">
-                  <h3 className="text-[#4B5563]">Total Return</h3>
-                  <h2>12% IRR</h2>
+              <div className="flex flex-col flex-1">
+                <div className="flex justify-between mt-4 font-bold text-[20px]">
+                  <h2>{project.title}</h2>
+                  <h2>{project.price}</h2>
                 </div>
-                <div className="py-3 font-medium">
-                  <h3 className="text-[#4B5563]">Min Invesment</h3>
-                  <h2>$5000</h2>
-                </div>
-                <div className="py-3 font-medium">
-                  <h3 className="text-[#4B5563]">Terms</h3>
-                  <h2>5 Years</h2>
-                </div>
-              </div>
+                <p className="text-[#4B5563] py-2">{project.desc}</p>
 
-              <button className="w-full bg-black text-white py-3 rounded-xl cursor-pointer relative overflow-hidden before:absolute before:w-full before:h-full before:top-0 before:left-0 before:bg-[#111827] before:translate-x-[-200px] hover:before:translate-x-0 before:translate-y-12 hover:before:translate-y-0 before:duration-300 before:z-[-1] z-0">
-                <span className="z-[1]">View Property</span>
-              </button>
+                <div className="flex items-center gap-4 flex-wrap">
+                  <div className="flex items-center gap-2">
+                    <Location />
+                    <p className="text-sm text-[#4B5563]">{project.location}</p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Unit />
+                    <p className="text-sm text-[#4B5563]">{project.units}</p>
+                  </div>
+                </div>
+
+                <div className="flex justify-between py-3 font-medium text-[17px]">
+                  <h3 className="text-[#4B5563]">Funding Progress</h3>
+                  <h3>{project.funding}% Complete</h3>
+                </div>
+                <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
+                  <div
+                    className="bg-black h-full rounded-full transition-all duration-1000 ease-out"
+                    style={{ width: `${project.funding}%` }}
+                  />
+                </div>
+
+                <div className="flex justify-between flex-wrap py-2 gap-y-3">
+                  <div className="py-3 font-medium">
+                    <h3 className="text-[#4B5563]">Total Return</h3>
+                    <h2>{project.return}</h2>
+                  </div>
+                  <div className="py-3 font-medium">
+                    <h3 className="text-[#4B5563]">Min Investment</h3>
+                    <h2>{project.min}</h2>
+                  </div>
+                  <div className="py-3 font-medium">
+                    <h3 className="text-[#4B5563]">Terms</h3>
+                    <h2>{project.terms}</h2>
+                  </div>
+                </div>
+
+                <button className="mt-auto py-3 text-[15px] font-medium bg-custom-primary text-white border hover:bg-custom-primary/80 rounded-lg cursor-pointer w-full text-center transform transition-all duration-200 ease-in-out">
+                  View Property
+                </button>
+              </div>
             </div>
-          );
-        })}
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      <div className="flex justify-center">
+        <CommonBtn>Start Investing Now</CommonBtn>
       </div>
     </div>
   );
