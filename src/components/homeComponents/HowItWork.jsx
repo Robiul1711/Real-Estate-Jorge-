@@ -3,7 +3,7 @@ import React from "react";
 
 const HowItWork = () => {
   return (
-    <div className="section-padding-x section-padding-y">
+    <div className="section-padding-x pb-12">
       <h2 className="text-[32px] md:text-4xl font-bold mb-4 text-center">
         How It Work
       </h2>
@@ -12,10 +12,10 @@ const HowItWork = () => {
         transparent for everyone.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 bg-[#002e33] h-auto md:h-[490px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 bg-custom-secondary h-auto md:h-[490px]">
         {/* Card 1 */}
-        <div className="group flex flex-col justify-end gap-x-4 pb-22 px-14 text-white hover:bg-[#A3DC2F] hover:text-black transition-all duration-200 ease-in-out">
-          <ManIcon className="text-white group-hover:text-black transition-colors duration-200" />
+        <div className="group flex flex-col justify-end gap-x-4 pb-22 px-14 text-white hover:bg-custom-primary transform transition-all duration-200 ease-in-out">
+          <ManIcon className="duration-200" />
           <h2 className="text-2xl font-bold my-5">Create Account</h2>
           <p className="text-lg mb-6">
             Sign up in minutes with our simple verification process.
@@ -23,8 +23,8 @@ const HowItWork = () => {
         </div>
 
         {/* Card 2 */}
-        <div className="group flex flex-col justify-end gap-x-4 pb-2 px-14 text-white hover:bg-[#A3DC2F] hover:text-black transform transition-all duration-200 ease-in-out">
-          <SearchIcon className="text-white group-hover:text-black transition-colors duration-200" />
+        <div className="group flex flex-col justify-end gap-x-4 pb-2 px-14 text-white hover:bg-custom-primary transform transition-all duration-200 ease-in-out">
+          <SearchIcon className="duration-200" />
           <h2 className="text-2xl font-bold my-5">Browse Properties</h2>
           <p className="text-lg mb-6">
             Explore our curated selection of high-quality real estate investment
@@ -33,8 +33,8 @@ const HowItWork = () => {
         </div>
 
         {/* Card 3 */}
-        <div className="group flex flex-col justify-end gap-x-4 pb-2 px-14 text-white hover:bg-[#A3DC2F] hover:text-black transform transition-all duration-200 ease-in-out">
-          <HammerIcon className="text-white group-hover:text-black transition-colors duration-200" />
+        <div className="group flex flex-col justify-end gap-x-4 pb-2 px-14 text-white hover:bg-custom-primary transform transition-all duration-200 ease-in-out">
+          <HammerIcon className=" duration-200" />
           <h2 className="text-2xl font-bold my-5">Place Your Bid</h2>
           <p className="text-lg mb-6">
             Decide how much you want to invest and place your bid on properties
