@@ -47,7 +47,7 @@ const ProjectViewdescription = () => {
                   onClick={() => setActiveTab(tab)}
                   className={`cursor-pointer w-full text-center px-10 py-4 font-semibold rounded-lg transition duration-200 ${
                     activeTab === tab
-                      ? "bg-black text-white"
+                      ? "bg-custom-primary text-white"
                       : "text-gray-800 hover:bg-gray-200"
                   }`}
                 >

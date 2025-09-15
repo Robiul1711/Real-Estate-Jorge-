@@ -16,7 +16,7 @@ const Documents = () => {
           </p>
         </div>
         <div className="flex items-center gap-4">
-          <button className="flex items-center gap-4 border font-medium bg-black text-white text-[14px] rounded px-6 py-2 cursor-pointer">
+          <button className="flex items-center gap-4 border font-medium bg-custom-primary text-white text-[14px] rounded px-6 py-2 cursor-pointer">
             <Upload />
             Upload Document
           </button>

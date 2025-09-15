@@ -80,7 +80,7 @@ const Settings = () => {
               />
             </div>
             <div className="flex justify-start">
-              <button className="bg-black text-white px-6 py-2 rounded-lg font-medium hover:bg-white hover:text-black  transition-all duration-200">
+              <button className="bg-custom-primary text-white px-6 py-2 rounded-lg font-medium hover:bg-white hover:text-black  transition-all duration-200">
                 Save Changes
               </button>
             </div>
@@ -193,7 +193,7 @@ const Settings = () => {
             <h2 className="text-lg font-bold">Account Summary</h2>
             <div className="flex justify-between items-center">
               <p className="text-[#4B5563]">Account Type</p>
-              <button className="px-3 py-1 text-[14px] bg-black text-white border rounded-2xl my-1 cursor-pointer">
+              <button className="px-3 py-1 text-[14px] bg-custom-primary text-white border rounded-2xl my-1 cursor-pointer">
                 Premium
               </button>
             </div>

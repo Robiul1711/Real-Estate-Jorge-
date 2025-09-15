@@ -39,7 +39,7 @@ const FinancialInformation = () => {
   </div>
 
   {/* Projected Revenue */}
-  <div className="group bg-white rounded-lg p-6 shadow-sm hover:bg-black transition duration-300">
+  <div className="group bg-white rounded-lg p-6 shadow-sm hover:bg-custom-primary transition duration-300">
     <div className="flex items-center justify-between">
       <div>
         <p className="text-sm text-gray-600 group-hover:text-gray-300">Projected Revenue</p>
@@ -137,16 +137,16 @@ const FinancialInformation = () => {
                     tick={{ fontSize: 12, fill: '#6B7280' }}
                     tickFormatter={(value) => `$${value/1000}K`}
                   />
-                  <Bar dataKey="projected" fill="#3B82F6" radius={[2, 2, 0, 0]} />
+                  <Bar dataKey="projected" fill="#30B767" radius={[2, 2, 0, 0]} />
                   <Bar dataKey="actual" fill="#6B7280" radius={[2, 2, 0, 0]} />
-                  <Bar dataKey="target" fill="#059669" radius={[2, 2, 0, 0]} />
+                  <Bar dataKey="target" fill="#000" radius={[2, 2, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
             
             <div className="flex justify-center space-x-6 mt-4">
               <div className="flex items-center">
-                <div className="w-3 h-3 bg-blue-500 rounded mr-2"></div>
+                <div className="w-3 h-3 bg-custom-primary rounded mr-2"></div>
                 <span className="text-xs text-gray-600">Projected</span>
               </div>
               <div className="flex items-center">
@@ -154,7 +154,7 @@ const FinancialInformation = () => {
                 <span className="text-xs text-gray-600">Actual</span>
               </div>
               <div className="flex items-center">
-                <div className="w-3 h-3 bg-green-600 rounded mr-2"></div>
+                <div className="w-3 h-3 bg-black rounded mr-2"></div>
                 <span className="text-xs text-gray-600">Target</span>
               </div>
             </div>
