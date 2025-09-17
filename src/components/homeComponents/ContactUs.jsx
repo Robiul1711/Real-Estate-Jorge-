@@ -1,11 +1,34 @@
-import React from "react";
+import React, { useRef } from "react";
 import { ImageProvider } from "../common/ImageProvider";
 import CommonBtn from "../common/CommonButton";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 const ContactUs = () => {
+  const sectionRef = useRef(null);
+  const buttonRef = useRef(null);
+  const cardRef = useRef(null);
+  useGSAP(() => {
+    gsap.from([buttonRef.current, cardRef.current, sectionRef.current], {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out",
+      delay: 0.2,
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+    });
+  });
   return (
-    <div className="section-padding-x py-10">
-      <div className="bg-white shadow rounded-xl p-6 md:p-10 flex flex-col md:flex-row gap-6">
+    <div ref={sectionRef} className="section-padding-x py-10">
+      <div
+        ref={cardRef}
+        className="bg-white shadow rounded-xl p-6 md:p-10 flex flex-col md:flex-row gap-6"
+      >
         {/* Form Section */}
         <div className="flex-1">
           <h2 className="text-xl md:text-2xl lg:text-[32px] font-semibold">
@@ -63,7 +86,7 @@ const ContactUs = () => {
       </div>
 
       {/* Bottom Button */}
-      <div className="flex  justify-center mt-8">
+      <div ref={buttonRef} className="flex  justify-center mt-8">
         <CommonBtn>Start Investing Now</CommonBtn>
       </div>
     </div>

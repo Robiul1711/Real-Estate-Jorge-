@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useRef } from "react";
 import image from "../../assets/images/project.png";
 import { Location, Unit } from "@/assets/icon";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import CommonBtn from "../common/CommonButton";
-
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 const projects = [
   {
     id: 1,
@@ -99,12 +102,41 @@ const projects = [
 ];
 
 const LatestProject = () => {
+  const sectionRef = useRef(null);
+  const titleRef = useRef(null);
+  const subtitleRef = useRef(null);
+  const cardRef = useRef(null);
+  useGSAP(() => {
+    gsap.from([titleRef.current, subtitleRef.current, cardRef.current], {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out",
+      delay: 0.2,
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+    });
+  });
   return (
-    <div id="projects" className="section-padding-x py-8 lg:py-12">
-      <h2 className="text-[32px] md:text-4xl lg:text-[40px] font-bold mb-4 text-center">
+    <div
+      ref={sectionRef}
+      id="projects"
+      className="section-padding-x py-8 lg:py-12"
+    >
+      <h2
+        ref={titleRef}
+        className="text-[32px] md:text-4xl lg:text-[40px] font-bold mb-4 text-center"
+      >
         Our Latest Projects
       </h2>
-      <p className="text-lg text-center md:text-[22px] w-full md:w-1/2 mx-auto">
+      <p
+        ref={subtitleRef}
+        className="text-lg text-center md:text-[22px] w-full md:w-1/2 mx-auto"
+      >
         Our comprehensive services encompass luxury property sales, sustainable
         green building investments, and premium vacation rentals.
       </p>
@@ -118,6 +150,7 @@ const LatestProject = () => {
           1024: { slidesPerView: 3 }, // desktop
         }}
         grabCursor={true}
+        ref={cardRef}
       >
         {projects.map((project) => (
           <SwiperSlide key={project.id} className="py-6 lg:py-12">
