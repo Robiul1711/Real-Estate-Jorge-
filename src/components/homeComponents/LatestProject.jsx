@@ -100,7 +100,7 @@ const projects = [
 
 const LatestProject = () => {
   return (
-    <div className="section-padding-x py-8 lg:py-12">
+    <div id="projects" className="section-padding-x py-8 lg:py-12">
       <h2 className="text-[32px] md:text-4xl lg:text-[40px] font-bold mb-4 text-center">
         Our Latest Projects
       </h2>

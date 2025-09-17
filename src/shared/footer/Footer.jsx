@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="section-padding-x py-10 md:py-20 bg-black text-white space-y-4">
+    <div className="section-padding-x py-10 md:py-20 bg-custom-secondary text-white space-y-4">
       <div className="inline-block">
         <Link to="/">
           <FooterIcon className="!text-white mb-2" />
