@@ -1,14 +1,29 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { MainIcon } from "@/assets/icon";
 
 const navLinks = [
   { name: "Home", href: "/" },
-  { name: "Services", href: "/services" },
-  { name: "Properties", href: "/properties" },
-  { name: "About", href: "/about" },
-  { name: "Agents", href: "/agents" },
+  { name: "Projects", href: "#projects" },
+  { name: "Who We Are", href: "/who" },
+  { name: "Statistics", href: "/statistics" },
+  {
+    name: "Discovers",
+    sublinks: [
+      {
+        id: 3,
+        name: "Ambassadors",
+        href: "/ambassadors",
+      },
+      {
+        id: 4,
+        name: "Learn",
+        href: "/learn",
+      },
+    ],
+  },
+  { name: "Blog", href: "/blog" },
 ];
 
 const Navbar = () => {
@@ -67,9 +82,47 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           {location.pathname !== "/step-form" && (
             <nav className="hidden lg:block">
-              <ul className="flex space-x-12  font-medium">
+              <ul className="flex space-x-10 font-medium">
                 {navLinks.map((link, index) => {
                   const isActive = location.pathname === link.href;
+                  if (link.sublinks) {
+                    return (
+                      <li key={index} className="group relative">
+                        <button
+                          className={`flex items-center gap-1 transition duration-300 ${
+                            isActive
+                              ? "text-custom-primary font-bold"
+                              : "text-Light group-hover:text-custom-primary"
+                          }`}
+                        >
+                          {link.name}
+                          <ChevronDown
+                            size={18}
+                            className="transition-transform duration-300 group-hover:rotate-180"
+                          />
+                        </button>
+
+                        {/* Dropdown */}
+                        <ul className="absolute left-0 mt-2 w-40 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-1 transition-all duration-300">
+                          {link.sublinks.map((sub) => (
+                            <li key={sub.id}>
+                              <Link
+                                to={sub.href}
+                                onClick={closeMobileMenu}
+                                className={`block px-4 py-2 text-sm ${
+                                  location.pathname === sub.href
+                                    ? "text-custom-primary font-semibold"
+                                    : "text-gray-700 hover:bg-green-50 hover:text-custom-primary rounded-lg"
+                                }`}
+                              >
+                                {sub.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </li>
+                    );
+                  }
                   return (
                     <li key={index} className="group relative">
                       <Link
@@ -83,10 +136,10 @@ const Navbar = () => {
                       >
                         {link.name}
                         <span
-                          className={`absolute left-0 -bottom-1 w-full h-0.5 bg-custom-primary text-custom-primary origin-left transition-transform duration-300 ${
+                          className={`absolute left-0 -bottom-1 w-full h-0.5 bg-custom-primary origin-left transition-transform duration-300 ${
                             isActive
-                              ? "scale-x-100 text-custom-primary"
-                              : "scale-x-0 group-hover:scale-x-100 "
+                              ? "scale-x-100"
+                              : "scale-x-0 group-hover:scale-x-100"
                           }`}
                         />
                       </Link>
