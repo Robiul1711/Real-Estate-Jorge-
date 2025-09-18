@@ -103,47 +103,14 @@ export default function InvestmentConfirmation() {
 
             {/* Security Verification */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <Shield className="text-gray-900" size={20} />
-                <h2 className="text-xl font-semibold text-gray-900">
-                  Security Verification
-                </h2>
-              </div>
-
-              <p className="text-gray-600 mb-6">
-                For your security, please enter the 6-digit verification code
-                sent to your registered email address.
-              </p>
-
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Verification Code
-                </label>
-                <input
-                  type="text"
-                  value={verificationCode}
-                  onChange={(e) =>
-                    setVerificationCode(
-                      e.target.value.replace(/\D/g, "").slice(0, 6)
-                    )
-                  }
-                  placeholder="Enter 6-digit code"
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-center text-lg tracking-widest"
-                  maxLength={6}
-                />
-              </div>
+ 
 
               <Link to={"/dashboard/investment-success"}
                 onClick={handleConfirm}
-                className="w-full bg-gray-900 block text-center text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors"
+                className="w-full bg-custom-primary block text-center text-white py-3 rounded-lg font-medium hover:bg-green-600 transition-colors"
               >
                 Confirm Investment
               </Link>
-
-              <p className="text-xs text-gray-500 text-center mt-4">
-                By confirming, you agree to proceed with this investment under
-                the terms previously accepted.
-              </p>
             </div>
           </div>
 

@@ -88,7 +88,7 @@ const ProjectTimeline = () => {
     <div className=" ">
       <div className="">
         {/* Header */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4">
           <h1 className="text-xl font-semibold text-gray-900 mb-8">Project Timeline</h1>
           
           {/* Timeline */}

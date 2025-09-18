@@ -36,7 +36,7 @@ const Support = () => {
   return (
     <div>
       <ScrollRestoration />
-      <h2 className="text-3xl font-bold my-2 text-[#000000]">Support Center</h2>
+      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold my-2 text-[#000000]">Support Center</h2>
       <p className="text-sm text-[#4B5563]">
         Get help and support for your investment journey
       </p>
@@ -84,16 +84,19 @@ const Support = () => {
             <div className="bg-[#ffffff] p-5 rounded-2xl  shadow-md">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <h2 className="text-lg font-bold">
+                  <h2 className="sm:text-lg font-bold">
                     Question about dividend payments
                   </h2>
+                  <div className="flex flex-col sm:flex-row items-center gap-2">
+
                   <button className="bg-[#DBEAFE] text-[#1E40AF] text-sm font-medium px-3 py-1 rounded-2xl flex items-center gap-2">
                     <Question /> Open
                   </button>
-                </div>
                 <button className="bg-[#FEF9C3] text-[#854D0E] text-sm font-medium px-3 py-1 rounded-2xl">
                   Medium
                 </button>
+                </div>
+                  </div>
               </div>
               <p className="text-sm text-[#4B5563] my-1">Ticket #12345</p>
               <div className="flex items-center justify-between text-[15px] my-1 text-[#4B5563]">
