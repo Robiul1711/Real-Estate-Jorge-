@@ -1,5 +1,5 @@
 import { Download } from "lucide-react";
-import { ScrollRestoration } from "react-router-dom";
+import { Link, ScrollRestoration } from "react-router-dom";
 
 const transactions = [
   {
@@ -59,10 +59,48 @@ const Payment = () => {
   return (
     <div>
       <ScrollRestoration />
- <div className="bg-white rounded-lg shadow p-6">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-semibold text-gray-700 flex items-center gap-2">
-          <span className="text-xl">⏱</span> Transaction History
+ <div className="bg-white rounded-lg shadow p-4">
+   <div className="">
+      {/* Header */}
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold text-gray-900 mb-2">Payment & Billing</h1>
+        <p className="text-gray-600">Manage your payment methods and transaction history</p>
+      </div>
+      
+      {/* Available Balance Card */}
+ <div className="bg-custom-primary rounded-lg p-4 md:p-6 text-white relative overflow-hidden">
+  <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+    {/* Left Section */}
+    <div>
+      <h2 className="text-xs md:text-sm font-medium text-green-100 mb-1 md:mb-2">
+        Available Balance
+      </h2>
+      <div className="text-2xl md:text-4xl font-bold mb-1">$12,450.00</div>
+      <p className="text-xs md:text-sm text-green-100">Ready for investment</p>
+    </div>
+
+    {/* Right Section (Buttons) */}
+    <div className="flex flex-col sm:flex-row md:flex-col gap-2 w-full sm:w-auto">
+      <Link
+        to="/dashboard/add-funds"
+        className="bg-white text-green-600 px-3 md:px-4 py-2 rounded-md font-medium text-sm md:text-base text-center hover:bg-gray-50 transition-colors"
+      >
+        Add Funds
+      </Link>
+      <Link
+        to="/dashboard/withdraw-funds"
+        className="border border-green-300 text-white px-3 md:px-4 py-2 rounded-md font-medium text-sm md:text-base text-center hover:bg-green-600 transition-colors"
+      >
+        Withdraw
+      </Link>
+    </div>
+  </div>
+</div>
+
+    </div>
+      <div className="flex items-center justify-between py-5">
+        <h2 className="sm:text-lg font-semibold text-gray-700 flex items-center gap-2">
+          <span className="sm:text-xl">⏱</span> Transaction History
         </h2>
         <button className="px-4 py-2 text-sm border rounded-md hover:bg-gray-50">
           Export All

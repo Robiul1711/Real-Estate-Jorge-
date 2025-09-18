@@ -43,18 +43,24 @@ const Description = () => {
       </div>
 
       <div className="mb-8">
-        <h2 className="text-lg font-semibold text-gray-700 mb-2">Scoring Type</h2>
-        <div className="bg-gray-100 p-4 rounded-md">
-          <p className="font-bold text-gray-800">AAA Fixed rate</p>
-          <div className="flex justify-between mt-2">
-            <span className="text-gray-600">Nominal annual interest rate</span>
-            <span className="text-gray-600">Maturity</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="font-semibold text-gray-800">10%</span>
-            <span className="font-semibold text-gray-800">15 months</span>
-          </div>
-        </div>
+      <div className='grid grid-cols-2 gap-4'>
+      <div className='flex flex-col items-start'>
+        <h1 className='text-lg font-semibold text-gray-700 mb-1'>Scoring</h1>
+        <p>100</p>
+      </div>
+      <div className='flex flex-col items-start'>
+        <h1 className='text-lg font-semibold text-gray-700 mb-1'>Type</h1>
+        <p>Fixed rate</p>
+      </div>
+      <div className='flex flex-col items-start'>
+        <h1 className='text-lg font-semibold text-gray-700 mb-1'>Nominal annual interest rate</h1>
+        <p>15 months</p>
+      </div>
+      <div className='flex flex-col items-start'>
+        <h1 className='text-lg font-semibold text-gray-700 mb-1'>Maturity</h1>
+        <p>15 months</p>
+      </div>
+      </div>
       </div>
 
       <div>

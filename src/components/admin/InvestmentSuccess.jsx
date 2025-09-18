@@ -22,7 +22,7 @@ export default function InvestmentSuccess() {
       <div className="max-w-7xl mx-auto">
         {/* Success Header */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="w-16 h-16 bg-custom-primary rounded-full flex items-center justify-center mx-auto mb-4">
             <Check className="text-white" size={32} />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Investment Successful!</h1>
@@ -82,7 +82,7 @@ export default function InvestmentSuccess() {
 
               <div className="space-y-6">
                 <div className="flex gap-4">
-                  <div className="w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0">
+                  <div className="w-8 h-8 bg-custom-primary text-white rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0">
                     1
                   </div>
                   <div>
@@ -92,7 +92,7 @@ export default function InvestmentSuccess() {
                 </div>
 
                 <div className="flex gap-4">
-                  <div className="w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0">
+                  <div className="w-8 h-8 bg-custom-primary text-white rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0">
                     2
                   </div>
                   <div>
@@ -102,7 +102,7 @@ export default function InvestmentSuccess() {
                 </div>
 
                 <div className="flex gap-4">
-                  <div className="w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0">
+                  <div className="w-8 h-8 bg-custom-primary text-white rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0">
                     3
                   </div>
                   <div>
@@ -113,34 +113,7 @@ export default function InvestmentSuccess() {
               </div>
             </div>
 
-            {/* Quick Actions */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
-              
-              <div className="flex flex-wrap gap-3">
-                <button
-                  onClick={handleViewDashboard}
-                  className="flex items-center gap-2 bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
-                >
-                  <BarChart3 size={16} />
-                  View Dashboard
-                </button>
-                <button
-                  onClick={handleViewProject}
-                  className="flex items-center gap-2 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
-                >
-                  <Eye size={16} />
-                  View Project
-                </button>
-                <button
-                  onClick={handleDownloadReceipt}
-                  className="flex items-center gap-2 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
-                >
-                  <Download size={16} />
-                  Download Receipt
-                </button>
-              </div>
-            </div>
+ 
           </div>
 
           {/* Right Column - Important Information & Contact */}
@@ -150,12 +123,12 @@ export default function InvestmentSuccess() {
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Important Information</h3>
               
               <div className="space-y-4">
-                <div className="bg-gray-900 text-white p-4 rounded-lg">
+                <div className="bg-custom-primary text-white p-4 rounded-lg">
                   <div className="font-medium mb-2">Cooling-Off Period</div>
                   <div className="text-sm text-gray-300">You have 14 days to cancel this investment if you change your mind.</div>
                 </div>
 
-                <div className="bg-gray-900 text-white p-4 rounded-lg">
+                <div className="bg-custom-primary text-white p-4 rounded-lg">
                   <div className="font-medium mb-2">Investment Protection</div>
                   <div className="text-sm text-gray-300">Your investment is protected under EU investor protection regulations.</div>
                 </div>

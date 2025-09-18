@@ -26,6 +26,12 @@ import InvestmentTermsConditions from "@/components/admin/InvestmentTermsConditi
 import InvestmentConfirmation from "@/components/admin/InvestmentConfirmation";
 import InvestmentSuccess from "@/components/admin/InvestmentSuccess";
 import PaymentSuccess from "@/components/admin/PaymentSuccess";
+import Communications from "@/components/admin/Communications";
+import WithdrawFunds from "@/components/admin/DigitalWallet/WithdrawFunds";
+import WithdrawalMethod from "@/components/admin/DigitalWallet/WithdrawalMethod";
+import ConfirmWithdrawal from "@/components/admin/DigitalWallet/ConfirmWithdrawal";
+import WithdrawalRequestSuccessful from "@/components/admin/DigitalWallet/WithdrawalRequestSuccessful";
+import RequestSubmittedSuccessfully from "@/components/admin/DigitalWallet/RequestSubmittedSuccessfully";
 
 const router = createBrowserRouter([
   {
@@ -92,13 +98,42 @@ const router = createBrowserRouter([
         element: <MyInvestments />,
       },
       {
+        path: "communication",
+        element: <Communications />,
+      },
+      // Digital wallet start 
+      {
         path: "payment",
         element: <Payment />,
       },
       {
+        path: "withdraw-funds",
+        element: <WithdrawFunds />,
+      },
+      {
+        path: "withdrawal-method",
+        element: <WithdrawalMethod />,
+      },
+      {
+        path: "confirm-withdrawal",
+        element: <ConfirmWithdrawal />,
+      },
+      {
+        path: "withdrawal-request-successful",
+        element: <WithdrawalRequestSuccessful />,
+      },
+  
+   
+      // Digital wallet end
+      {
         path: "add-funds",
         element: <AddFunds />,
       },
+         {
+        path: "request-submitted-successfully",
+        element: <RequestSubmittedSuccessfully />,
+      },
+
       {
         path: "payment-details",
         element: <PaymentDetails />,

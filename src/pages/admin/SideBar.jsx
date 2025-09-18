@@ -54,7 +54,7 @@ const SideBar = ({ sidebar, open, setOpen }) => {
               className={`flex items-center gap-3 px-4 py-2 rounded-lg text-base font-medium transition-colors duration-200 ${
                 isActive(item.path)
                   ? "bg-custom-primary text-white"
-                  : "text-black hover:bg-[#2F2F2F] hover:text-white"
+                  : "text-black hover:bg-custom-primary hover:text-white"
               }`}
             >
               <span className="text-lg">{item.icon}</span>

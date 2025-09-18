@@ -3,7 +3,7 @@ import { Calendar, Eye } from "lucide-react";
 import { CiLocationOn } from "react-icons/ci";
 import React from "react";
 import { IoAdd } from "react-icons/io5";
-import { ScrollRestoration } from "react-router-dom";
+import { Link, ScrollRestoration } from "react-router-dom";
 import residential from "@/assets/images/residential.png";
 
 const MyInvestments = () => {
@@ -11,62 +11,65 @@ const MyInvestments = () => {
     <div>
       <ScrollRestoration />
       <div>
-        <h2 className="text-3xl font-bold my-2 text-[#000000]">
+        <h2 className="text-xl md:text-3xl font-bold my-2 text-[#000000]">
           My Investments
         </h2>
         <p className="text-sm text-[#4B5563]">
           Track and manage your real estate investment portfolio
         </p>
       </div>
-      <div className="flex items-center justify-end my-4">
+      <div className="flex items-center md:justify-end my-4">
         <div className="flex items-center gap-4">
-          <button className="flex items-center gap-4 border font-medium bg-white rounded px-6 py-2">
+          <button className="flex items-center gap-4 border text-sm font-medium bg-white rounded px-6 py-2">
             <Filter />
             Filter
           </button>
-          <button className="flex items-center gap-3 border font-medium bg-white rounded px-6 py-2">
+          <button className="flex items-center gap-3 border text-sm font-medium bg-white rounded px-6 py-2">
             <Sort />
             Sort by ROI
           </button>
         </div>
       </div>
       <div className="bg-white p-5 rounded-lg my-4">
-     <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 ">
-  {/* Left Side */}
-  <div className="flex items-center gap-3 flex-wrap">
-    <img
-      src={residential}
-      alt="Sunrise Apartments"
-      className="w-16 h-16 object-cover rounded-md"
-    />
-    <div>
-      <h2 className="text-[#000000] text-lg font-semibold">
-        Sunrise Apartments
-      </h2>
-      <div className="flex flex-wrap gap-2 mt-1">
-        <span className="bg-[#DCFCE7] text-[#166534] text-xs md:text-sm font-medium px-3 py-1 rounded-2xl">
-          Active
-        </span>
-        <span className="bg-[#DBEAFE] text-[#1E40AF] text-xs md:text-sm font-medium px-3 py-1 rounded-2xl">
-          Residential
-        </span>
-      </div>
-    </div>
-  </div>
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 ">
+          {/* Left Side */}
+          <div className="flex items-center gap-3 flex-wrap">
+            <img
+              src={residential}
+              alt="Sunrise Apartments"
+              className="w-16 h-16 object-cover rounded-md"
+            />
+            <div>
+              <h2 className="text-[#000000] text-lg font-semibold">
+                Sunrise Apartments
+              </h2>
+              <div className="flex flex-wrap gap-2 mt-1">
+                <span className="bg-[#DCFCE7] text-[#166534] text-xs md:text-sm font-medium px-3 py-1 rounded-2xl">
+                  Active
+                </span>
+                <span className="bg-[#DBEAFE] text-[#1E40AF] text-xs md:text-sm font-medium px-3 py-1 rounded-2xl">
+                  Residential
+                </span>
+              </div>
+            </div>
+          </div>
 
-  {/* Right Side */}
-  <button className="flex items-center gap-2 border border-gray-300 font-medium text-sm text-gray-700 bg-white rounded-md px-4 py-2 hover:bg-gray-50 transition">
-    <Eye size={18} className="text-gray-600" /> View Details
-  </button>
-</div>
+          {/* Right Side */}
+          <button className="flex items-center gap-2 border border-gray-300 font-medium text-sm text-gray-700 bg-white rounded-md px-4 py-2 hover:bg-custom-primary hover:text-white transition">
+            <Eye size={18} /> View Details
+          </button>
+        </div>
 
         <div className="flex items-center justify-between ">
           <p className="text-sm text-[#4B5563] flex items-center gap-2">
             <CiLocationOn /> Austin, TX
           </p>
-          <button className="flex items-center gap-2 border font-medium text-sm bg-custom-primary text-white rounded px-4 py-2 cursor-pointer">
-            <IoAdd size={18} /> Add Feature
-          </button>
+          <Link
+            to="/dashboard/communication"
+            className="flex items-center gap-2 border border-gray-300 font-medium text-sm text-gray-700 bg-white rounded-md px-4 py-2 hover:bg-custom-primary hover:text-white transition"
+          >
+            Communication
+          </Link>
         </div>
         <div className="w-full md:w-[86%]">
           <div className="flex items-start justify-between mt-2 w-[90%]">
@@ -78,7 +81,7 @@ const MyInvestments = () => {
             </div>
             <div className="space-y-2">
               <h4 className="text-[12px] font-medium text-[#4B5563]">
-               %property
+                %property
               </h4>
               <p className="text-sm text-[#000000] font-bold">$28,125</p>
             </div>
@@ -88,7 +91,7 @@ const MyInvestments = () => {
             </div>
             <div className="space-y-2">
               <h4 className="text-[12px] font-medium text-[#4B5563]">
-           Total Revenue
+                Total Revenue
               </h4>
               <p className="text-sm text-[#16A34A] font-bold">+$3,125</p>
             </div>
@@ -117,8 +120,6 @@ const MyInvestments = () => {
           <p>Expected Duration: 24 months</p>
         </div>
       </div>
-
-
     </div>
   );
 };
