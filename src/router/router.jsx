@@ -26,6 +26,8 @@ import InvestmentTermsConditions from "@/components/admin/InvestmentTermsConditi
 import InvestmentConfirmation from "@/components/admin/InvestmentConfirmation";
 import InvestmentSuccess from "@/components/admin/InvestmentSuccess";
 import PaymentSuccess from "@/components/admin/PaymentSuccess";
+import CheckEmailBox from "@/pages/auth/CheckEmailBox";
+import NewPasswordSuccess from "@/pages/auth/NewPasswordSuccess";
 
 const router = createBrowserRouter([
   {
@@ -135,8 +137,16 @@ const router = createBrowserRouter([
     element: <ForgotPassword />,
   },
   {
+    path: "/check-email-box",
+    element: <CheckEmailBox />,
+  },
+  {
     path: "/new-password",
     element: <NewPassword />,
+  },
+  {
+    path: "/new-password-success",
+    element: <NewPasswordSuccess />,
   },
 ]);
 
