@@ -6,7 +6,7 @@ import { MainIcon } from "@/assets/icon";
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "Projects", href: "#projects" },
-  { name: "Who We Are", href: "/who" },
+  { name: "Who We Are", href: "/about" },
   { name: "Statistics", href: "/statistics" },
   {
     name: "Discovers",
@@ -23,7 +23,7 @@ const navLinks = [
       },
     ],
   },
-  { name: "Blog", href: "/blog" },
+  { name: "Blog", href: "#blog" },
 ];
 
 const Navbar = () => {

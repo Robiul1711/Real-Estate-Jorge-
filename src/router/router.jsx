@@ -11,7 +11,6 @@ import Support from "@/components/admin/Support";
 import AdminLayout from "@/layout/AdminLayout";
 import Layout from "@/layout/Layout";
 import About from "@/pages/about/About";
-import Agents from "@/pages/agents/Agents";
 import ForgotPassword from "@/pages/auth/ForgotPassword";
 import Login from "@/pages/auth/Login";
 import NewPassword from "@/pages/auth/NewPassword";
@@ -26,6 +25,9 @@ import InvestmentTermsConditions from "@/components/admin/InvestmentTermsConditi
 import InvestmentConfirmation from "@/components/admin/InvestmentConfirmation";
 import InvestmentSuccess from "@/components/admin/InvestmentSuccess";
 import PaymentSuccess from "@/components/admin/PaymentSuccess";
+import CheckEmailBox from "@/pages/auth/CheckEmailBox";
+import NewPasswordSuccess from "@/pages/auth/NewPasswordSuccess";
+import Statistics from "@/pages/statistics/Statistics";
 import Communications from "@/components/admin/Communications";
 import WithdrawFunds from "@/components/admin/DigitalWallet/WithdrawFunds";
 import WithdrawalMethod from "@/components/admin/DigitalWallet/WithdrawalMethod";
@@ -55,8 +57,8 @@ const router = createBrowserRouter([
         element: <About />,
       },
       {
-        path: "/agents",
-        element: <Agents />,
+        path: "/statistics",
+        element: <Statistics />,
       },
     ],
   },
@@ -170,8 +172,16 @@ const router = createBrowserRouter([
     element: <ForgotPassword />,
   },
   {
+    path: "/check-email-box",
+    element: <CheckEmailBox />,
+  },
+  {
     path: "/new-password",
     element: <NewPassword />,
+  },
+  {
+    path: "/new-password-success",
+    element: <NewPasswordSuccess />,
   },
 ]);
 

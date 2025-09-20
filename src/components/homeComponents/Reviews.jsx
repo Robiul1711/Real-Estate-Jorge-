@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useRef } from "react";
 import { ImageProvider } from "../common/ImageProvider";
 import { MdOutlineStarPurple500 } from "react-icons/md";
 import { Star } from "@/assets/icon";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import CommonBtn from "../common/CommonButton";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 const reviewsData = [
   {
@@ -58,16 +62,53 @@ const reviewsData = [
 ];
 
 const Reviews = () => {
+  const sectionRef = useRef(null);
+  const titleRef = useRef(null);
+  const subtitleRef = useRef(null);
+  const cardRef = useRef(null);
+  const buttonRef = useRef(null);
+  useGSAP(() => {
+    gsap.from(
+      [
+        titleRef.current,
+        subtitleRef.current,
+        cardRef.current,
+        buttonRef.current,
+      ],
+      {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        delay: 0.2,
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+  });
   return (
-    <div className="section-padding-x py-8 lg:py-12">
-      <h2 className="text-[32px] md:text-4xl lg:text-[40px] font-bold mb-4 text-center">
+    <div ref={sectionRef} className="section-padding-x py-8 lg:py-12">
+      <h2
+        ref={titleRef}
+        className="text-[32px] md:text-4xl lg:text-[40px] font-bold mb-4 text-center"
+      >
         Reviews
       </h2>
-      <p className="text-lg text-center md:text-[22px] w-full md:w-1/2 mx-auto">
+      <p
+        ref={subtitleRef}
+        className="text-lg text-center md:text-[22px] w-full md:w-1/2 mx-auto"
+      >
         More than 180,000 investments reflect the confidence in our real estate
         crowdfunding platforms
       </p>
-      <div className="flex flex-col md:flex-row gap-6 lg:gap-12 mt-8 mb-4">
+      <div
+        ref={cardRef}
+        className="flex flex-col md:flex-row gap-6 lg:gap-12 mt-8 mb-4"
+      >
         {/* Left Summary */}
         <div className="w-full lg:w-[20%]">
           <h2 className="text-[32px] md:text-4xl lg:text-[40px] font-bold text-center">
@@ -144,7 +185,7 @@ const Reviews = () => {
           </Swiper>
         </div>
       </div>
-      <div className="flex justify-center mt-8">
+      <div ref={buttonRef} className="flex justify-center mt-8">
         <CommonBtn>Start Investing Now</CommonBtn>
       </div>
     </div>

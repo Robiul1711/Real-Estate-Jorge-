@@ -8,6 +8,10 @@ import blog1 from "../../assets/images/blog.png";
 import blog2 from "../../assets/images/blog1.png";
 import blog3 from "../../assets/images/blog2.png";
 import { MoveLeft, MoveRight } from "lucide-react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 const blogData = [
   {
@@ -45,13 +49,38 @@ const blogData = [
 const OurBlog = () => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
+  const sectionRef = useRef(null);
+  const titleRef = useRef(null);
+  const subtitleRef = useRef(null);
+  const cardRef = useRef(null);
+  useGSAP(() => {
+    gsap.from([titleRef.current, subtitleRef.current, cardRef.current], {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out",
+      delay: 0.2,
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+    });
+  });
 
   return (
-    <div className="section-padding-x py-4 relative">
-      <h2 className="text-[32px] md:text-4xl lg:text-[40px] font-bold mb-4 text-center">
+    <div id="blog" ref={sectionRef} className="section-padding-x py-4 relative">
+      <h2
+        ref={titleRef}
+        className="text-[32px] md:text-4xl lg:text-[40px] font-bold mb-4 text-center"
+      >
         Our Blog
       </h2>
-      <p className="text-lg text-center md:text-[22px] w-full md:w-1/2 mx-auto">
+      <p
+        ref={subtitleRef}
+        className="text-lg text-center md:text-[22px] w-full md:w-1/2 mx-auto"
+      >
         Explore Our Diverse Offerings: From Luxury Real Estate to Eco-Friendly
         Investments and Exclusive Getaways.
       </p>
@@ -71,6 +100,7 @@ const OurBlog = () => {
       </button>
 
       <Swiper
+        ref={cardRef}
         modules={[Navigation]}
         loop={true}
         spaceBetween={24}
