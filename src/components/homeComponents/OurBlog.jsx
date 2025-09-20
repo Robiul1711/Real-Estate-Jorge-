@@ -70,7 +70,7 @@ const OurBlog = () => {
   });
 
   return (
-    <div ref={sectionRef} className="section-padding-x py-4 relative">
+    <div id="blog" ref={sectionRef} className="section-padding-x py-4 relative">
       <h2
         ref={titleRef}
         className="text-[32px] md:text-4xl lg:text-[40px] font-bold mb-4 text-center"

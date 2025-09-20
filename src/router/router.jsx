@@ -11,7 +11,6 @@ import Support from "@/components/admin/Support";
 import AdminLayout from "@/layout/AdminLayout";
 import Layout from "@/layout/Layout";
 import About from "@/pages/about/About";
-import Agents from "@/pages/agents/Agents";
 import ForgotPassword from "@/pages/auth/ForgotPassword";
 import Login from "@/pages/auth/Login";
 import NewPassword from "@/pages/auth/NewPassword";
@@ -28,6 +27,7 @@ import InvestmentSuccess from "@/components/admin/InvestmentSuccess";
 import PaymentSuccess from "@/components/admin/PaymentSuccess";
 import CheckEmailBox from "@/pages/auth/CheckEmailBox";
 import NewPasswordSuccess from "@/pages/auth/NewPasswordSuccess";
+import Statistics from "@/pages/statistics/Statistics";
 
 const router = createBrowserRouter([
   {
@@ -51,8 +51,8 @@ const router = createBrowserRouter([
         element: <About />,
       },
       {
-        path: "/agents",
-        element: <Agents />,
+        path: "/statistics",
+        element: <Statistics />,
       },
     ],
   },
