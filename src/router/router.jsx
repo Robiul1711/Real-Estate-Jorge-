@@ -28,6 +28,8 @@ import PaymentSuccess from "@/components/admin/PaymentSuccess";
 import CheckEmailBox from "@/pages/auth/CheckEmailBox";
 import NewPasswordSuccess from "@/pages/auth/NewPasswordSuccess";
 import Statistics from "@/pages/statistics/Statistics";
+import Ambassadors from "@/pages/ambassadors/Ambassadors";
+import Learn from "@/pages/learn/Learn";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +55,14 @@ const router = createBrowserRouter([
       {
         path: "/statistics",
         element: <Statistics />,
+      },
+      {
+        path: "/ambassadors",
+        element: <Ambassadors />,
+      },
+      {
+        path: "/learn",
+        element: <Learn />,
       },
     ],
   },
