@@ -57,8 +57,8 @@ const AllAmbassadors = () => {
       {teamMembers.map((member, index) => (
         <div
           key={index}
-          className={`bg-white p-6 flex gap-8 lg:gap-12 ${
-            index % 2 === 1 ? "flex-row-reverse" : ""
+          className={`bg-white p-6 flex flex-col lg:flex-row gap-8 lg:gap-12 ${
+            index % 2 === 1 ? "lg:flex-row-reverse" : "lg:flex-row"
           }`}
         >
           {/* Left - Profile Image */}

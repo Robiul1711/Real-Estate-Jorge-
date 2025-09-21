@@ -67,7 +67,7 @@ const MeetOurTeam = () => {
   ];
 
   return (
-    <div ref={sectionRef} className="py-12">
+    <div ref={sectionRef} className="py-6 lg:py-12">
       <h2
         ref={titleRef}
         className="text-[32px] md:text-[40px] font-bold text-[#111827] mb-4 text-center"

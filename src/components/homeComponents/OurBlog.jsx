@@ -79,7 +79,7 @@ const OurBlog = () => {
       </h2>
       <p
         ref={subtitleRef}
-        className="text-lg text-center md:text-[22px] w-full md:w-1/2 mx-auto"
+        className="text-lg text-center md:text-[22px] w-full lg:w-1/2 mx-auto"
       >
         Explore Our Diverse Offerings: From Luxury Real Estate to Eco-Friendly
         Investments and Exclusive Getaways.

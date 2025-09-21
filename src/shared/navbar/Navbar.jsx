@@ -67,14 +67,16 @@ const Navbar = () => {
   return (
     <header
       className={`fixed top-0 left-0 section-padding-x right-0 z-50 w-full transition-all duration-300 ${
-        scrolled ? "bg-white shadow-md py-4" : "bg-transparent py-4 "
+        scrolled
+          ? "bg-white shadow-md py-4"
+          : "bg-white xl:bg-transparent py-4 "
       }`}
     >
       <div className="flex items-center justify-between w-full">
         {/* Logo */}
         <Link to="/" onClick={closeMobileMenu} className="text-center">
           <p>
-            <MainIcon className="w-44 h-10" />
+            <MainIcon className="w-36 lg:w-44 h-10" />
           </p>
         </Link>
 
@@ -152,39 +154,81 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <Link to="/login">
-            <button className="text-[17px] font-medium px-6 rounded-md py-[7px] text-custom-primary border border-custom-primary relative before:absolute overflow-hidden before:translate-x-[-200px] hover:before:translate-x-0 before:z-[-1] before:translate-y-12 dark:text-custom-primary dark:border-custom-primary dark:z-0 dark:before:bg-custom-primary before:transition hover:before:translate-y-0 before:duration-300 hover:text-secondary  before:w-full before:h-full before:bg-custom-primary before:top-0 before:left-0 cursor-pointer">
-              Login
-            </button>
-          </Link>
+          <div className="hidden sm:flex items-center gap-4">
+            <Link to="/login">
+              <button className="text-[15px] lg:text-[17px] font-medium px-4 lg:px-6 rounded-md py-[5px] lg:py-[7px] text-custom-primary border border-custom-primary relative before:absolute overflow-hidden before:translate-x-[-200px] hover:before:translate-x-0 before:z-[-1] before:translate-y-12 dark:text-custom-primary dark:border-custom-primary dark:z-0 dark:before:bg-custom-primary before:transition hover:before:translate-y-0 before:duration-300 hover:text-secondary  before:w-full before:h-full before:bg-custom-primary before:top-0 before:left-0 cursor-pointer">
+                Login
+              </button>
+            </Link>
 
-          <Link to="/sign-up">
-            <button className="text-[17px] font-medium px-6 rounded-md py-[7px] text-custom-primary border border-custom-primary relative before:absolute overflow-hidden before:translate-x-[-200px] hover:before:translate-x-0 before:z-[-1] before:translate-y-12 dark:text-custom-primary dark:border-custom-primary dark:z-0 dark:before:bg-custom-primary before:transition hover:before:translate-y-0 before:duration-300 hover:text-secondary  before:w-full before:h-full before:bg-custom-primary before:top-0 before:left-0 cursor-pointer">
-              Signup
-            </button>
-          </Link>
+            <Link to="/sign-up">
+              <button className="text-[15px] lg:text-[17px] font-medium px-4 lg:px-6 rounded-md py-[5px] lg:py-[7px] text-custom-primary border border-custom-primary relative before:absolute overflow-hidden before:translate-x-[-200px] hover:before:translate-x-0 before:z-[-1] before:translate-y-12 dark:text-custom-primary dark:border-custom-primary dark:z-0 dark:before:bg-custom-primary before:transition hover:before:translate-y-0 before:duration-300 hover:text-secondary  before:w-full before:h-full before:bg-custom-primary before:top-0 before:left-0 cursor-pointer">
+                Signup
+              </button>
+            </Link>
+          </div>
+          {/* Mobile Toggle */}
+          <button
+            className="lg:hidden text-custom-primary z-50"
+            onClick={toggleMobileMenu}
+          >
+            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
-
-        {/* Mobile Toggle */}
-
-        <button
-          className="lg:hidden text-custom-primary z-50"
-          onClick={toggleMobileMenu}
-        >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
       </div>
 
       {/* Mobile Slide Menu */}
       <div
         ref={menuRef}
-        className={`fixed top-[72px] left-0 h-auto rounded-br-lg w-72 bg-Primary z-50 p-6 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed top-[72px] left-0 h-auto rounded-br-lg w-72 bg-Primary z-50 p-6 transform transition-transform duration-300 ease-in-out bg-white border ${
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="space-y-6 text-base pt-12">
+        <div className="space-y-6 text-base">
           {navLinks.map((link, index) => {
             const isActive = location.pathname === link.href;
+
+            if (link.sublinks) {
+              return (
+                <div key={index} className="space-y-2">
+                  {/* Parent button */}
+                  <button
+                    type="button"
+                    className="flex items-center justify-between w-full text-left transition duration-300 text-black hover:text-custom-primary"
+                    onClick={() =>
+                      setMobileOpen((prev) => ({
+                        ...prev,
+                        [link.name]: !prev[link.name],
+                      }))
+                    }
+                  >
+                    {link.name}
+                    <ChevronDown size={16} />
+                  </button>
+
+                  {/* Sublinks */}
+                  {mobileOpen[link.name] && (
+                    <div className="ml-4 space-y-2">
+                      {link.sublinks.map((sub) => (
+                        <Link
+                          key={sub.id}
+                          to={sub.href}
+                          onClick={closeMobileMenu}
+                          className={`block text-sm ${
+                            location.pathname === sub.href
+                              ? "text-custom-primary font-semibold"
+                              : "text-gray-700 hover:text-custom-primary"
+                          }`}
+                        >
+                          {sub.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            }
+
             return (
               <Link
                 key={index}
@@ -192,20 +236,26 @@ const Navbar = () => {
                 onClick={closeMobileMenu}
                 className={`block transition duration-300 ${
                   isActive
-                    ? "text-[#FFD8B1] font-semibold"
-                    : "text-white hover:text-[#FFB066]"
+                    ? "text-custom-primary font-semibold"
+                    : "text-black hover:text-custom-primary"
                 }`}
               >
                 {link.name}
               </Link>
             );
           })}
-          <Link
-            to="/contact"
-            onClick={closeMobileMenu}
-            className="block w-full mt-4 bg-custom-primary text-white font-medium py-2 px-4 rounded-full text-center hover:opacity-90 transition"
-          >
-            Contact
+        </div>
+        <div className="flex items-center gap-4 mt-4">
+          <Link to="/login">
+            <button className="text-[15px] lg:text-[17px] font-medium px-4 lg:px-6 rounded-md py-[5px] lg:py-[7px] text-custom-primary border border-custom-primary relative before:absolute overflow-hidden before:translate-x-[-200px] hover:before:translate-x-0 before:z-[-1] before:translate-y-12 dark:text-custom-primary dark:border-custom-primary dark:z-0 dark:before:bg-custom-primary before:transition hover:before:translate-y-0 before:duration-300 hover:text-secondary  before:w-full before:h-full before:bg-custom-primary before:top-0 before:left-0 cursor-pointer">
+              Login
+            </button>
+          </Link>
+
+          <Link to="/sign-up">
+            <button className="text-[15px] lg:text-[17px] font-medium px-4 lg:px-6 rounded-md py-[5px] lg:py-[7px] text-custom-primary border border-custom-primary relative before:absolute overflow-hidden before:translate-x-[-200px] hover:before:translate-x-0 before:z-[-1] before:translate-y-12 dark:text-custom-primary dark:border-custom-primary dark:z-0 dark:before:bg-custom-primary before:transition hover:before:translate-y-0 before:duration-300 hover:text-secondary  before:w-full before:h-full before:bg-custom-primary before:top-0 before:left-0 cursor-pointer">
+              Signup
+            </button>
           </Link>
         </div>
       </div>

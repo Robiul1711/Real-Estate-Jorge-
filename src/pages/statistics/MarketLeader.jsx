@@ -65,11 +65,11 @@ const MarketLeader = () => {
   ];
 
   // Data for project type breakdown
-  const projectTypeData = [
-    { name: "Capital Gains", value: 118, color: "#10B981" },
-    { name: "Loans", value: 82, color: "#F59E0B" },
-    { name: "Rentals", value: 11, color: "#8B5CF6" },
-  ];
+  // const projectTypeData = [
+  //   { name: "Capital Gains", value: 118, color: "#10B981" },
+  //   { name: "Loans", value: 82, color: "#F59E0B" },
+  //   { name: "Rentals", value: 11, color: "#8B5CF6" },
+  // ];
 
   // Data for the evolution line chart
   const evolutionData = [
@@ -163,7 +163,7 @@ const MarketLeader = () => {
     <div className="section-padding-x relative bg-[#F9FAFB]">
       <div
         ref={cardRef}
-        className="absolute -mt-60 left-1/2 -translate-x-1/2 w-full max-w-[88%] px-30 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 bg-[#008335] text-white rounded-sm"
+        className="hidden absolute -mt-60 left-1/2 -translate-x-1/2 w-full max-w-[88%] mx-auto px-30 xl:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 bg-[#008335] text-white rounded-sm"
       >
         {revenueData.map((value, index) => (
           <div
