@@ -20,6 +20,15 @@ import value2 from "../../assets/images/value2.png";
 import emma from "../../assets/images/emma.png";
 import jorge from "../../assets/images/jorge.png";
 import chen from "../../assets/images/chen.png";
+import ambassadors from "../../assets/images/ambassadors.png";
+import ambassadors1 from "../../assets/images/ambassadors1.png";
+import ambassadors2 from "../../assets/images/ambassadors2.png";
+import invest from "../../assets/images/invest.png";
+import invest1 from "../../assets/images/invest1.png";
+import invest2 from "../../assets/images/invest2.png";
+import invest3 from "../../assets/images/invest3.png";
+import invest4 from "../../assets/images/invest4.png";
+import invest5 from "../../assets/images/invest5.png";
 
 export const ImageProvider = {
   star,
@@ -44,4 +53,13 @@ export const ImageProvider = {
   emma,
   jorge,
   chen,
+  ambassadors,
+  ambassadors1,
+  ambassadors2,
+  invest,
+  invest1,
+  invest2,
+  invest3,
+  invest4,
+  invest5,
 };

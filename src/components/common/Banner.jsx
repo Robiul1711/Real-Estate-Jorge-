@@ -43,7 +43,7 @@ const Banner = ({ title, subtitle, description }) => {
           </p>
           <p
             ref={descriptionRef}
-            className="text-lg text-[#D1D5DB] mt-2 max-w-xl mx-auto text-center"
+            className="text-lg text-[#D1D5DB] mt-2 max-w-3xl mx-auto text-center"
           >
             {description}
           </p>

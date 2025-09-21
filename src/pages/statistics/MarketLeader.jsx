@@ -1,6 +1,9 @@
 import { ImageProvider } from "@/components/common/ImageProvider";
-import { Calendar, Target, Users } from "lucide-react";
-import React from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Calendar } from "lucide-react";
+import React, { useRef } from "react";
 import {
   PieChart,
   Pie,
@@ -15,7 +18,41 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const MarketLeader = () => {
+  const sectionRef = useRef(null);
+  const buttonRef = useRef(null);
+  const cardRef = useRef(null);
+  const chartRef = useRef(null);
+  const bottomRef = useRef(null);
+  useGSAP(() => {
+    const targets = [
+      buttonRef.current,
+      cardRef.current,
+      sectionRef.current,
+      chartRef.current,
+      bottomRef.current,
+    ].filter(Boolean);
+
+    if (targets.length) {
+      gsap.from(targets, {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        delay: 0.2,
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 90%",
+          toggleActions: "play none none none",
+        },
+      });
+    }
+  });
+
+  // Data for the revenue chart
   const revenueData = [
     { value: "+210", label: "Projects Financed" },
     { value: "+$470M", label: "Capital Financed" },
@@ -124,7 +161,10 @@ const MarketLeader = () => {
 
   return (
     <div className="section-padding-x relative bg-[#F9FAFB]">
-      <div className="absolute -mt-60 left-1/2 -translate-x-1/2 w-full max-w-[88%] px-30 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 bg-[#008335] text-white rounded-sm">
+      <div
+        ref={cardRef}
+        className="absolute -mt-60 left-1/2 -translate-x-1/2 w-full max-w-[88%] px-30 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 bg-[#008335] text-white rounded-sm"
+      >
         {revenueData.map((value, index) => (
           <div
             key={index}
@@ -137,10 +177,10 @@ const MarketLeader = () => {
           </div>
         ))}
       </div>
-      <div className="min-h-screen section-padding-x p-6">
+      <div ref={sectionRef} className="min-h-screen section-padding-x p-6">
         <div className="max-w-7xl mx-auto">
           {/* Top Row - Platform Comparison */}
-          <div className="bg-white shadow rounded-lg">
+          <div ref={buttonRef} className="bg-white shadow rounded-lg">
             <div className="bg-custom-primary text-white p-6 rounded-t-lg">
               <h2 className="text-2xl font-semibold">Market Leadership</h2>
               <p className="text-lg font-medium my-2">
@@ -202,7 +242,10 @@ const MarketLeader = () => {
           </div>
 
           {/* Evolution Chart */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          <div
+            ref={chartRef}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8"
+          >
             {/* Project Types Breakdown */}
             <div className="bg-white rounded-lg shadow-sm p-6">
               <h3 className="text-lg lg:text-xl font-semibold text-gray-900 mb-2">
@@ -309,118 +352,122 @@ const MarketLeader = () => {
             </div>
           </div>
         </div>
-      </div>
+        <div className="max-w-7xl mx-auto space-y-8">
+          {/* Financial Table */}
+          <div ref={bottomRef} className="bg-white rounded-lg shadow-sm p-6">
+            <h2 className="text-xl lg:text-2xl font-bold text-gray-900 mb-6">
+              Key Financial Indicators
+            </h2>
 
-      <div className="max-w-7xl mx-auto space-y-8">
-        {/* Financial Table */}
-        <div className="bg-white rounded-lg shadow-sm p-6">
-          <h2 className="text-xl lg:text-2xl font-bold text-gray-900 mb-6">
-            Key Financial Indicators
-          </h2>
-
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="text-left text-sm font-medium text-gray-500 border-b">
-                  <th className="pb-3">Project Type</th>
-                  <th className="pb-3 text-center">Projects Financed</th>
-                  <th className="pb-3 text-center">Projects Returned</th>
-                  <th className="pb-3 text-center">Avg. Estimated ROI</th>
-                  <th className="pb-3 text-center">Avg. Achieved ROI</th>
-                  <th className="pb-3 text-center">Weighted Est. ROI</th>
-                  <th className="pb-3 text-center">Weighted Achieved ROI</th>
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                {tableData.map((row, index) => (
-                  <tr key={index} className="border-b border-gray-100">
-                    <td className="py-4 font-medium text-gray-900">
-                      {row.projectType}
-                    </td>
-                    <td className="py-4 text-center text-gray-700">
-                      {row.projectsFinanced}
-                    </td>
-                    <td className="py-4 text-center text-gray-700">
-                      {row.projectsReturned}
-                    </td>
-                    <td className="py-4 text-center text-yellow-600 font-medium">
-                      {row.avgEstimatedROI}
-                    </td>
-                    <td className="py-4 text-center text-green-600 font-medium">
-                      {row.avgAchievedROI}
-                    </td>
-                    <td className="py-4 text-center text-yellow-600 font-medium">
-                      {row.weightedEstROI}
-                    </td>
-                    <td className="py-4 text-center text-green-600 font-medium">
-                      {row.weightedAchievedROI}
-                    </td>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="text-left text-sm font-medium text-gray-500 border-b">
+                    <th className="pb-3">Project Type</th>
+                    <th className="pb-3 text-center">Projects Financed</th>
+                    <th className="pb-3 text-center">Projects Returned</th>
+                    <th className="pb-3 text-center">Avg. Estimated ROI</th>
+                    <th className="pb-3 text-center">Avg. Achieved ROI</th>
+                    <th className="pb-3 text-center">Weighted Est. ROI</th>
+                    <th className="pb-3 text-center">Weighted Achieved ROI</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="text-sm">
+                  {tableData.map((row, index) => (
+                    <tr key={index} className="border-b border-gray-100">
+                      <td className="py-4 font-medium text-gray-900">
+                        {row.projectType}
+                      </td>
+                      <td className="py-4 text-center text-gray-700">
+                        {row.projectsFinanced}
+                      </td>
+                      <td className="py-4 text-center text-gray-700">
+                        {row.projectsReturned}
+                      </td>
+                      <td className="py-4 text-center text-yellow-600 font-medium">
+                        {row.avgEstimatedROI}
+                      </td>
+                      <td className="py-4 text-center text-green-600 font-medium">
+                        {row.avgAchievedROI}
+                      </td>
+                      <td className="py-4 text-center text-yellow-600 font-medium">
+                        {row.weightedEstROI}
+                      </td>
+                      <td className="py-4 text-center text-green-600 font-medium">
+                        {row.weightedAchievedROI}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <p className="bg-[#F9FAFB] text-[#6B7280] mt-4 p-5 rounded-lg">
+              Note: Returns are calculated based on completed projects only.
+              Weighted averages consider the investment amount of each project.
+              Past performance does not guarantee future results.
+            </p>
           </div>
 
-          <p className="bg-[#F9FAFB] text-[#6B7280] mt-4 p-5 rounded-lg">
-            Note: Returns are calculated based on completed projects only.
-            Weighted averages consider the investment amount of each project.
-            Past performance does not guarantee future results.
-          </p>
-        </div>
+          {/* Metrics Cards */}
+          <div
+            ref={cardRef}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 py-12"
+          >
+            {/* Success Rate */}
+            <div className="bg-white rounded-lg shadow-sm p-6 text-center hover:shadow-lg">
+              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <img src={ImageProvider.value2} alt="image" />
+              </div>
+              <div className="text-3xl font-bold text-gray-900 mb-2">94.2%</div>
+              <div className="text-gray-600 mb-4">Success Rate</div>
+              <div className="w-full bg-gray-200 rounded-full h-4 mb-3">
+                <div
+                  className="bg-green-500 h-4 rounded-full"
+                  style={{ width: "91.2%" }}
+                ></div>
+              </div>
+              <div className="text-sm text-green-600 font-medium">
+                +12% from last quarter
+              </div>
+            </div>
 
-        {/* Metrics Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-12">
-          {/* Success Rate */}
-          <div className="bg-white rounded-lg shadow-sm p-6 text-center hover:shadow-lg">
-            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <img src={ImageProvider.value2} alt="image" />
+            {/* Avg Funding Time */}
+            <div className="bg-white rounded-lg shadow-sm p-6 text-center hover:shadow-lg">
+              <div className="w-12 h-12 bg-custom-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                <Calendar className="w-6 h-6 text-white" />
+              </div>
+              <div className="text-3xl font-bold text-gray-900 mb-2">
+                18 days
+              </div>
+              <div className="text-gray-600 mb-4">Avg. Funding Time</div>
+              <div className="w-full bg-gray-200 rounded-full h-4 mb-3">
+                <div
+                  className="bg-green-500 h-4 rounded-full"
+                  style={{ width: "75%" }}
+                ></div>
+              </div>
+              <div className="text-sm text-green-600 font-medium">
+                5 days faster than industry
+              </div>
             </div>
-            <div className="text-3xl font-bold text-gray-900 mb-2">94.2%</div>
-            <div className="text-gray-600 mb-4">Success Rate</div>
-            <div className="w-full bg-gray-200 rounded-full h-4 mb-3">
-              <div
-                className="bg-green-500 h-4 rounded-full"
-                style={{ width: "91.2%" }}
-              ></div>
-            </div>
-            <div className="text-sm text-green-600 font-medium">
-              +12% from last quarter
-            </div>
-          </div>
 
-          {/* Avg Funding Time */}
-          <div className="bg-white rounded-lg shadow-sm p-6 text-center hover:shadow-lg">
-            <div className="w-12 h-12 bg-custom-primary rounded-full flex items-center justify-center mx-auto mb-4">
-              <Calendar className="w-6 h-6 text-white" />
-            </div>
-            <div className="text-3xl font-bold text-gray-900 mb-2">18 days</div>
-            <div className="text-gray-600 mb-4">Avg. Funding Time</div>
-            <div className="w-full bg-gray-200 rounded-full h-4 mb-3">
-              <div
-                className="bg-green-500 h-4 rounded-full"
-                style={{ width: "75%" }}
-              ></div>
-            </div>
-            <div className="text-sm text-green-600 font-medium">
-              5 days faster than industry
-            </div>
-          </div>
-
-          {/* Active Investors */}
-          <div className="bg-white rounded-lg shadow-sm p-6 text-center hover:shadow-lg">
-            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <img src={ImageProvider.value1} alt="image" />
-            </div>
-            <div className="text-3xl font-bold text-gray-900 mb-2">2,045</div>
-            <div className="text-gray-600 mb-4">Active Investors</div>
-            <div className="w-full bg-gray-200 rounded-full h-4 mb-3">
-              <div
-                className="bg-green-500 h-4 rounded-full"
-                style={{ width: "80%" }}
-              ></div>
-            </div>
-            <div className="text-sm text-green-600 font-medium">
-              +35% monthly growth
+            {/* Active Investors */}
+            <div className="bg-white rounded-lg shadow-sm p-6 text-center hover:shadow-lg">
+              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <img src={ImageProvider.value1} alt="image" />
+              </div>
+              <div className="text-3xl font-bold text-gray-900 mb-2">2,045</div>
+              <div className="text-gray-600 mb-4">Active Investors</div>
+              <div className="w-full bg-gray-200 rounded-full h-4 mb-3">
+                <div
+                  className="bg-green-500 h-4 rounded-full"
+                  style={{ width: "80%" }}
+                ></div>
+              </div>
+              <div className="text-sm text-green-600 font-medium">
+                +35% monthly growth
+              </div>
             </div>
           </div>
         </div>

@@ -34,6 +34,8 @@ import WithdrawalMethod from "@/components/admin/DigitalWallet/WithdrawalMethod"
 import ConfirmWithdrawal from "@/components/admin/DigitalWallet/ConfirmWithdrawal";
 import WithdrawalRequestSuccessful from "@/components/admin/DigitalWallet/WithdrawalRequestSuccessful";
 import RequestSubmittedSuccessfully from "@/components/admin/DigitalWallet/RequestSubmittedSuccessfully";
+import Ambassadors from "@/pages/ambassadors/Ambassadors";
+import Learn from "@/pages/learn/Learn";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +61,14 @@ const router = createBrowserRouter([
       {
         path: "/statistics",
         element: <Statistics />,
+      },
+      {
+        path: "/ambassadors",
+        element: <Ambassadors />,
+      },
+      {
+        path: "/learn",
+        element: <Learn />,
       },
     ],
   },
@@ -103,7 +113,7 @@ const router = createBrowserRouter([
         path: "communication",
         element: <Communications />,
       },
-      // Digital wallet start 
+      // Digital wallet start
       {
         path: "payment",
         element: <Payment />,
@@ -124,14 +134,13 @@ const router = createBrowserRouter([
         path: "withdrawal-request-successful",
         element: <WithdrawalRequestSuccessful />,
       },
-  
-   
+
       // Digital wallet end
       {
         path: "add-funds",
         element: <AddFunds />,
       },
-         {
+      {
         path: "request-submitted-successfully",
         element: <RequestSubmittedSuccessfully />,
       },
