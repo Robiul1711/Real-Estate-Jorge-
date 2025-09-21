@@ -173,10 +173,10 @@ const InvestmentGuide = () => {
 
   return (
     <div className="pb-8">
-      <h2 className="text-xl md:text-2xl lg:text-[32px] text-[#111827] font-bold mb-4 text-center">
+      <h2 className="text-lg sm:text-xl md:text-2xl lg:text-[32px] text-[#111827] font-bold mb-4 text-center">
         Investment Guide for Beginners
       </h2>
-      <p className="text-[#64748B] text-lg font-medium my-4 w-full max-w-3xl mx-auto text-center">
+      <p className="text-[#64748B] text-base sm:text-lg font-medium my-4 w-full max-w-3xl mx-auto text-center px-4">
         Comprehensive video lessons covering everything from basic concepts to
         advanced investment strategies
       </p>
@@ -184,7 +184,7 @@ const InvestmentGuide = () => {
       {/* Tabs */}
       <div
         ref={scrollRef}
-        className="overflow-x-auto hide-scrollbar px-8 cursor-grab active:cursor-grabbing flex items-center text-center justify-center my-4"
+        className="overflow-x-auto hide-scrollbar px-4 sm:px-8 cursor-grab active:cursor-grabbing flex items-center text-center justify-start sm:justify-center my-4"
         style={{ scrollBehavior: "smooth", userSelect: "none" }}
         onMouseDown={onMouseDown}
         onMouseMove={onMouseMove}
@@ -194,12 +194,12 @@ const InvestmentGuide = () => {
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
-        <div className="flex flex-nowrap min-w-fit gap-4">
+        <div className="flex flex-nowrap min-w-fit gap-3 sm:gap-4">
           {tabs.map((tab, index) => (
             <button
               key={`${tab.label}-${index}`}
               onClick={() => setActiveTab(tab.label)}
-              className={`flex-shrink-0 px-4 py-2 rounded-full text-sm md:text-base font-medium transition cursor-pointer ${
+              className={`flex-shrink-0 px-3 sm:px-4 py-2 rounded-full text-sm md:text-base font-medium transition cursor-pointer ${
                 activeTab === tab.label
                   ? "bg-custom-primary text-white"
                   : "text-[#0F172A] bg-[#30B7671A] hover:bg-green-200"
@@ -212,39 +212,46 @@ const InvestmentGuide = () => {
       </div>
 
       {/* Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-6 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 my-6 max-w-7xl mx-auto px-4">
         {currentItems.map((guide) => (
           <div
             key={guide.id}
-            className="relative border rounded-2xl overflow-hidden"
+            className="relative border rounded-2xl overflow-hidden bg-white"
           >
-            <img src={guide.image} alt={guide.title} />
-            <p className="absolute top-2 left-2 p-2 bg-custom-primary text-white text-sm rounded-full">
+            <img
+              src={guide.image}
+              alt={guide.title}
+              className="w-full h-48 sm:h-56 md:h-64 object-cover"
+            />
+            <p className="absolute top-2 left-2 p-2 bg-custom-primary text-white text-xs sm:text-sm rounded-full">
               {guide.category}
             </p>
             <div className="p-4">
-              <h2 className="flex gap-2 items-center text-[#64748B] text-lg">
-                <Calendar size={22} />
+              <h2 className="flex gap-2 items-center text-[#64748B] text-sm sm:text-base md:text-lg">
+                <Calendar size={18} />
                 {guide.date}
               </h2>
-              <h2 className="text-[#111827] text-2xl font-bold my-2">
+              <h2 className="text-[#111827] text-lg sm:text-xl md:text-2xl font-bold my-2">
                 {guide.title}
               </h2>
-              <p className="text-[#64748B] my-3">{guide.description}</p>
+              <p className="text-[#64748B] text-sm sm:text-base my-3">
+                {guide.description}
+              </p>
             </div>
           </div>
         ))}
       </div>
+
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex justify-center items-center gap-2 mt-6">
+        <div className="flex justify-center items-center gap-1 sm:gap-2 mt-6 px-2">
           {/* Prev Button */}
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
-            className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 cursor-pointer transition"
+            className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 cursor-pointer transition"
           >
-            <ArrowLeft size={16} />
+            <ArrowLeft size={22} />
           </button>
 
           {/* Page Numbers */}
@@ -252,7 +259,7 @@ const InvestmentGuide = () => {
             <button
               key={i}
               onClick={() => setCurrentPage(i + 1)}
-              className={`w-10 h-10 rounded-full flex items-center justify-center font-medium transition cursor-pointer ${
+              className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-sm sm:text-base font-medium transition cursor-pointer ${
                 currentPage === i + 1
                   ? "bg-custom-primary text-white"
                   : "bg-gray-200 hover:bg-gray-300"
@@ -268,9 +275,9 @@ const InvestmentGuide = () => {
               setCurrentPage((prev) => Math.min(prev + 1, totalPages))
             }
             disabled={currentPage === totalPages}
-            className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 cursor-pointer transition"
+            className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 cursor-pointer transition"
           >
-            <ArrowRight size={16} />
+            <ArrowRight size={22} />
           </button>
         </div>
       )}

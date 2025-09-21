@@ -84,7 +84,7 @@ const FAQ = () => {
       </h2>
       <p
         ref={subtitleRef}
-        className="text-lg text-center md:text-[22px] w-full md:w-[60%] mx-auto"
+        className="lg:text-lg text-center md:text-[22px] w-full lg:w-[60%] mx-auto"
       >
         FAQs cover key questions on real estate, green building, and vacation
         rentals, helping clients make smart choices.
@@ -106,7 +106,7 @@ const FAQ = () => {
               </h2>
               <p>
                 <FaPlus
-                  className={`text-[1.2rem] text-slate-600 text-text transition-all duration-300 ${
+                  className={`text-[1rem] lg:text-[1.2rem] text-slate-600 text-text transition-all duration-300 ${
                     isPlusAccording === index &&
                     "rotate-[45deg] !text-custom-secondary"
                   }`}

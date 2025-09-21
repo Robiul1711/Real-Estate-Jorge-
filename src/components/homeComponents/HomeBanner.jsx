@@ -58,7 +58,7 @@ const HomeBanner = () => {
               className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-6 sm:mt-8"
             >
               <Link to={"/"}>
-                <button className="py-2.5 px-4 flex items-center border border-custom-primary gap-4 font-medium bg-white text-black rounded-lg hover:bg-custom-primary hover:text-white transition duration-300 ease-in-out cursor-pointer">
+                <button className="text-sm lg:text-base py-2 lg:py-2.5 px-4 flex items-center border border-custom-primary gap-4 font-medium bg-white text-black rounded-lg hover:bg-custom-primary hover:text-white transition duration-300 ease-in-out cursor-pointer">
                   <span>Explore Project</span>
                   <span className="bg-custom-primary p-1 rounded-lg text-white">
                     <ArrowUpRight size={18} />
@@ -68,7 +68,7 @@ const HomeBanner = () => {
 
               <Link
                 to={"/sign-up"}
-                className="py-2.5 px-4 hover:bg-white border border-custom-primary rounded-lg bg-custom-primary text-white hover:text-black transition duration-300 ease-in-out"
+                className="text-sm lg:text-base py-2 lg:py-2.5 px-4 hover:bg-white border border-custom-primary rounded-lg bg-custom-primary text-white hover:text-black transition duration-300 ease-in-out"
               >
                 Sign up for free
               </Link>

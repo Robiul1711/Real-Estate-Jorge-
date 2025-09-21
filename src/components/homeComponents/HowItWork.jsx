@@ -52,16 +52,16 @@ const HowItWork = () => {
     });
   });
   return (
-    <div ref={sectionRef} className="section-padding-x pb-12">
+    <div ref={sectionRef} className="section-padding-x pb-8 lg:pb-12">
       <h2
         ref={titleRef}
-        className="text-[32px] md:text-4xl lg:text-[40px] font-bold mb-4 text-center"
+        className="text-[32px] md:text-4xl lg:text-[40px] font-bold mb-2 lg:mb-4 text-center"
       >
         How It Work
       </h2>
       <p
         ref={subtitleRef}
-        className="text-lg text-center md:text-[22px] w-full md:w-1/2 mx-auto"
+        className="lg:text-lg text-center md:text-[22px] w-full lg:w-1/2 mx-auto"
       >
         Our platform makes real estate investing simple, accessible, and
         transparent for everyone.
@@ -74,7 +74,7 @@ const HowItWork = () => {
         {steps.map((step) => (
           <div
             key={step.id}
-            className="group flex flex-col justify-end gap-x-4 pb-8 px-14 text-white hover:bg-custom-primary transform transition-all duration-200 ease-in-out"
+            className="group flex flex-col justify-end gap-x-4 pt-8 lg:pt-0 pb-8 px-6 lg:px-14 text-white hover:bg-custom-primary transform transition-all duration-200 ease-in-out"
           >
             {step.icon}
             <h2 className="text-2xl font-bold my-5">{step.title}</h2>

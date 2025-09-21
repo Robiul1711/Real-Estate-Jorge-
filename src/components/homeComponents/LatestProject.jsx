@@ -135,7 +135,7 @@ const LatestProject = () => {
       </h2>
       <p
         ref={subtitleRef}
-        className="text-lg text-center md:text-[22px] w-full md:w-1/2 mx-auto"
+        className="lg:text-lg text-center md:text-[22px] w-full lg:w-1/2 mx-auto"
       >
         Our comprehensive services encompass luxury property sales, sustainable
         green building investments, and premium vacation rentals.
@@ -177,7 +177,7 @@ const LatestProject = () => {
               </div>
 
               <div className="flex flex-col flex-1">
-                <div className="flex justify-between mt-4 font-bold text-[20px]">
+                <div className="flex flex-col sm:flex-row justify-between mt-4 font-bold text-lg lg:text-[20px]">
                   <h2>{project.title}</h2>
                   <h2>{project.price}</h2>
                 </div>
@@ -220,7 +220,7 @@ const LatestProject = () => {
                   </div>
                 </div>
 
-                <button className="mt-auto py-3 text-[15px] font-medium bg-custom-primary text-white border hover:bg-custom-primary/80 rounded-lg cursor-pointer w-full text-center transform transition-all duration-200 ease-in-out">
+                <button className="mt-auto py-2.5 lg:py-3 text-[15px] font-medium bg-custom-primary text-white border hover:bg-custom-primary/80 rounded-lg cursor-pointer w-full text-center transform transition-all duration-200 ease-in-out">
                   View Property
                 </button>
               </div>

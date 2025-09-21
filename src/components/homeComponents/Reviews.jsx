@@ -100,28 +100,48 @@ const Reviews = () => {
       </h2>
       <p
         ref={subtitleRef}
-        className="text-lg text-center md:text-[22px] w-full md:w-1/2 mx-auto"
+        className="lg:text-lg text-center md:text-[22px] w-full lg:w-1/2 mx-auto"
       >
         More than 180,000 investments reflect the confidence in our real estate
         crowdfunding platforms
       </p>
       <div
         ref={cardRef}
-        className="flex flex-col md:flex-row gap-6 lg:gap-12 mt-8 mb-4"
+        className="flex flex-col lg:flex-row gap-6 lg:gap-12 mt-8 mb-4"
       >
         {/* Left Summary */}
         <div className="w-full lg:w-[20%]">
           <h2 className="text-[32px] md:text-4xl lg:text-[40px] font-bold text-center">
             Very Good
           </h2>
-          <div className="flex gap-1 mt-4">
-            <img src={ImageProvider.star} alt="image" />
-            <img src={ImageProvider.star} alt="image" />
-            <img src={ImageProvider.star} alt="image" />
-            <img src={ImageProvider.star} alt="image" />
-            <img src={ImageProvider.emptystar} alt="image" />
+          <div className="flex justify-center gap-1 mt-4">
+            <img
+              className="w-12 h-12 xl:h-auto xl:w-auto"
+              src={ImageProvider.star}
+              alt="image"
+            />
+            <img
+              className="w-12 h-12 xl:h-auto xl:w-auto"
+              src={ImageProvider.star}
+              alt="image"
+            />
+            <img
+              className="w-12 h-12 xl:h-auto xl:w-auto"
+              src={ImageProvider.star}
+              alt="image"
+            />
+            <img
+              className="w-12 h-12 xl:h-auto xl:w-auto"
+              src={ImageProvider.star}
+              alt="image"
+            />
+            <img
+              className="w-12 h-12 xl:h-auto xl:w-auto"
+              src={ImageProvider.emptystar}
+              alt="image"
+            />
           </div>
-          <p className="text-lg font-semibold py-2 text-center">
+          <p className="xl:text-lg font-semibold py-2 text-center">
             Based on 1708 reviews
           </p>
           <div className="flex items-center justify-center gap-2">
@@ -139,8 +159,9 @@ const Reviews = () => {
             spaceBetween={20}
             slidesPerView={1}
             breakpoints={{
-              768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
+              768: { slidesPerView: 1 },
+              1024: { slidesPerView: 2 },
+              1280: { slidesPerView: 3 },
             }}
           >
             {reviewsData.map((review) => (

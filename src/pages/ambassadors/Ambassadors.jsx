@@ -2,6 +2,7 @@ import Banner from "@/components/common/Banner";
 import React from "react";
 import { ScrollRestoration } from "react-router-dom";
 import AllAmbassadors from "./AllAmbassadors";
+import CommonBanner from "@/components/homeComponents/CommonBanner";
 
 const Ambassadors = () => {
   return (
@@ -15,6 +16,7 @@ const Ambassadors = () => {
         }
       />
       <AllAmbassadors />
+      <CommonBanner />
     </>
   );
 };
