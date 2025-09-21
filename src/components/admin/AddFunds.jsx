@@ -1,66 +1,109 @@
-import { Method } from "@/assets/icon";
-import React from "react";
-import { IoArrowBackOutline } from "react-icons/io5";
-import { Link, ScrollRestoration } from "react-router-dom";
+import { ArrowLeft, CreditCard } from "lucide-react";
+import { Link } from "react-router-dom";
 
-const AddFunds = () => {
+export default function AddFunds() {
   return (
-    <div className="min-h-[80vh] flex flex-col items-center justify-center px-4 md:px-6">
-      <ScrollRestoration />
-
-      {/* Back link */}
-      <div className="flex items-center gap-2 self-start mb-6">
-        <Link to="/dashboard/payment">
-          <IoArrowBackOutline className="text-xl" />
-        </Link>
-        <p className="font-medium text-sm sm:text-base">Back to Dashboard</p>
-      </div>
-
-      {/* Form Card */}
-      <div className="w-full max-w-md bg-white p-6 sm:p-8 rounded-xl shadow-md">
-        <h2 className="text-xl sm:text-2xl font-bold text-[#111827] mb-1">
-          Add Funds to Wallet
-        </h2>
-        <p className="text-sm text-[#6B7280] mb-4">
-          Step 1 of 3: Enter the amount you want to add
-        </p>
-
-        {/* Amount Input */}
-        <div className="mb-4">
-          <label
-            htmlFor="amount"
-            className="block mb-2 text-sm font-medium text-[#111827]"
-          >
-            Amount to Add (USD)
-          </label>
-          <input
-            id="amount"
-            placeholder="Enter Amount"
-            type="text"
-            className="w-full px-4 py-2.5 border border-[#D1D5DB] rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-black/80"
-          />
-        </div>
-
-        {/* Method Info Box */}
-        <div className="bg-[#F9FAFB] p-5 rounded-lg mb-4">
-          <h3 className="text-[#111827] font-medium flex items-center gap-2 mb-2">
-            <Method /> Payment Method
-          </h3>
-          <p className="text-sm text-[#6B7280]">
-            Bank transfer only. You'll receive our bank details in the next
-            step.
-          </p>
-        </div>
-
-        {/* CTA Button */}
-        <Link to="/dashboard/payment-details">
-          <button className="w-full bg-black text-white py-3 rounded-lg text-sm font-medium hover:bg-[#111] transition cursor-pointer">
-            Continue to Payment Details
+    <div className="">
+      <div className="max-w-2xl mx-auto">
+        {/* Back to Dashboard */}
+        <div className="mb-8">
+          <button className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors">
+            <Link to="/dashboard/payment">
+            <ArrowLeft className="w-4 h-4" />
+            </Link>
+            <span className="text-sm font-medium">Back to Dashboard</span>
           </button>
-        </Link>
+        </div>
+
+        {/* Main Content */}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          {/* Header */}
+          <div className="mb-8">
+            <h1 className="text-2xl font-semibold text-gray-900 mb-2">Payment Details</h1>
+            <p className="text-gray-600 text-sm">
+              Step 1 of 2: Complete your bank transfer and submit proof
+            </p>
+          </div>
+
+          {/* Bank Transfer Details Section */}
+          <div className="mb-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-6 h-6 bg-black rounded flex items-center justify-center">
+                <CreditCard className="w-4 h-4 text-white" />
+              </div>
+              <h2 className="text-lg font-semibold text-gray-900">Bank Transfer Details</h2>
+            </div>
+
+            {/* Bank Details Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              {/* Left Column */}
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Bank Name:
+                  </label>
+                  <p className="text-gray-900 font-medium">PropertyPath Bank Ltd</p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Account Name:
+                  </label>
+                  <p className="text-gray-900 font-medium">PropertyPath Investment Ltd</p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Account Number:
+                  </label>
+                  <p className="text-gray-900 font-medium">123456890123</p>
+                </div>
+              </div>
+
+              {/* Right Column */}
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Routing Number:
+                  </label>
+                  <p className="text-gray-900 font-medium">123456789</p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    SWIFT Code:
+                  </label>
+                  <p className="text-gray-900 font-medium">PPBANKUS</p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Client Code:
+                  </label>
+                  <p className="text-gray-900 font-medium">JHGHUI768</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Important Notice */}
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+              <p className="text-green-800 text-sm">
+                <span className="font-medium">Important:</span> Please use the exact Specific code shown above and include this code in the transfer reference.
+              </p>
+            </div>
+
+            {/* Submit Button */}
+            <Link to="/dashboard/request-submitted-successfully" className="w-full text-center flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-4 rounded-lg transition-colors">
+              Submit Deposit Request
+            </Link>
+
+            {/* Footer Text */}
+            <p className="text-center text-gray-600 text-sm mt-4">
+              Your request will be reviewed within 24-48 hours. You'll receive a notification once approved.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
-};
-
-export default AddFunds;
+}

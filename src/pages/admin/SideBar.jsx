@@ -26,8 +26,23 @@ const SideBar = ({ sidebar, open, setOpen }) => {
       >
         {/* Logo */}
         <Link to={"/"} className="flex justify-center mb-6">
-          <FooterIcon className="text-black w-36" color="black" />
+          <FooterIcon className="text-custom-primary w-36" color="black" />
         </Link>
+        <div className="rounded-2xl bg-custom-primary p-4 w-full max-w-sm mx-auto shadow-md mb-10">
+          {/* Header */}
+          <p className="text-white text-xl font-semibold">Digital Wallet</p>
+          <p className="text-white text-xs tracking-wide mb-4">
+            AVAILABLE BALANCE
+          </p>
+
+          {/* Balance Section */}
+          <div className="flex items-center justify-between">
+            <p className="text-white text-2xl font-bold">€58,79</p>
+            <button className="flex items-center justify-center w-10 h-10 bg-white text-custom-primary font-bold text-xl rounded-full shadow hover:bg-gray-100 transition">
+              +
+            </button>
+          </div>
+        </div>
 
         {/* Links */}
         <div className="flex flex-col gap-3 flex-grow">
@@ -38,8 +53,8 @@ const SideBar = ({ sidebar, open, setOpen }) => {
               onClick={() => setOpen(false)}
               className={`flex items-center gap-3 px-4 py-2 rounded-lg text-base font-medium transition-colors duration-200 ${
                 isActive(item.path)
-                  ? "bg-[#2F2F2F] text-white"
-                  : "text-black hover:bg-[#2F2F2F] hover:text-white"
+                  ? "bg-custom-primary text-white"
+                  : "text-black hover:bg-custom-primary hover:text-white"
               }`}
             >
               <span className="text-lg">{item.icon}</span>

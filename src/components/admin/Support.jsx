@@ -36,23 +36,12 @@ const Support = () => {
   return (
     <div>
       <ScrollRestoration />
-      <h2 className="text-3xl font-bold my-2 text-[#000000]">Support Center</h2>
+      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold my-2 text-[#000000]">Support Center</h2>
       <p className="text-sm text-[#4B5563]">
         Get help and support for your investment journey
       </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8">
-        <div className="bg-[#ffffff] p-5 rounded-2xl flex flex-col justify-center items-center shadow-md">
-          <Chat />
-          <h2 className="text-[17px] font-bold my-1 text-[#000000]">
-            Live Chat
-          </h2>
-          <p className="text-sm text-[#4B5563] mb-1">
-            Get instant help from our support team
-          </p>
-          <button className="px-3 py-2 text-[15px] bg-[#FFF] hover:text-white border hover:bg-black rounded-lg mt-2 cursor-pointer w-full text-center">
-            Start Chat
-          </button>
-        </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2  gap-8 mt-8">
+ 
         <div className="bg-[#ffffff] p-5 rounded-2xl flex flex-col justify-center items-center shadow-md">
           <Phone />
           <h2 className="text-[17px] font-bold my-1 text-[#000000]">
@@ -62,7 +51,7 @@ const Support = () => {
             Mon-Fri, 9 AM - 6 PM EST
           </p>
           <p className="text-sm text-[#4B5563] mb-1">+1 (555) 123-4567</p>
-          <button className="px-3 py-2 text-[15px] bg-[#FFF] border hover:text-white hover:bg-black rounded-lg mt-2 cursor-pointer w-full text-center">
+          <button className="px-3 py-2 text-[15px] bg-custom-primary border duration-300 text-white hover:bg-black rounded-lg mt-2 cursor-pointer w-full text-center">
             Call Now
           </button>
         </div>
@@ -77,7 +66,7 @@ const Support = () => {
           <p className="text-sm text-[#4B5563] my-1">
             support@realtyinvest.com
           </p>
-          <button className="px-3 py-2 text-[15px] bg-[#FFF] border hover:text-white hover:bg-black rounded-lg mt-2 cursor-pointer w-full text-center">
+          <button className="px-3 py-2 text-[15px] bg-custom-primary border duration-300 text-white hover:bg-black rounded-lg mt-2 cursor-pointer w-full text-center">
             Send Email
           </button>
         </div>
@@ -87,7 +76,7 @@ const Support = () => {
         <div className="w-full md:w-1/2">
           <div className="flex items-center justify-between my-4">
             <h2 className="md:text-[22px] font-bold">My Support Tickets</h2>
-            <button className="px-3 py-2 text-[15px] bg-[#FFF] border hover:text-white hover:bg-black rounded-lg mt-2 cursor-pointer">
+            <button className="px-3 py-2 text-[15px] bg-custom-primary border duration-300 text-white hover:bg-black rounded-lg mt-2 cursor-pointer">
               New Ticket
             </button>
           </div>
@@ -95,16 +84,19 @@ const Support = () => {
             <div className="bg-[#ffffff] p-5 rounded-2xl  shadow-md">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <h2 className="text-lg font-bold">
+                  <h2 className="sm:text-lg font-bold">
                     Question about dividend payments
                   </h2>
+                  <div className="flex flex-col sm:flex-row items-center gap-2">
+
                   <button className="bg-[#DBEAFE] text-[#1E40AF] text-sm font-medium px-3 py-1 rounded-2xl flex items-center gap-2">
                     <Question /> Open
                   </button>
-                </div>
                 <button className="bg-[#FEF9C3] text-[#854D0E] text-sm font-medium px-3 py-1 rounded-2xl">
                   Medium
                 </button>
+                </div>
+                  </div>
               </div>
               <p className="text-sm text-[#4B5563] my-1">Ticket #12345</p>
               <div className="flex items-center justify-between text-[15px] my-1 text-[#4B5563]">
@@ -166,7 +158,7 @@ const Support = () => {
             <h2 className="text-lg md:text-[22px] font-bold">
               Frequently Asked Questions
             </h2>
-            <button className="px-3 py-2 text-[15px] bg-[#FFF] border hover:text-white hover:bg-black rounded-lg mt-2 cursor-pointer flex items-center gap-2">
+            <button className="px-3 py-2 text-[15px] bg-custom-primary duration-300 text-white border  hover:bg-black rounded-lg mt-2 cursor-pointer flex items-center gap-2">
               <Book size={18} /> View All
             </button>
           </div>

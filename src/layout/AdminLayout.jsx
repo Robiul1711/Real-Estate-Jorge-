@@ -9,7 +9,6 @@ import {
 } from "@/assets/icon";
 import CommonNavbar from "@/pages/admin/CommonNavbar";
 import SideBar from "@/pages/admin/SideBar";
-import path from "path";
 import React, { useEffect, useState } from "react";
 import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
 const AdminLayout = () => {
@@ -38,8 +37,9 @@ const AdminLayout = () => {
     {
       id: 4,
       icon: <Payment />,
-      text: "Payment",
+      text: "Digital Wallet",
       path: "/dashboard/payment",
+      
     },
     {
       id: 5,
@@ -71,10 +71,10 @@ const AdminLayout = () => {
   return (
     <>
       <ScrollRestoration />
-      <div className="flex h-screen min-h-screen w-full">
+      <div className="flex h-screen min-h-screen bg-[#F8FAFC] w-full">
         <SideBar open={Open} setOpen={setOpen} sidebar={sideBar} />
         <div className="flex-1 bg-dark text-white flex flex-col overflow-auto custom-scrollbar">
-          <div className=" flex flex-col gap-6 lg:py-6 py-3 lg:px-[30px] px-2.5 sm:px-5 bg-[#F8FAFC] text-black">
+          <div className=" flex flex-col gap-6 lg:py-6 py-3 lg:px-[30px] px-2.5 sm:px-5  text-black">
             <CommonNavbar open={Open} setOpen={setOpen} />
             <Outlet />
           </div>

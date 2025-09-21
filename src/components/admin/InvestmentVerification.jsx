@@ -73,7 +73,7 @@ const InvestmentVerification = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {profileStatus.map((item, index) => (
                   <div key={index} className="flex items-center space-x-3 bg-[#F9FAFB] rounded-lg p-4">
-                    <CheckCircle className="h-5 w-5 text-emerald-500" fill="currentColor" />
+                    <CheckCircle className="h-5 w-5 text-emerald-500" fill="white" />
                     <div>
                       <div className="text-sm font-medium text-gray-900">{item.title}</div>
                       <div className="text-xs text-gray-500 uppercase tracking-wide">{item.subtitle}</div>
@@ -122,7 +122,7 @@ const InvestmentVerification = () => {
                   <h2 className="text-lg font-semibold text-gray-900">Investment Warning</h2>
                 </div>
                 
-                <div className="bg-gray-900 rounded-xl p-4 text-white">
+                <div className="bg-custom-primary rounded-xl p-4 text-white">
                   <p className="text-sm mb-3 font-medium">Please ensure you understand the following before proceeding:</p>
                   <ul className="space-y-2">
                     {warningPoints.map((point, index) => (
@@ -144,7 +144,7 @@ const InvestmentVerification = () => {
               
               {/* Status Icon */}
               <div className="text-center mb-6">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-900 rounded-full mb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-custom-primary rounded-full mb-4">
                   <Check className="h-8 w-8 text-white" />
                 </div>
                 <div className="text-lg font-semibold text-gray-900 mb-1">Eligible to Invest</div>
@@ -164,7 +164,7 @@ const InvestmentVerification = () => {
               {/* Proceed Button */}
               <Link to={"/dashboard/investment-terms-conditions"}
                 onClick={handleProceedToInvestment}
-                className="w-full block text-center bg-gray-900 text-white py-3 px-4 rounded-xl font-medium hover:bg-gray-800 transition-colors duration-200"
+                className="w-full block text-center bg-custom-primary text-white py-3 px-4 rounded-xl font-medium hover:bg-gray-800 transition-colors duration-200"
               >
                 Proceed To Investment
               </Link>

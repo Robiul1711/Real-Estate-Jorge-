@@ -59,12 +59,12 @@ const InvestmentTermsConditions = () => {
           {/* Main Content */}
           <div className="lg:col-span-3 space-y-6">
             {/* Important Notice */}
-            <div className="bg-red-900 text-white rounded-xl p-4">
-              <div className="flex items-start space-x-3">
-                <AlertTriangle className="h-5 w-5 text-red-300 mt-0.5 flex-shrink-0" />
+            <div className=" text-white rounded-xl p-4 border border-red-500">
+              <div className="flex items-start space-x-3 text-red-500">
+                <AlertTriangle className="h-5 w-5  mt-0.5 flex-shrink-0" />
                 <div>
                   <h3 className="font-semibold text-sm mb-1">Important Notice</h3>
-                  <p className="text-sm text-red-100">This investment is subject to European Union regulations. Please read all terms carefully.</p>
+                  <p className="text-sm ">This investment is subject to European Union regulations. Please read all terms carefully.</p>
                 </div>
               </div>
             </div>
@@ -163,7 +163,7 @@ const InvestmentTermsConditions = () => {
                 <h2 className="text-lg font-semibold text-gray-900">Cooling-Off Period</h2>
               </div>
               
-              <div className="bg-gray-900 text-white rounded-xl p-4 mb-6">
+              <div className="bg-custom-primary text-white rounded-xl p-4 mb-6">
                 <p className="text-sm">
                   14-Day Cooling-Off Period: You have the right to cancel your investment 
                   within 14 days of making the investment without giving any reason. During 
@@ -234,7 +234,7 @@ const InvestmentTermsConditions = () => {
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div 
-                    className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                    className="bg-custom-primary h-2 rounded-full transition-all duration-300"
                     style={{ width: `${(completedCount / 5) * 100}%` }}
                   ></div>
                 </div>
@@ -245,7 +245,7 @@ const InvestmentTermsConditions = () => {
                 disabled={!allCompleted}
                 className={`w-full py-3 px-4 rounded-xl font-medium transition-colors block text-center duration-200 ${
                   allCompleted
-                    ? 'bg-gray-900 text-white hover:bg-gray-800'
+                    ? 'bg-custom-primary text-white hover:bg-gray-800'
                     : 'bg-gray-200 text-gray-400 cursor-not-allowed'
                 }`}
               >
