@@ -43,7 +43,7 @@ const NewPassword = () => {
                 className="text-custom-primary cursor-pointer"
                 size={24}
               />
-              <MainIcon />
+              <MainIcon className="w-44 lg:w-auto" />
             </Link>
             <div className="text-center">
               <h2 className="text-2xl md:text-[36px] font-bold">

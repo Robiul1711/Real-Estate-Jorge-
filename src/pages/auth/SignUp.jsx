@@ -56,7 +56,7 @@ const SignUp = () => {
               className="flex items-center justify-center mb-6 gap-2"
             >
               <ArrowLeft className="text-slate-700" size={24} />
-              <MainIcon />
+              <MainIcon className="w-44 lg:w-auto" />
             </Link>
             <h2 className="text-2xl md:text-[36px] font-bold">
               Register Account
@@ -67,7 +67,7 @@ const SignUp = () => {
             <div className="flex items-center gap-6 mb-8">
               <div className="flex items-center gap-[10px]">
                 <div
-                  className={`w-[25px] h-[25px] border border-custom-secondary rounded-full flex items-center justify-center cursor-pointer`}
+                  className={`w-[18px] lg:w-[25px] h-[18px] lg:h-[25px] border border-custom-secondary rounded-full flex items-center justify-center cursor-pointer`}
                   onClick={() => handleToggle("individual")}
                 >
                   <div
@@ -75,11 +75,11 @@ const SignUp = () => {
                       isToggle
                         ? "bg-custom-primary scale-[0.8]"
                         : "bg-transparent scale-[0.6]"
-                    } w-[25px] h-[25px] transition-all duration-200 rounded-full`}
+                    } w-[16px] lg:w-[25px] h-[16px] lg:h-[25px] transition-all duration-200 rounded-full`}
                   ></div>
                 </div>
                 <p
-                  className="text-[1.2rem] font-medium dark:text-[#abc2d3] text-[#424242] cursor-pointer"
+                  className="text-[1rem] lg:text-[1.2rem] font-medium dark:text-[#abc2d3] text-[#424242] cursor-pointer"
                   onClick={() => handleToggle("individual")}
                 >
                   Individual
@@ -87,7 +87,7 @@ const SignUp = () => {
               </div>
               <div className="flex items-center gap-[10px]">
                 <div
-                  className={`w-[25px] h-[25px] border border-custom-secondary rounded-full flex items-center justify-center cursor-pointer`}
+                  className={`w-[18px] lg:w-[25px] h-[18px] lg:h-[25px] border border-custom-secondary rounded-full flex items-center justify-center cursor-pointer`}
                   onClick={() => handleToggle("enterprise")}
                 >
                   <div
@@ -95,11 +95,11 @@ const SignUp = () => {
                       isToggle1
                         ? "bg-custom-primary scale-[0.8]"
                         : "bg-transparent scale-[0.6]"
-                    } w-[25px] h-[25px] transition-all duration-200 rounded-full`}
+                    } w-[16px] lg:w-[25px] h-[16px] lg:h-[25px] transition-all duration-200 rounded-full`}
                   ></div>
                 </div>
                 <p
-                  className="text-[1.2rem] font-medium dark:text-[#abc2d3] text-[#424242] cursor-pointer"
+                  className="text-[1rem] lg:text-[1.2rem] font-medium dark:text-[#abc2d3] text-[#424242] cursor-pointer"
                   onClick={() => handleToggle("enterprise")}
                 >
                   Enterprise
