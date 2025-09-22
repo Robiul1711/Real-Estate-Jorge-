@@ -22,7 +22,7 @@ const Login = () => {
               className="flex items-center justify-center mb-6 gap-2"
             >
               <ArrowLeft className="text-slate-700" size={24} />
-              <MainIcon />
+              <MainIcon className="w-44 lg:w-auto" />
             </Link>
 
             <h2 className="text-2xl md:text-4xl font-bold">
