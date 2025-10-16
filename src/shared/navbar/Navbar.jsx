@@ -2,10 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { MainIcon } from "@/assets/icon";
+import { ImageProvider } from "@/components/common/ImageProvider";
 
 const navLinks = [
   { name: "Home", href: "/" },
-  { name: "Projects", href: "#projects" },
+  { name: "Projects", href: "/projects" },
   { name: "Who We Are", href: "/about" },
   { name: "Statistics", href: "/statistics" },
   {
@@ -23,7 +24,7 @@ const navLinks = [
       },
     ],
   },
-  { name: "Blog", href: "#blog" },
+  { name: "Blog", href: "/blog" },
 ];
 
 const Navbar = () => {
@@ -68,7 +69,7 @@ const Navbar = () => {
     <header
       className={`fixed top-0 left-0 section-padding-x right-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? "bg-white shadow-md py-4"
+          ? "bg-white shadow-md py-1"
           : "bg-white xl:bg-transparent py-4 "
       }`}
     >
@@ -76,7 +77,7 @@ const Navbar = () => {
         {/* Logo */}
         <Link to="/" onClick={closeMobileMenu} className="text-center">
           <p>
-            <MainIcon className="w-36 lg:w-44 h-10" />
+            <img src={ImageProvider.civia} alt="" />
           </p>
         </Link>
 

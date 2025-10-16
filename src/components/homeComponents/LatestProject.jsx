@@ -200,7 +200,7 @@ const LatestProject = () => {
                 </div>
                 <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
                   <div
-                    className="bg-black h-full rounded-full transition-all duration-1000 ease-out"
+                    className="bg-custom-primary h-full rounded-full transition-all duration-1000 ease-out"
                     style={{ width: `${project.funding}%` }}
                   />
                 </div>

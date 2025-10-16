@@ -15,7 +15,6 @@ import investor from "../../assets/images/investor.png";
 import investment from "../../assets/images/investment.png";
 import rate from "../../assets/images/rate.png";
 import value from "../../assets/images/value.png";
-import value1 from "../../assets/images/value1.png";
 import value2 from "../../assets/images/value2.png";
 import emma from "../../assets/images/emma.png";
 import jorge from "../../assets/images/jorge.png";
@@ -29,6 +28,13 @@ import invest2 from "../../assets/images/invest2.png";
 import invest3 from "../../assets/images/invest3.png";
 import invest4 from "../../assets/images/invest4.png";
 import invest5 from "../../assets/images/invest5.png";
+import logo from "../../assets/images/logo.png";
+import footer from "../../assets/images/footer.png";
+import civia from "../../assets/images/civia.png";
+import project from "../../assets/images/project.png";
+import blog from "../../assets/images/blog.png";
+import blog1 from "../../assets/images/blog1.png";
+import blog2 from "../../assets/images/blog2.png";
 
 export const ImageProvider = {
   star,
@@ -48,7 +54,6 @@ export const ImageProvider = {
   investment,
   rate,
   value,
-  value1,
   value2,
   emma,
   jorge,
@@ -62,4 +67,11 @@ export const ImageProvider = {
   invest3,
   invest4,
   invest5,
+  logo,
+  civia,
+  footer,
+  project,
+  blog,
+  blog1,
+  blog2,
 };

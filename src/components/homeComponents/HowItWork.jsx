@@ -9,7 +9,7 @@ const steps = [
     id: 1,
     icon: <ManIcon className="duration-200" />,
     title: "Create Account",
-    desc: "Sign up in minutes with our simple verification process from property appreciation when assets are sold our property appreciation when assets are sold.",
+    desc: "Sign up in minutes with our simple verification process from property appreciation when assets are sold our property appreciation.",
   },
   {
     id: 2,
@@ -69,7 +69,7 @@ const HowItWork = () => {
 
       <div
         ref={cardRef}
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 bg-custom-secondary h-auto md:h-[490px]"
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 bg-[#003C3594] h-auto md:h-[490px]"
       >
         {steps.map((step) => (
           <div

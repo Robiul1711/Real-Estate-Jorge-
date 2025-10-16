@@ -60,7 +60,7 @@ const MarketLeader = () => {
     { value: "+12.60%", label: "Average Annual Return" },
   ];
   const platformData = [
-    { name: "Our Platform", value: 51.7, color: "#10B981" },
+    { name: "Our Platform", value: 51.7, color: "#19AB9A" },
     { name: "Others", value: 48.3, color: "#F59E0B" },
   ];
 
@@ -163,7 +163,7 @@ const MarketLeader = () => {
     <div className="section-padding-x relative bg-[#F9FAFB]">
       <div
         ref={cardRef}
-        className="hidden absolute -mt-60 left-1/2 -translate-x-1/2 w-full max-w-[88%] mx-auto px-30 xl:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 bg-[#008335] text-white rounded-sm"
+        className="hidden absolute -mt-60 left-1/2 -translate-x-1/2 w-full max-w-[88%] mx-auto px-30 xl:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 bg-custom-primary text-white rounded-sm"
       >
         {revenueData.map((value, index) => (
           <div
@@ -200,7 +200,7 @@ const MarketLeader = () => {
                         labelLine={false}
                         label={renderCustomLabel}
                         outerRadius={120}
-                        fill="#8884d8"
+                        fill="#19AB9A"
                         dataKey="value"
                       >
                         {platformData.map((entry, index) => (
@@ -214,7 +214,7 @@ const MarketLeader = () => {
 
               <div className="flex flex-col">
                 <div className="flex items-center mb-4">
-                  <div className="w-6 h-6 bg-green-500 rounded-sm mr-2"></div>
+                  <div className="w-6 h-6 bg-custom-primary rounded-sm mr-2"></div>
                   <div className="flex flex-col">
                     <span className="text-lg font-semibold text-gray-900 ml-1">
                       51.70%
@@ -258,7 +258,7 @@ const MarketLeader = () => {
               <div className="space-y-4">
                 <div className="flex items-center justify-between border-b-6  border-[#F1F5F9] pb-4">
                   <div className="flex items-center">
-                    <div className="w-5 h-5 bg-green-500 rounded-sm mr-3"></div>
+                    <div className="w-5 h-5 bg-custom-primary rounded-sm mr-3"></div>
                     <span className="text-gray-700">Capital Gains</span>
                   </div>
                   <span className="font-semibold text-gray-900">118</span>
@@ -387,13 +387,13 @@ const MarketLeader = () => {
                       <td className="py-4 text-center text-yellow-600 font-medium">
                         {row.avgEstimatedROI}
                       </td>
-                      <td className="py-4 text-center text-green-600 font-medium">
+                      <td className="py-4 text-center text-custom-primary font-medium">
                         {row.avgAchievedROI}
                       </td>
                       <td className="py-4 text-center text-yellow-600 font-medium">
                         {row.weightedEstROI}
                       </td>
-                      <td className="py-4 text-center text-green-600 font-medium">
+                      <td className="py-4 text-center text-custom-primary font-medium">
                         {row.weightedAchievedROI}
                       </td>
                     </tr>
@@ -423,11 +423,11 @@ const MarketLeader = () => {
               <div className="text-gray-600 mb-4">Success Rate</div>
               <div className="w-full bg-gray-200 rounded-full h-4 mb-3">
                 <div
-                  className="bg-green-500 h-4 rounded-full"
+                  className="bg-custom-primary h-4 rounded-full"
                   style={{ width: "91.2%" }}
                 ></div>
               </div>
-              <div className="text-sm text-green-600 font-medium">
+              <div className="text-sm text-custom-primary font-medium">
                 +12% from last quarter
               </div>
             </div>
@@ -443,11 +443,11 @@ const MarketLeader = () => {
               <div className="text-gray-600 mb-4">Avg. Funding Time</div>
               <div className="w-full bg-gray-200 rounded-full h-4 mb-3">
                 <div
-                  className="bg-green-500 h-4 rounded-full"
+                  className="bg-custom-primary h-4 rounded-full"
                   style={{ width: "75%" }}
                 ></div>
               </div>
-              <div className="text-sm text-green-600 font-medium">
+              <div className="text-sm text-custom-primary font-medium">
                 5 days faster than industry
               </div>
             </div>
@@ -455,17 +455,17 @@ const MarketLeader = () => {
             {/* Active Investors */}
             <div className="bg-white rounded-lg shadow-sm p-6 text-center hover:shadow-lg">
               <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <img src={ImageProvider.value1} alt="image" />
+                <img src={ImageProvider.investor} alt="image" />
               </div>
               <div className="text-3xl font-bold text-gray-900 mb-2">2,045</div>
               <div className="text-gray-600 mb-4">Active Investors</div>
               <div className="w-full bg-gray-200 rounded-full h-4 mb-3">
                 <div
-                  className="bg-green-500 h-4 rounded-full"
+                  className="bg-custom-primary h-4 rounded-full"
                   style={{ width: "80%" }}
                 ></div>
               </div>
-              <div className="text-sm text-green-600 font-medium">
+              <div className="text-sm text-custom-primary font-medium">
                 +35% monthly growth
               </div>
             </div>
