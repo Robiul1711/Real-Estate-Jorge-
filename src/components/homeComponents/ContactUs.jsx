@@ -68,7 +68,7 @@ const ContactUs = () => {
             />
             <button
               type="submit"
-              className="w-full bg-green-600 text-white py-3 rounded-md hover:bg-green-700 transition"
+              className="w-full bg-custom-primary text-white py-3 rounded-md hover:bg-green-700 transition cursor-pointer"
             >
               Connect with Us
             </button>

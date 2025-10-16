@@ -36,6 +36,8 @@ import WithdrawalRequestSuccessful from "@/components/admin/DigitalWallet/Withdr
 import RequestSubmittedSuccessfully from "@/components/admin/DigitalWallet/RequestSubmittedSuccessfully";
 import Ambassadors from "@/pages/ambassadors/Ambassadors";
 import Learn from "@/pages/learn/Learn";
+import Projects from "@/pages/projects/Projects";
+import Blog from "@/pages/blog/Blog";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/projects",
+        element: <Projects />,
       },
       {
         path: "/services",
@@ -69,6 +75,10 @@ const router = createBrowserRouter([
       {
         path: "/learn",
         element: <Learn />,
+      },
+      {
+        path: "/blog",
+        element: <Blog />,
       },
     ],
   },

@@ -118,7 +118,7 @@ const AllAmbassadors = () => {
             </div>
 
             {/* Button */}
-            <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2.5 text-sm rounded cursor-pointer">
+            <button className="bg-custom-primary hover:bg-custom-primary/95 text-white px-4 py-2.5 text-sm rounded cursor-pointer">
               View Profile
             </button>
           </div>

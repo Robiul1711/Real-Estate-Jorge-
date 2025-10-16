@@ -1,13 +1,13 @@
-import { FooterIcon } from "@/assets/icon";
+import { ImageProvider } from "@/components/common/ImageProvider";
 import React from "react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="section-padding-x py-10 md:py-20 bg-custom-secondary text-white space-y-4">
+    <div className="section-padding-x py-8 md:py-16 bg-custom-secondary text-white space-y-4">
       <div className="inline-block">
-        <Link to="/">
-          <FooterIcon className="!text-white mb-2" />
+        <Link to="/" className="text-center">
+          <img className="w-44" src={ImageProvider.footer} alt="logo" />
         </Link>
       </div>
 

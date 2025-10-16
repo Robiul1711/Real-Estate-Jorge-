@@ -33,7 +33,7 @@ const OurValues = () => {
         "We believe in complete transparency in every investment opportunity, providing detailed project information and regular updates.",
     },
     {
-      image: ImageProvider.value1,
+      image: ImageProvider.investor,
       title: "Community First",
       description:
         "Our platform connects investors and developers, creating a thriving community of real estate enthusiasts.",
