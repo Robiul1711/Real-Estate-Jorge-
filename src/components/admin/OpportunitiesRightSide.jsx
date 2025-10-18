@@ -12,7 +12,6 @@ import DocumentSummary from "./DocumentSummary";
 const OpportunitiesRightSide = ({ activeTab }) => {
   return (
     <div className="flex flex-col gap-6">
-      
       {/* Developer Card */}
       <div className="border rounded-2xl p-6 shadow-2xl bg-white">
         <p className="text-sm font-semibold">Developer</p>
@@ -44,7 +43,9 @@ const OpportunitiesRightSide = ({ activeTab }) => {
       </div>
 
       {/* Investment Summary Card */}
-      {(activeTab === "Description" || activeTab === "Your Investment" || activeTab === "Financial Information") && (
+      {(activeTab === "Description" ||
+        activeTab === "Your Investment" ||
+        activeTab === "Financial Information") && (
         <div className="border rounded-2xl p-6 shadow-2xl bg-white">
           <p className="text-sm font-semibold">Investment Summary</p>
 
@@ -70,10 +71,10 @@ const OpportunitiesRightSide = ({ activeTab }) => {
           <div className="grid grid-cols-2 gap-4 my-5">
             <div>
               <p className="font-semibold text-gray-500 flex items-center gap-1">
-                <AiOutlineRise className="text-green-500" />
+                <AiOutlineRise className="text-custom-primary" />
                 Expected Return
               </p>
-              <p className="text-sm text-green-500">12-15%</p>
+              <p className="text-sm text-custom-primary">12-15%</p>
             </div>
             <div>
               <p className="font-semibold text-gray-500 flex items-center gap-1">
@@ -103,7 +104,9 @@ const OpportunitiesRightSide = ({ activeTab }) => {
 
           {/* Min Investment */}
           <div className="flex justify-between items-center mt-4">
-            <p className="font-semibold text-gray-600 text-base">Min. Investment</p>
+            <p className="font-semibold text-gray-600 text-base">
+              Min. Investment
+            </p>
             <p className="font-bold text-base">$50,000</p>
           </div>
 
@@ -122,7 +125,6 @@ const OpportunitiesRightSide = ({ activeTab }) => {
         {activeTab === "Your Investment" && <BenefitsDisclaimer />}
         {activeTab === "Documentation" && <DocumentSummary />}
       </div>
-
     </div>
   );
 };
