@@ -73,8 +73,12 @@ export default function RecentInvestment() {
             <div className="flex-1 w-full">
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
                 <div>
-                  <h3 className="text-base md:text-lg font-semibold">{item.title}</h3>
-                  <p className="text-xs md:text-sm text-gray-500">{item.location}</p>
+                  <h3 className="text-base md:text-lg font-semibold">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs md:text-sm text-gray-500">
+                    {item.location}
+                  </p>
                   <p className="text-xs md:text-sm text-gray-600">
                     Investment:{" "}
                     <span className="font-medium">{item.investment}</span>
@@ -95,14 +99,14 @@ export default function RecentInvestment() {
                   </p>
                 )}
                 {item.roi && (
-                  <p className="text-green-600 font-medium">{item.roi}</p>
+                  <p className="text-custom-primary font-medium">{item.roi}</p>
                 )}
               </div>
 
               {/* Progress Bar */}
               <div className="w-full bg-gray-200 rounded-full h-2 mt-3">
                 <div
-                  className="bg-green-500 h-2 rounded-full"
+                  className="bg-custom-primary h-2 rounded-full"
                   style={{ width: `${item.progress}%` }}
                 ></div>
               </div>

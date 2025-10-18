@@ -77,7 +77,7 @@ const Navbar = () => {
         {/* Logo */}
         <Link to="/" onClick={closeMobileMenu} className="text-center">
           <p>
-            <img src={ImageProvider.civia} alt="" />
+            <img src={ImageProvider.civia} alt="image" />
           </p>
         </Link>
 

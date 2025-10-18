@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { MainIcon } from "@/assets/icon";
 import { Link } from "react-router-dom";
 import CommonBtn from "@/components/common/CommonButton";
+import { ImageProvider } from "@/components/common/ImageProvider";
 
 const ForgotPassword = () => {
   return (
@@ -19,7 +20,7 @@ const ForgotPassword = () => {
               className="flex items-center justify-center mb-6 gap-2"
             >
               <ArrowLeft className="text-slate-700" size={24} />
-              <MainIcon className="w-44 lg:w-auto" />
+              <img src={ImageProvider.civia} alt="image" />
             </Link>
 
             {/* Headings */}

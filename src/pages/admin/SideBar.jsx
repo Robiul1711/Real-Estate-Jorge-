@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { IoLogOutOutline } from "react-icons/io5";
 import { FooterIcon } from "@/assets/icon";
+import { ImageProvider } from "@/components/common/ImageProvider";
 
 const SideBar = ({ sidebar, open, setOpen }) => {
   const location = useLocation();
@@ -25,10 +26,10 @@ const SideBar = ({ sidebar, open, setOpen }) => {
         }`}
       >
         {/* Logo */}
-        <Link to={"/"} className="flex justify-center mb-6">
-          <FooterIcon className="text-custom-primary w-36" color="black" />
+        <Link to={"/"} className="flex justify-center mb-1">
+          <img src={ImageProvider.civia} alt="logo" className="w-44" />
         </Link>
-        <div className="rounded-2xl bg-custom-primary p-4 w-full max-w-sm mx-auto shadow-md mb-10">
+        <div className="rounded-2xl bg-custom-primary p-4 w-full max-w-sm mx-auto shadow-md mb-6">
           {/* Header */}
           <p className="text-white text-xl font-semibold">Digital Wallet</p>
           <p className="text-white text-xs tracking-wide mb-4">
@@ -46,7 +47,7 @@ const SideBar = ({ sidebar, open, setOpen }) => {
 
         {/* Links */}
         <div className="flex flex-col gap-3 flex-grow">
-          {sidebar.map((item, index) => (
+          {sidebar.map((item) => (
             <Link
               key={item.id}
               to={item.path}

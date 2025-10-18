@@ -25,7 +25,7 @@ const Dashboard = () => {
             <Return />
           </div>
           <h2 className="text-2xl font-bold text-[#0F172A]">$23,850</h2>
-          <p className="text-sm text-[#21C45D] flex items-center">
+          <p className="text-sm text-custom-primary flex items-center">
             <Arrow />
             +18.7% from last month
           </p>
@@ -36,7 +36,7 @@ const Dashboard = () => {
             <Active />
           </div>
           <h2 className="text-2xl font-bold text-[#0F172A]">8</h2>
-          <p className="text-sm text-[#21C45D] flex items-center">
+          <p className="text-sm text-custom-primary flex items-center">
             <Arrow />
             +2 from last month
           </p>
@@ -47,7 +47,7 @@ const Dashboard = () => {
             <Time />
           </div>
           <h2 className="text-2xl font-bold text-[#0F172A]">14 months</h2>
-          <p className="text-sm text-[#21C45D] flex items-center">
+          <p className="text-sm text-custom-primary flex items-center">
             <Arrow />
             -2 months from last month
           </p>
@@ -55,91 +55,89 @@ const Dashboard = () => {
       </div>
       <div className="flex flex-col lg:flex-row items-start gap-6 w-full my-8">
         <div className="w-full lg:w-[68%] bg-white  rounded-2xl space-y-1 shadow-md">
-  
-     <RecentInvestment />
+          <RecentInvestment />
         </div>
-    <div className="w-full lg:w-[30%] bg-white p-4 rounded-2xl shadow-md">
-  {/* Header */}
-  <div>
-    <h2 className="text-xl md:text-2xl font-semibold text-[#0F172A]">
-      New Opportunities
-    </h2>
-    <p className="text-xs md:text-sm text-[#666666]">
-      Latest investment opportunities
-    </p>
-  </div>
+        <div className="w-full lg:w-[30%] bg-white p-4 rounded-2xl shadow-md">
+          {/* Header */}
+          <div>
+            <h2 className="text-xl md:text-2xl font-semibold text-[#0F172A]">
+              New Opportunities
+            </h2>
+            <p className="text-xs md:text-sm text-[#666666]">
+              Latest investment opportunities
+            </p>
+          </div>
 
-  {/* Card 1 */}
-  <div className="my-6 p-4 md:p-5 border border-gray-200 rounded-lg">
-    <h2 className="text-lg md:text-2xl font-semibold text-[#0F172A]">
-      Downtown Office Complex
-    </h2>
-    <p className="text-[#666666] text-sm md:text-base">Chicago, IL</p>
+          {/* Card 1 */}
+          <div className="my-6 p-4 md:p-5 border border-gray-200 rounded-lg">
+            <h2 className="text-lg md:text-2xl font-semibold text-[#0F172A]">
+              Downtown Office Complex
+            </h2>
+            <p className="text-[#666666] text-sm md:text-base">Chicago, IL</p>
 
-    <div className="flex justify-between py-2 text-xs md:text-sm font-medium">
-      <h3 className="text-[#4B5563]">20%</h3>
-      <h3 className="text-[#16A34A]">ROI</h3>
-    </div>
+            <div className="flex justify-between py-2 text-xs md:text-sm font-medium">
+              <h3 className="text-[#4B5563]">20%</h3>
+              <h3 className="text-custom-primary">ROI</h3>
+            </div>
 
-    {/* Investment */}
-    <div>
-      <div className="flex justify-between pb-2 md:pb-3 text-xs md:text-sm font-medium">
-        <h3 className="text-[#4B5563]">Min. Investment</h3>
-        <h3 className="text-[#16A34A]">$15,000</h3>
-      </div>
+            {/* Investment */}
+            <div>
+              <div className="flex justify-between pb-2 md:pb-3 text-xs md:text-sm font-medium">
+                <h3 className="text-[#4B5563]">Min. Investment</h3>
+                <h3 className="text-custom-primary">$15,000</h3>
+              </div>
 
-      {/* Progress Bar */}
-      <div className="w-full bg-gray-200 h-2 md:h-3 rounded-full overflow-hidden">
-        <div
-          className="bg-custom-primary h-full rounded-full transition-all duration-1000 ease-out"
-          style={{ width: `20%` }}
-        />
-      </div>
-    </div>
+              {/* Progress Bar */}
+              <div className="w-full bg-gray-200 h-2 md:h-3 rounded-full overflow-hidden">
+                <div
+                  className="bg-custom-primary h-full rounded-full transition-all duration-1000 ease-out"
+                  style={{ width: `20%` }}
+                />
+              </div>
+            </div>
 
-    <p className="text-xs md:text-sm text-[#666666] my-1">65% funded</p>
+            <p className="text-xs md:text-sm text-[#666666] my-1">65% funded</p>
 
-    <button className="bg-custom-primary text-[#FFF] text-center w-full font-semibold text-xs md:text-sm px-3 py-2 md:py-2.5 rounded mt-3 relative overflow-hidden before:absolute before:w-full before:h-full before:top-0 before:left-0 before:bg-[#111827] before:translate-x-[-200px] hover:before:translate-x-0 before:translate-y-12 hover:before:translate-y-0 before:duration-300 before:z-[-1] z-0 cursor-pointer">
-      View Details
-    </button>
-  </div>
+            <button className="bg-custom-primary text-[#FFF] text-center w-full font-semibold text-xs md:text-sm px-3 py-2 md:py-2.5 rounded mt-3 relative overflow-hidden before:absolute before:w-full before:h-full before:top-0 before:left-0 before:bg-[#111827] before:translate-x-[-200px] hover:before:translate-x-0 before:translate-y-12 hover:before:translate-y-0 before:duration-300 before:z-[-1] z-0 cursor-pointer">
+              View Details
+            </button>
+          </div>
 
-  {/* Card 2 */}
-  <div className="my-6 p-4 md:p-5 border border-gray-200 rounded-lg">
-    <h2 className="text-lg md:text-2xl font-semibold text-[#0F172A]">
-      Luxury Condominiums
-    </h2>
-    <p className="text-[#666666] text-sm md:text-base">Seattle, WA</p>
+          {/* Card 2 */}
+          <div className="my-6 p-4 md:p-5 border border-gray-200 rounded-lg">
+            <h2 className="text-lg md:text-2xl font-semibold text-[#0F172A]">
+              Luxury Condominiums
+            </h2>
+            <p className="text-[#666666] text-sm md:text-base">Seattle, WA</p>
 
-    <div className="flex justify-between py-2 text-xs md:text-sm font-medium">
-      <h3 className="text-[#4B5563]">15%</h3>
-      <h3 className="text-[#16A34A]">ROI</h3>
-    </div>
+            <div className="flex justify-between py-2 text-xs md:text-sm font-medium">
+              <h3 className="text-[#4B5563]">15%</h3>
+              <h3 className="text-custom-primary">ROI</h3>
+            </div>
 
-    {/* Investment */}
-    <div>
-      <div className="flex justify-between pb-2 md:pb-3 text-xs md:text-sm font-medium">
-        <h3 className="text-[#4B5563]">Min. Investment</h3>
-        <h3 className="text-[#16A34A]">$10,000</h3>
-      </div>
+            {/* Investment */}
+            <div>
+              <div className="flex justify-between pb-2 md:pb-3 text-xs md:text-sm font-medium">
+                <h3 className="text-[#4B5563]">Min. Investment</h3>
+                <h3 className="text-custom-primary">$10,000</h3>
+              </div>
 
-      {/* Progress Bar */}
-      <div className="w-full bg-gray-200 h-2 md:h-3 rounded-full overflow-hidden">
-        <div
-          className="bg-custom-primary h-full rounded-full transition-all duration-1000 ease-out"
-          style={{ width: `30%` }}
-        />
-      </div>
-    </div>
+              {/* Progress Bar */}
+              <div className="w-full bg-gray-200 h-2 md:h-3 rounded-full overflow-hidden">
+                <div
+                  className="bg-custom-primary h-full rounded-full transition-all duration-1000 ease-out"
+                  style={{ width: `30%` }}
+                />
+              </div>
+            </div>
 
-    <p className="text-xs md:text-sm text-[#666666] my-1">30% funded</p>
+            <p className="text-xs md:text-sm text-[#666666] my-1">30% funded</p>
 
-    <button className="bg-custom-primary text-[#FFF] text-center w-full font-semibold text-xs md:text-sm px-3 py-2 md:py-2.5 rounded mt-3 relative overflow-hidden before:absolute before:w-full before:h-full before:top-0 before:left-0 before:bg-[#111827] before:translate-x-[-200px] hover:before:translate-x-0 before:translate-y-12 hover:before:translate-y-0 before:duration-300 before:z-[-1] z-0 cursor-pointer">
-      View Details
-    </button>
-  </div>
-</div>
-
+            <button className="bg-custom-primary text-[#FFF] text-center w-full font-semibold text-xs md:text-sm px-3 py-2 md:py-2.5 rounded mt-3 relative overflow-hidden before:absolute before:w-full before:h-full before:top-0 before:left-0 before:bg-[#111827] before:translate-x-[-200px] hover:before:translate-x-0 before:translate-y-12 hover:before:translate-y-0 before:duration-300 before:z-[-1] z-0 cursor-pointer">
+              View Details
+            </button>
+          </div>
+        </div>
       </div>
     </>
   );
