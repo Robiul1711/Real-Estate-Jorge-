@@ -2,11 +2,39 @@ import React from "react";
 import image from "../../assets/images/forgot.png";
 import { ArrowLeft } from "lucide-react";
 import { MainIcon } from "@/assets/icon";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CommonBtn from "@/components/common/CommonButton";
 import { ImageProvider } from "@/components/common/ImageProvider";
+import { useForm } from "react-hook-form";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import toast from "react-hot-toast";
+
 
 const ForgotPassword = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm()
+  const axoisPublic = useAxiosPublic();
+  const navigate = useNavigate();
+
+
+  const onSubmit = async (data) => {
+    const toastId = toast.loading("Sending password reset email...");
+    try {
+      const res = await axoisPublic.post('/forgot-password', data);
+      if (res) {
+        toast.success(res?.data?.message || "Password reset email sent!", { id: toastId });
+        localStorage.setItem('reset_email', data.email);
+        navigate('/verify-reset-otp');
+      }
+    } catch (error) {
+      console.error("Forgot password error:", error);
+      toast.error(error?.response?.data?.message || "Failed to send password reset email.", { id: toastId });
+    }
+  }
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Left Side - Form */}
@@ -30,24 +58,27 @@ const ForgotPassword = () => {
             </p>
 
             {/* Form */}
-            <form className="space-y-4">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div>
                 <label className="block mb-1 font-medium">Email</label>
                 <input
+                  {...register("email", { required: true })}
                   type="email"
                   className="w-full px-4 py-2 md:py-3 border rounded-md outline-none"
                   placeholder="Enter your email"
                 />
+                {errors.email && (<div className="text-red-500 text-sm mt-1">Email is required</div>)}
               </div>
 
-              <Link to="">
-                <CommonBtn
-                  path={"/check-email-box"}
-                  className="w-full !rounded-lg mt-3"
-                >
-                  Send
-                </CommonBtn>
-              </Link>
+
+              <CommonBtn
+                type="submit"
+                path={"/check-email-box"}
+                className="w-full !rounded-lg mt-3"
+              >
+                Send
+              </CommonBtn>
+
             </form>
           </div>
 

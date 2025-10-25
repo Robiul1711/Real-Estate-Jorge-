@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import image from "../../assets/images/signup.png";
 import { ArrowLeft, Eye, EyeOff } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CommonBtn from "@/components/common/CommonButton";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { ImageProvider } from "@/components/common/ImageProvider";
+import { useForm } from "react-hook-form"
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -14,6 +17,17 @@ const SignUp = () => {
   const [isToggle, setIsToggle] = useState(false);
   const [isToggle1, setIsToggle1] = useState(false);
   const [phone, setPhone] = useState("");
+  const [account_type, setAccount_type] = useState("");
+  const [terms_accepted, setTerms_accepted] = useState(0);
+
+  const axiosPublic = useAxiosPublic();
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm()
 
   const getPasswordStrength = () => {
     let strength = 0;
@@ -35,13 +49,43 @@ const SignUp = () => {
 
   const handleToggle = (type) => {
     if (type === "individual") {
+      setAccount_type("individual");
       setIsToggle(true);
       setIsToggle1(false);
     } else {
+      setAccount_type("enterprise");
       setIsToggle(false);
       setIsToggle1(true);
     }
   };
+
+  const navigate = useNavigate();
+
+  const onSubmit = async (data) => {
+    const toastId = toast.loading("Registering...");
+    const payload = {
+      name: data.name,
+      sur_name: data.sur_name,
+      email: data.email,
+      phone: data.phone,
+      password: data.password,
+      password_confirmation: data.password_confirmation,
+      account_type: account_type,
+      terms_accepted: data.terms_accepted ? 1 : 0,
+    }
+
+    try {
+      const res = await axiosPublic.post("/register", payload);
+      if (res) {
+        localStorage.setItem("registration_email", data.email);
+        toast.success("Registration successful!", { id: toastId });
+        navigate("/register-otp-verify");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message, { id: toastId });
+    }
+  }
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
@@ -71,11 +115,10 @@ const SignUp = () => {
                   onClick={() => handleToggle("individual")}
                 >
                   <div
-                    className={`${
-                      isToggle
-                        ? "bg-custom-primary scale-[0.8]"
-                        : "bg-transparent scale-[0.6]"
-                    } w-[16px] lg:w-[25px] h-[16px] lg:h-[25px] transition-all duration-200 rounded-full`}
+                    className={`${isToggle
+                      ? "bg-custom-primary scale-[0.8]"
+                      : "bg-transparent scale-[0.6]"
+                      } w-[16px] lg:w-[25px] h-[16px] lg:h-[25px] transition-all duration-200 rounded-full`}
                   ></div>
                 </div>
                 <p
@@ -91,11 +134,10 @@ const SignUp = () => {
                   onClick={() => handleToggle("enterprise")}
                 >
                   <div
-                    className={`${
-                      isToggle1
-                        ? "bg-custom-primary scale-[0.8]"
-                        : "bg-transparent scale-[0.6]"
-                    } w-[16px] lg:w-[25px] h-[16px] lg:h-[25px] transition-all duration-200 rounded-full`}
+                    className={`${isToggle1
+                      ? "bg-custom-primary scale-[0.8]"
+                      : "bg-transparent scale-[0.6]"
+                      } w-[16px] lg:w-[25px] h-[16px] lg:h-[25px] transition-all duration-200 rounded-full`}
                   ></div>
                 </div>
                 <p
@@ -108,24 +150,29 @@ const SignUp = () => {
             </div>
 
             {/* Form */}
-            <form className="space-y-5">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
               {/* First Name + Surname */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block mb-1 font-medium">First Name</label>
                   <input
                     type="text"
+                    {...register("name", { required: true })}
                     className="w-full px-4 py-2 md:py-3 border rounded-md outline-none"
                     placeholder="Enter first name"
                   />
+
+                  {errors.name && <span className="text-red-500">First name is required</span>}
                 </div>
                 <div>
                   <label className="block mb-1 font-medium">Surname</label>
                   <input
                     type="text"
+                    {...register("sur_name", { required: true })}
                     className="w-full px-4 py-2 md:py-3 border rounded-md outline-none"
                     placeholder="Enter surname"
                   />
+                  {errors.surname && <span className="text-red-500">Surname is required</span>}
                 </div>
               </div>
 
@@ -135,11 +182,13 @@ const SignUp = () => {
                 <PhoneInput
                   international
                   defaultCountry="BD"
+                  {...register("phone", { required: true })}
                   value={phone}
                   onChange={setPhone}
                   className="w-full px-4 py-2 md:py-3 border rounded-md outline-none"
                   placeholder="Enter phone number"
                 />
+                {errors.phone && <span className="text-red-500">Phone number is required</span>}
               </div>
 
               {/* Email */}
@@ -147,9 +196,11 @@ const SignUp = () => {
                 <label className="block mb-1 font-medium">Email</label>
                 <input
                   type="email"
+                  {...register("email", { required: true })}
                   className="w-full px-4 py-2 md:py-3 border rounded-md outline-none"
                   placeholder="Enter your email"
                 />
+                {errors.email && <span className="text-red-500">Email is required</span>}
               </div>
 
               {/* Password */}
@@ -161,6 +212,7 @@ const SignUp = () => {
                     className="w-full px-4 py-2 md:py-3 border rounded-md pr-10"
                     placeholder="Enter password"
                     value={password}
+                    {...register("password", { required: true })}
                     onChange={(e) => setPassword(e.target.value)}
                   />
                   <div
@@ -169,6 +221,7 @@ const SignUp = () => {
                   >
                     {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
                   </div>
+                  {errors.password && <span className="text-red-500">Password is required</span>}
                 </div>
                 <p className="text-sm text-gray-500 mt-2">
                   Min 8 Characters with a combination of letters and numbers
@@ -180,11 +233,10 @@ const SignUp = () => {
                     {[...Array(4)].map((_, i) => (
                       <div
                         key={i}
-                        className={`h-2 flex-1 rounded-full ${
-                          i < strengthLevel
-                            ? strengthColors[strengthLevel - 1]
-                            : "bg-gray-200"
-                        }`}
+                        className={`h-2 flex-1 rounded-full ${i < strengthLevel
+                          ? strengthColors[strengthLevel - 1]
+                          : "bg-gray-200"
+                          }`}
                       ></div>
                     ))}
                   </div>
@@ -203,6 +255,7 @@ const SignUp = () => {
                 </label>
                 <div className="relative">
                   <input
+                    {...register("password_confirmation", { required: true })}
                     type={showConfirmPassword ? "text" : "password"}
                     className="w-full px-4 py-2 md:py-3 border rounded-md pr-10"
                     placeholder="Confirm password"
@@ -217,30 +270,34 @@ const SignUp = () => {
                       <EyeOff size={20} />
                     )}
                   </div>
+                  {errors.password_confirmation && <span className="text-red-500">Confirm password is required</span>}
                 </div>
               </div>
 
               {/* Terms */}
-              <div className="flex items-start gap-3 py-2">
-                <input
-                  type="checkbox"
-                  className="appearance-none w-4 h-4 rounded border-2 border-gray-400 checked:bg-custom-primary checked:border-custom-primary cursor-pointer"
-                />
-                <p className="text-[#757575] text-sm">
-                  By creating your account, you agree to our{" "}
-                  <span className="text-primary underline cursor-pointer">
-                    Terms and Conditions
-                  </span>{" "}
-                  &{" "}
-                  <span className="text-primary underline cursor-pointer">
-                    Privacy Policy
-                  </span>
-                  .
-                </p>
+              <div className="">
+                <div className="flex items-start gap-3 py-2">
+                  <input
+                    type="checkbox"
+                    {...register("terms_accepted", { required: true })}
+                    className="appearance-none w-4 h-4 rounded border-2 border-gray-400 checked:bg-custom-primary checked:border-custom-primary cursor-pointer"
+                  />
+                  <p className="text-[#757575] text-sm">
+                    By creating your account, you agree to our{" "}
+                    <span className="text-primary underline cursor-pointer">
+                      Terms and Conditions
+                    </span>{" "}
+                    &{" "}
+                    <span className="text-primary underline cursor-pointer">
+                      Privacy Policy
+                    </span>
+                    .
+                  </p>
+                </div>
+                {errors.terms_accepted && <span className="text-red-500">You must accept the terms</span>}
               </div>
-
               {/* Submit Button */}
-              <CommonBtn className="w-full !rounded-lg">Sign Up</CommonBtn>
+              <CommonBtn type="submit" className="w-full !rounded-lg">Sign Up</CommonBtn>
             </form>
 
             {/* Already have account */}

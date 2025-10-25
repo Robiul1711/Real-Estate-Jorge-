@@ -38,6 +38,8 @@ import Ambassadors from "@/pages/ambassadors/Ambassadors";
 import Learn from "@/pages/learn/Learn";
 import Projects from "@/pages/projects/Projects";
 import Blog from "@/pages/blog/Blog";
+import VerifyRegisterOTP from "@/pages/auth/VerifyRegisterOTP";
+import VerifyResetOTP from "@/pages/auth/VerifyResetOTP";
 
 const router = createBrowserRouter([
   {
@@ -193,6 +195,14 @@ const router = createBrowserRouter([
   {
     path: "/check-email-box",
     element: <CheckEmailBox />,
+  },
+  {
+    path: "/register-otp-verify",
+    element: <VerifyRegisterOTP />
+  },
+  {
+    path: "/verify-reset-otp",
+    element: <VerifyResetOTP />
   },
   {
     path: "/new-password",
