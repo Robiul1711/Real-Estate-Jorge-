@@ -4,6 +4,7 @@ import CommonBtn from "../common/CommonButton";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { JoinPlatform } from "@/hooks/useCMS";
 gsap.registerPlugin(ScrollTrigger);
 
 const CommonBanner = () => {
@@ -11,6 +12,9 @@ const CommonBanner = () => {
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
   const cardRef = useRef(null);
+  const {JoinPlatformData,isLoading,error}=JoinPlatform()
+  const Data=JoinPlatformData?.data?.investment_section
+  console.log(Data);
   useGSAP(() => {
     gsap.from([titleRef.current, subtitleRef.current, cardRef.current], {
       y: 50,
@@ -30,7 +34,7 @@ const CommonBanner = () => {
     <div className="relative my-6">
       {/* Banner Image */}
       <img
-        src={ImageProvider.commonbanner}
+        src={Data?.image}
         alt="banner"
         className="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover"
       />
@@ -45,13 +49,13 @@ const CommonBanner = () => {
             ref={titleRef}
             className="text-[32px] md:text-4xl lg:text-[48px] xl:text-[64px] max-w-3xl font-bold text-white leading-tight"
           >
-            Join Our Platform and Start Investing
+       {Data?.title}
           </h2>
-          <p ref={subtitleRef} className="text-lg text-[#D1D5DB] mt-4">
-            Choose the investment strategy that best suits your needs
+          <p ref={subtitleRef} className="text-lg text-[#D1D5DB] mt-4" dangerouslySetInnerHTML={{__html:Data?.description}}>
+          
           </p>
           <div ref={cardRef} className="mt-8">
-            <CommonBtn>Start Investing Now</CommonBtn>
+            <CommonBtn>{Data?.button_text}</CommonBtn>
           </div>
         </div>
       </div>

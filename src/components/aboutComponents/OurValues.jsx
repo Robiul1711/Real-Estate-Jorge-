@@ -3,6 +3,7 @@ import { ImageProvider } from "../common/ImageProvider";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { OurValueQuery } from "@/hooks/useCMS";
 gsap.registerPlugin(ScrollTrigger);
 
 const OurValues = () => {
@@ -10,6 +11,10 @@ const OurValues = () => {
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
   const cardRef = useRef(null);
+  const {ourValueData,isLoading,error}=OurValueQuery();
+  const Data=ourValueData?.data?.value_section
+  const valuesData=ourValueData?.data?.value_section ? Object.values(ourValueData.data.value_section) : [];
+  // console.log(valuesData)
   useGSAP(() => {
     gsap.from([titleRef.current, subtitleRef.current, cardRef.current], {
       y: 50,
@@ -65,7 +70,7 @@ const OurValues = () => {
         ref={cardRef}
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-12 w-full md:w-[65%] mx-auto my-6"
       >
-        {values.map((value, index) => (
+        {valuesData?.map((value, index) => (
           <div
             key={index}
             className="shadow-md hover:shadow-lg transition-all duration-200 ease-in-out rounded-md p-8 space-y-4 flex flex-col items-center"
@@ -74,7 +79,7 @@ const OurValues = () => {
             <h2 className="md:text-2xl text-[#111827] font-medium my-2">
               {value.title}
             </h2>
-            <p className="text-[#6B7280] text-center">{value.description}</p>
+            <p className="text-[#6B7280] text-center" dangerouslySetInnerHTML={{ __html: value.description }}></p>
           </div>
         ))}
       </div>

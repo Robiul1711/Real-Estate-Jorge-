@@ -1,15 +1,9 @@
-import {
-  ChartIcon,
-  DollarIcon,
-  HandIcon,
-  KeyIcon,
-  MeasureIcon,
-  SettingIcon,
-} from "@/assets/icon";
+import React, { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import React, { useRef } from "react";
+import { WhyChooseUsQuery } from "@/hooks/useCMS";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const WhyChooseUs = () => {
@@ -17,7 +11,15 @@ const WhyChooseUs = () => {
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
   const cardRef = useRef(null);
+
+  const { whyChooseData, isLoading, error } = WhyChooseUsQuery();
+
+  // ✅ Extract array safely
+  const cards = whyChooseData?.data || [];
+
+  // --- GSAP Animation ---
   useGSAP(() => {
+    if (!sectionRef.current) return;
     gsap.from([titleRef.current, subtitleRef.current, cardRef.current], {
       y: 50,
       opacity: 0,
@@ -31,7 +33,38 @@ const WhyChooseUs = () => {
         toggleActions: "play none none none",
       },
     });
-  });
+  }, [cards]);
+
+  // --- Skeleton Loader ---
+  if (isLoading) {
+    return (
+      <div className="section-padding-x pb-6">
+        <div className="text-center mb-8">
+          <div className="h-8 w-56 bg-gray-300 rounded-lg mx-auto animate-pulse"></div>
+          <div className="h-4 w-80 bg-gray-300 rounded-lg mx-auto mt-4 animate-pulse"></div>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8">
+          {[...Array(3)].map((_, i) => (
+            <div
+              key={i}
+              className="bg-gray-200 rounded-3xl p-8 animate-pulse h-56"
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  // --- Error State ---
+  if (error) {
+    return (
+      <div className="section-padding-x pb-6 text-center text-red-500 font-medium">
+        Failed to load Why Choose Us section.
+      </div>
+    );
+  }
+
+  // --- Main Content ---
   return (
     <div ref={sectionRef} className="section-padding-x pb-6">
       <h2
@@ -40,6 +73,7 @@ const WhyChooseUs = () => {
       >
         Why Choose Us
       </h2>
+
       <p
         ref={subtitleRef}
         className="text-lg text-center md:text-[22px] w-full md:w-1/2 mx-auto"
@@ -47,111 +81,39 @@ const WhyChooseUs = () => {
         Our comprehensive services encompass luxury property sales, sustainable
         green building investments, and premium vacation rentals.
       </p>
+
       <div
         ref={cardRef}
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8 "
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8"
       >
-        <div className="bg-[#F3F3F3] text-[#2C2C2C] rounded-4xl p-8 shadow-md hover:shadow-lg transition-shadow duration-300">
-          {/* Icon container */}
-          <div className="p-4 bg-white rounded-full w-fit mb-6">
-            <DollarIcon className="w-6 h-6 md:w-8 md:h-8 text-black" />
+        {cards.map((item) => (
+          <div
+            key={item.id}
+            className="bg-[#F3F3F3] text-[#2C2C2C] rounded-3xl p-8 shadow-md hover:shadow-lg transition-all duration-300"
+          >
+            {/* Dynamic Icon */}
+            {item.icon && (
+              <div className="p-4 bg-white rounded-full w-fit mb-6">
+                <img
+                  src={item.icon}
+                  alt={item.title}
+                  className="w-8 h-8 object-contain"
+                />
+              </div>
+            )}
+
+            {/* Title */}
+            <h2 className="text-xl md:text-2xl font-semibold mb-4">
+              {item.title}
+            </h2>
+
+            {/* Description */}
+            <p
+              className="text-base md:text-lg text-[#4B5563] leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: item.description }}
+            />
           </div>
-
-          {/* Title */}
-          <h2 className="text-xl md:text-2xl font-semibold mb-4">
-            Verified Investment Properties
-          </h2>
-
-          {/* Description */}
-          <p className="text-base md:text-lg text-[#4B5563] leading-relaxed">
-            Every property is thoroughly vetted to ensure high ROI and legal
-            transparency.
-          </p>
-        </div>
-        <div className="bg-[#F3F3F3] text-[#2C2C2C] rounded-4xl p-8 shadow-md hover:shadow-lg transition-shadow duration-300">
-          {/* Icon container */}
-          <div className="p-4 bg-white rounded-full w-fit mb-6">
-            <HandIcon className="w-6 h-6 md:w-8 md:h-8 text-black" />
-          </div>
-
-          {/* Title */}
-          <h2 className="text-xl md:text-2xl font-semibold mb-4">
-            Competitive Bidding System
-          </h2>
-
-          {/* Description */}
-          <p className="text-base md:text-lg text-[#4B5563] leading-relaxed">
-            Our auction-style platform empowers investors to get the best value
-            deals.
-          </p>
-        </div>
-        <div className="bg-[#F3F3F3] text-[#2C2C2C] rounded-4xl p-8 shadow-md hover:shadow-lg transition-shadow duration-300">
-          {/* Icon container */}
-          <div className="p-4 bg-white rounded-full w-fit mb-6">
-            <KeyIcon className="w-6 h-6 md:w-8 md:h-8 text-black" />
-          </div>
-
-          {/* Title */}
-          <h2 className="text-xl md:text-2xl font-semibold mb-4">
-            Data-Driven Insights
-          </h2>
-
-          {/* Description */}
-          <p className="text-base md:text-lg text-[#4B5563] leading-relaxed">
-            Access detailed property analytics and neighborhood trends before
-            you bid.
-          </p>
-        </div>
-        <div className="bg-[#F3F3F3] text-[#2C2C2C] rounded-4xl p-8 shadow-md hover:shadow-lg transition-shadow duration-300">
-          {/* Icon container */}
-          <div className="p-4 bg-white rounded-full w-fit mb-6">
-            <ChartIcon className="w-6 h-6 md:w-8 md:h-8 text-black" />
-          </div>
-
-          {/* Title */}
-          <h2 className="text-xl md:text-2xl font-semibold mb-4">
-            Secure Transactions
-          </h2>
-
-          {/* Description */}
-          <p className="text-base md:text-lg text-[#4B5563] leading-relaxed">
-            End-to-end encrypted processes to keep your investments safe and
-            compliant.
-          </p>
-        </div>
-        <div className="bg-[#F3F3F3] text-[#2C2C2C] rounded-4xl p-8 shadow-md hover:shadow-lg transition-shadow duration-300">
-          {/* Icon container */}
-          <div className="p-4 bg-white rounded-full w-fit mb-6">
-            <MeasureIcon className="w-6 h-6 md:w-8 md:h-8 text-black" />
-          </div>
-
-          {/* Title */}
-          <h2 className="text-xl md:text-2xl font-semibold mb-4">
-            Investor-Focused Platform
-          </h2>
-
-          {/* Description */}
-          <p className="text-base md:text-lg text-[#4B5563] leading-relaxed">
-            Built specifically for property investors—streamlined, scalable, and
-            smart.
-          </p>
-        </div>
-        <div className="bg-[#F3F3F3] text-[#2C2C2C] rounded-4xl p-8 shadow-md hover:shadow-lg transition-shadow duration-300">
-          {/* Icon container */}
-          <div className="p-4 bg-white rounded-full w-fit mb-6">
-            <SettingIcon className="w-6 h-6 md:w-8 md:h-8 text-black" />
-          </div>
-
-          {/* Title */}
-          <h2 className="text-xl md:text-2xl font-semibold mb-4">
-            Flexible Subscription Plans
-          </h2>
-
-          {/* Description */}
-          <p className="text-base md:text-lg text-[#4B5563] leading-relaxed">
-            Choose from tiered pricing models that suit every investor’s need.
-          </p>
-        </div>
+        ))}
       </div>
     </div>
   );

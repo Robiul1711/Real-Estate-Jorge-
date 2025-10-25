@@ -3,7 +3,7 @@ import { ImageProvider } from "./ImageProvider";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
-const Banner = ({ title, subtitle, description }) => {
+const Banner = ({ title, subtitle, description,image }) => {
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
   const descriptionRef = useRef(null);
@@ -21,7 +21,7 @@ const Banner = ({ title, subtitle, description }) => {
     <div className="relative section-padding-y">
       {/* Banner Image */}
       <img
-        src={ImageProvider.commonbanner1}
+        src={image || ImageProvider.banner}
         alt="banner"
         className="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover"
       />
@@ -44,8 +44,9 @@ const Banner = ({ title, subtitle, description }) => {
           <p
             ref={descriptionRef}
             className="text-lg text-[#D1D5DB] mt-2 max-w-3xl mx-auto text-center"
+            dangerouslySetInnerHTML={{__html: description}}
           >
-            {description}
+           
           </p>
         </div>
       </div>

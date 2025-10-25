@@ -4,55 +4,97 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { HomeBannerQuery } from "@/hooks/useCMS";
 
 const HomeBanner = () => {
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
   const inputRef = useRef(null);
+
+  const { homeBanner, isLoading, error } = HomeBannerQuery();
+  const bannerData = homeBanner?.data?.banner_section;
+
+  // Animate only after data is ready
   useGSAP(() => {
-    gsap.from([titleRef.current, subtitleRef.current, inputRef.current], {
-      y: 50,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out",
-      delay: 0.3,
-      stagger: 0.1,
-    });
-  }, []);
+    if (!bannerData) return;
+    const elements = [titleRef.current, subtitleRef.current, inputRef.current];
+    if (elements.every((el) => el)) {
+      gsap.from(elements, {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        delay: 0.3,
+        stagger: 0.1,
+      });
+    }
+  }, [bannerData]);
+
+  // --- Skeleton Loader ---
+  if (isLoading) {
+    return (
+      <section className="section-padding-x section-padding-y relative">
+        <div className="relative rounded-2xl overflow-hidden bg-gray-200 animate-pulse">
+          <div className="w-full h-[350px] sm:h-[400px] md:h-[550px] lg:h-[650px] xl:h-[780px] bg-gray-300" />
+
+          <div className="absolute inset-0 z-20 flex items-center px-4 sm:px-8 md:px-12 lg:px-20 max-w-6xl">
+            <div className="space-y-6 w-full">
+              <div className="h-10 sm:h-12 md:h-16 bg-gray-400/70 rounded-lg w-3/4"></div>
+              <div className="h-4 sm:h-5 md:h-6 bg-gray-400/60 rounded-lg w-2/3"></div>
+              <div className="h-4 sm:h-5 md:h-6 bg-gray-400/60 rounded-lg w-1/2"></div>
+
+              <div className="flex gap-4 mt-8">
+                <div className="h-10 w-40 bg-gray-400/70 rounded-lg"></div>
+                <div className="h-10 w-32 bg-gray-400/70 rounded-lg"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // --- Error State ---
+  if (error) {
+    return (
+      <section className="section-padding-x section-padding-y flex items-center justify-center h-[400px]">
+        <div className="text-red-500 text-lg font-medium">
+          Failed to load banner. Please try again later.
+        </div>
+      </section>
+    );
+  }
+
+  // --- No data fallback ---
+  if (!bannerData) return null;
+
+  // --- Actual Banner ---
   return (
     <section className="section-padding-x section-padding-y relative">
-      {/* Banner Image + Overlay */}
       <div className="relative rounded-2xl overflow-hidden">
         <img
-          src={image}
+          src={bannerData?.image || image}
           alt="Banner"
           className="w-full h-[350px] sm:h-[400px] md:h-[550px] lg:h-[650px] xl:h-[780px] object-cover"
         />
 
-        {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.6)] via-[rgba(0,0,0,0.3)] to-transparent z-10" />
 
-        {/* Content */}
         <div className="absolute inset-0 z-20 flex items-center">
           <div className="px-4 sm:px-8 md:px-12 lg:px-20 max-w-6xl text-white">
             <h2
               ref={titleRef}
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight"
             >
-              Invest in Real Estate Like the Big Players
+              {bannerData?.title}
             </h2>
 
-            {/* Paragraph */}
             <p
               ref={subtitleRef}
               className="mt-4 sm:mt-6 md:mt-8 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-200 max-w-4xl"
-            >
-              We provide tailored real estate solutions, guiding you through
-              every step with personalized experiences that meet your unique
-              needs and aspirations.
-            </p>
+              dangerouslySetInnerHTML={{ __html: bannerData?.description }}
+            />
 
-            {/* CTA Buttons */}
             <div
               ref={inputRef}
               className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-6 sm:mt-8"
