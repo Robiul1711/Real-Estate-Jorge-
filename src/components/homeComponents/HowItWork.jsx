@@ -1,42 +1,28 @@
 import { BankIcon, HammerIcon, ManIcon, SearchIcon } from "@/assets/icon";
+import { PricessSectionQuery } from "@/hooks/useCMS";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import React, { useRef } from "react";
+
 gsap.registerPlugin(ScrollTrigger);
-const steps = [
-  {
-    id: 1,
-    icon: <ManIcon className="duration-200" />,
-    title: "Create Account",
-    desc: "Sign up in minutes with our simple verification process from property appreciation when assets are sold our property appreciation.",
-  },
-  {
-    id: 2,
-    icon: <SearchIcon className="duration-200" />,
-    title: "Browse Properties",
-    desc: "Explore our curated selection of high-quality real estate investment opportunities across different markets and property types.",
-  },
-  {
-    id: 3,
-    icon: <HammerIcon className="duration-200" />,
-    title: "Place Your Bid",
-    desc: "Decide how much you want to invest and place your bid on properties that align with your investment goals and risk tolerance.",
-  },
-  {
-    id: 4,
-    icon: <BankIcon className="duration-200" />,
-    title: "Earn Returns",
-    desc: "Receive regular dividend payments from rental income and benefit from property appreciation when assets are sold.",
-  },
-];
 
 const HowItWork = () => {
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
   const cardRef = useRef(null);
+  const { processSection, isLoading, error } = PricessSectionQuery();
+
+  // Convert object -> array
+  const processData = processSection?.data?.process_section
+    ? Object.values(processSection.data.process_section)
+    : [];
+
+    console.log(processData)
+  // --- GSAP animation ---
   useGSAP(() => {
+    if (!sectionRef.current) return;
     gsap.from([titleRef.current, subtitleRef.current, cardRef.current], {
       y: 50,
       opacity: 0,
@@ -50,7 +36,39 @@ const HowItWork = () => {
         toggleActions: "play none none none",
       },
     });
-  });
+  }, [processData]);
+
+  // --- Skeleton Loader ---
+  if (isLoading) {
+    return (
+      <div className="section-padding-x pb-8 lg:pb-12">
+        <div className="text-center mb-6">
+          <div className="h-8 w-56 bg-gray-300 rounded-lg mx-auto animate-pulse"></div>
+          <div className="h-4 w-80 bg-gray-300 rounded-lg mx-auto mt-4 animate-pulse"></div>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 bg-gray-100 rounded-lg p-6 animate-pulse">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="flex flex-col gap-4 p-6 bg-gray-200 rounded-lg">
+              <div className="w-12 h-12 bg-gray-300 rounded-full mx-auto"></div>
+              <div className="h-6 bg-gray-300 rounded w-3/4 mx-auto"></div>
+              <div className="h-4 bg-gray-300 rounded w-full"></div>
+              <div className="h-4 bg-gray-300 rounded w-5/6"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  // --- Error state ---
+  if (error) {
+    return (
+      <div className="section-padding-x pb-8 lg:pb-12 text-center text-red-500 font-medium">
+        Failed to load process section.
+      </div>
+    );
+  }
+
   return (
     <div ref={sectionRef} className="section-padding-x pb-8 lg:pb-12">
       <h2
@@ -71,14 +89,22 @@ const HowItWork = () => {
         ref={cardRef}
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 bg-[#003C3594] h-auto md:h-[490px]"
       >
-        {steps.map((step) => (
+        {processData.map((step, index) => (
           <div
-            key={step.id}
+            key={index}
             className="group flex flex-col justify-end gap-x-4 pt-8 lg:pt-0 pb-8 px-6 lg:px-14 text-white hover:bg-custom-primary transform transition-all duration-200 ease-in-out"
           >
-            {step.icon}
+            {console.log(step)}
+            <img
+              src={step.image}
+              alt={step.title}
+              className="w-12 h-12 object-contain mb-4 transition-transform duration-200 group-hover:scale-110"
+            />
             <h2 className="text-2xl font-bold my-5">{step.title}</h2>
-            <p className="text-lg mb-6">{step.desc}</p>
+            <p
+              className="text-lg mb-6"
+              dangerouslySetInnerHTML={{ __html: step.description }}
+            ></p>
           </div>
         ))}
       </div>
