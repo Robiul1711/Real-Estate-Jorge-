@@ -4,10 +4,11 @@ import toast from "react-hot-toast";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useNavigate } from "react-router-dom";
 import OTPInput from "otp-input-react";
+import { useEmail } from "@/hooks/useEmail";
 
 const VerifyResetOTP = () => {
     const [OTP, setOTP] = useState("");
-
+const {setResetToken} = useEmail();
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
     const handleVerify = async () => {
@@ -21,7 +22,9 @@ const VerifyResetOTP = () => {
             const res = await axiosPublic.post('/verify-otp', payload);
             if (res) {
                 toast.success(res?.data?.message || "OTP verified successfully!", { id: toastId });
-                navigate('/auth');
+                console.log(res?.data)
+                setResetToken(res?.data?.reset_token);
+                navigate('/new-password');
             }
         } catch (error) {
             console.error("OTP verification error:", error);

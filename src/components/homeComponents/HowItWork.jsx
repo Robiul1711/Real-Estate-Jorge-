@@ -19,7 +19,7 @@ const HowItWork = () => {
     ? Object.values(processSection.data.process_section)
     : [];
 
-    console.log(processData)
+    // console.log(processData)
   // --- GSAP animation ---
   useGSAP(() => {
     if (!sectionRef.current) return;
@@ -94,7 +94,7 @@ const HowItWork = () => {
             key={index}
             className="group flex flex-col justify-end gap-x-4 pt-8 lg:pt-0 pb-8 px-6 lg:px-14 text-white hover:bg-custom-primary transform transition-all duration-200 ease-in-out"
           >
-            {console.log(step)}
+            {/* {console.log(step)} */}
             <img
               src={step.image}
               alt={step.title}

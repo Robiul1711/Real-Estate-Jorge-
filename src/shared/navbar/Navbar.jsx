@@ -3,6 +3,9 @@ import { Link, useLocation } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { MainIcon } from "@/assets/icon";
 import { ImageProvider } from "@/components/common/ImageProvider";
+import { useAuth } from "@/hooks/useAuth";
+import UserDropdown from "./UserDropdown";
+import { useEmail } from "@/hooks/useEmail";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -28,6 +31,8 @@ const navLinks = [
 ];
 
 const Navbar = () => {
+  const { token } = useEmail();
+const {user,logout}=useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
   const menuRef = useRef(null);
@@ -153,29 +158,34 @@ const Navbar = () => {
             </nav>
           )}
         </div>
-
-        <div className="flex items-center gap-4">
-          <div className="hidden sm:flex items-center gap-4">
-            <Link to="/login">
-              <button className="text-[15px] lg:text-[17px] font-medium px-4 lg:px-6 rounded-md py-[5px] lg:py-[7px] text-custom-primary border border-custom-primary relative before:absolute overflow-hidden before:translate-x-[-200px] hover:before:translate-x-0 before:z-[-1] before:translate-y-12 dark:text-custom-primary dark:border-custom-primary dark:z-0 dark:before:bg-custom-primary before:transition hover:before:translate-y-0 before:duration-300 hover:text-secondary  before:w-full before:h-full before:bg-custom-primary before:top-0 before:left-0 cursor-pointer">
-                Login
-              </button>
-            </Link>
-
-            <Link to="/sign-up">
-              <button className="text-[15px] lg:text-[17px] font-medium px-4 lg:px-6 rounded-md py-[5px] lg:py-[7px] text-custom-primary border border-custom-primary relative before:absolute overflow-hidden before:translate-x-[-200px] hover:before:translate-x-0 before:z-[-1] before:translate-y-12 dark:text-custom-primary dark:border-custom-primary dark:z-0 dark:before:bg-custom-primary before:transition hover:before:translate-y-0 before:duration-300 hover:text-secondary  before:w-full before:h-full before:bg-custom-primary before:top-0 before:left-0 cursor-pointer">
-                Signup
-              </button>
-            </Link>
+        {token ? (
+          <div>
+            <UserDropdown userData={user} logout={logout} />
           </div>
-          {/* Mobile Toggle */}
-          <button
-            className="lg:hidden text-custom-primary z-50"
-            onClick={toggleMobileMenu}
-          >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+        ) : (
+          <div className="flex items-center gap-4">
+            <div className="hidden sm:flex items-center gap-4">
+              <Link to="/login">
+                <button className="text-[15px] lg:text-[17px] font-medium px-4 lg:px-6 rounded-md py-[5px] lg:py-[7px] text-custom-primary border border-custom-primary relative before:absolute overflow-hidden before:translate-x-[-200px] hover:before:translate-x-0 before:z-[-1] before:translate-y-12 dark:text-custom-primary dark:border-custom-primary dark:z-0 dark:before:bg-custom-primary before:transition hover:before:translate-y-0 before:duration-300 hover:text-secondary  before:w-full before:h-full before:bg-custom-primary before:top-0 before:left-0 cursor-pointer">
+                  Login
+                </button>
+              </Link>
+
+              <Link to="/sign-up">
+                <button className="text-[15px] lg:text-[17px] font-medium px-4 lg:px-6 rounded-md py-[5px] lg:py-[7px] text-custom-primary border border-custom-primary relative before:absolute overflow-hidden before:translate-x-[-200px] hover:before:translate-x-0 before:z-[-1] before:translate-y-12 dark:text-custom-primary dark:border-custom-primary dark:z-0 dark:before:bg-custom-primary before:transition hover:before:translate-y-0 before:duration-300 hover:text-secondary  before:w-full before:h-full before:bg-custom-primary before:top-0 before:left-0 cursor-pointer">
+                  Signup
+                </button>
+              </Link>
+            </div>
+            {/* Mobile Toggle */}
+            <button
+              className="lg:hidden text-custom-primary z-50"
+              onClick={toggleMobileMenu}
+            >
+              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Mobile Slide Menu */}

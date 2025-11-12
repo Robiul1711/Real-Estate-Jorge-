@@ -2,20 +2,42 @@ import React, { useState } from "react";
 import image from "../../assets/images/newpassword.png";
 import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 import { MainIcon } from "@/assets/icon";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CommonBtn from "@/components/common/CommonButton";
+import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import { useEmail } from "@/hooks/useEmail";
 
 const NewPassword = () => {
+  const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
+  const { resetToken } = useEmail();
+
+  // 👁️ Password visibility states
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [password, setPassword] = useState("");
+  const [passwordValue, setPasswordValue] = useState("");
 
+  // ✅ Form setup
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  const newPassword = watch("new_password");
+
+  // ✅ Strength calculation
   const getPasswordStrength = () => {
     let strength = 0;
-    if (password.length >= 8) strength++;
-    if (/[a-z]/.test(password)) strength++;
-    if (/[A-Z]/.test(password)) strength++;
-    if (/[0-9]/.test(password)) strength++;
+    if (passwordValue.length >= 8) strength++;
+    if (/[a-z]/.test(passwordValue)) strength++;
+    if (/[A-Z]/.test(passwordValue)) strength++;
+    if (/[0-9]/.test(passwordValue)) strength++;
     return strength;
   };
 
@@ -28,12 +50,44 @@ const NewPassword = () => {
     "bg-green-600",
   ];
 
+  // ✅ Mutation for password reset
+  const resetPasswordMutation = useMutation({
+    mutationFn: async (formData) => {
+      const email = localStorage.getItem("email");
+      const payload = {
+        email,
+        reset_token: resetToken,
+        new_password: formData.new_password,
+        new_password_confirmation: formData.new_password_confirmation,
+      };
+
+      const response = await axiosSecure.post("/reset-password", payload);
+      return response.data;
+    },
+    onSuccess: (data) => {
+      toast.success(data?.message || "Password reset successfully!");
+      reset();
+      localStorage.removeItem("email");
+      navigate("/new-password-success");
+    },
+    onError: (error) => {
+      const message =
+        error?.response?.data?.message || "Password reset failed!";
+      toast.error(message);
+    },
+  });
+
+  // ✅ Form submit handler
+  const onSubmit = (data) => {
+    resetPasswordMutation.mutate(data);
+  };
+
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Left Side - Form */}
       <div className="md:w-1/2 w-full flex items-center justify-center px-6 md:px-12 py-10">
         <div className="w-full max-w-xl flex flex-col min-h-full">
-          {/* Center Content */}
+          {/* Header */}
           <div className="flex-1 flex flex-col justify-center">
             <Link
               to="/login"
@@ -45,27 +99,35 @@ const NewPassword = () => {
               />
               <MainIcon className="w-44 lg:w-auto" />
             </Link>
+
             <div className="text-center">
               <h2 className="text-2xl md:text-[36px] font-bold">
                 Create New Password
               </h2>
               <p className="text-sm md:text-lg text-[#757575] mt-3 mb-8 max-w-md mx-auto">
-                Send your email account to reset password and make new password
+                Enter your new password to reset your account
               </p>
             </div>
 
-            {/* Form */}
-            <form className="space-y-5">
+            {/* ✅ Form */}
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
               {/* Password */}
               <div>
-                <label className="block mb-1 font-medium">Password</label>
+                <label className="block mb-1 font-medium">New Password</label>
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
                     className="w-full px-4 py-2 md:py-3 border rounded-md pr-10"
-                    placeholder="Enter password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter new password"
+                    {...register("new_password", {
+                      required: "Password is required",
+                      minLength: {
+                        value: 8,
+                        message: "Password must be at least 8 characters",
+                      },
+                    })}
+                    value={passwordValue}
+                    onChange={(e) => setPasswordValue(e.target.value)}
                   />
                   <div
                     className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
@@ -74,8 +136,13 @@ const NewPassword = () => {
                     {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
                   </div>
                 </div>
+                {errors.new_password && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.new_password.message}
+                  </p>
+                )}
                 <p className="text-sm text-gray-500 mt-2 text-left">
-                  Min 8 Characters with a combination of letters and numbers
+                  Min 8 characters with a mix of letters and numbers
                 </p>
 
                 {/* Strength Bar */}
@@ -110,10 +177,17 @@ const NewPassword = () => {
                     type={showConfirmPassword ? "text" : "password"}
                     className="w-full px-4 py-2 md:py-3 border rounded-md pr-10"
                     placeholder="Confirm password"
+                    {...register("new_password_confirmation", {
+                      required: "Confirm your password",
+                      validate: (value) =>
+                        value === newPassword || "Passwords do not match",
+                    })}
                   />
                   <div
                     className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    onClick={() =>
+                      setShowConfirmPassword(!showConfirmPassword)
+                    }
                   >
                     {showConfirmPassword ? (
                       <Eye size={20} />
@@ -122,20 +196,27 @@ const NewPassword = () => {
                     )}
                   </div>
                 </div>
+                {errors.new_password_confirmation && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.new_password_confirmation.message}
+                  </p>
+                )}
               </div>
 
               {/* Submit Button */}
               <CommonBtn
-                path={"/new-password-success"}
+                as="button"
+                type="submit"
+                disabled={resetPasswordMutation.isPending}
                 className="w-full !rounded-lg"
               >
-                Submit
+                {resetPasswordMutation.isPending ? "Submitting..." : "Submit"}
               </CommonBtn>
             </form>
 
             {/* Already have account */}
             <p className="text-sm text-center mt-6">
-              Don't have an account?{" "}
+              Don’t have an account?{" "}
               <Link
                 to="/sign-up"
                 className="underline cursor-pointer font-medium text-custom-primary hover:text-custom-secondary"
@@ -145,7 +226,7 @@ const NewPassword = () => {
             </p>
           </div>
 
-          {/* Footer (always bottom) */}
+          {/* Footer */}
           <p className="text-center text-xs text-gray-400 mt-10">
             ©2025 Logoipsum. All Rights Reserved.
           </p>
@@ -154,7 +235,7 @@ const NewPassword = () => {
 
       {/* Right Side - Image */}
       <div className="md:w-1/2 w-full h-[300px] md:h-screen">
-        <img src={image} alt="Sign Up" className="w-full h-full object-cover" />
+        <img src={image} alt="Reset Password" className="w-full h-full object-cover" />
       </div>
     </div>
   );

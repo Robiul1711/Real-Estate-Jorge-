@@ -5,13 +5,17 @@ import "swiper/css";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { MeetOurTeamQuery } from "@/hooks/useCMS";
 gsap.registerPlugin(ScrollTrigger);
 
 const MeetOurTeam = () => {
+const {teamMembersData}=MeetOurTeamQuery();
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
   const cardRef = useRef(null);
+
+  // ✅ GSAP Animations
   useGSAP(() => {
     gsap.from([titleRef.current, subtitleRef.current, cardRef.current], {
       y: 50,
@@ -27,44 +31,6 @@ const MeetOurTeam = () => {
       },
     });
   });
-  const teamData = [
-    {
-      name: "Jorge Feanco",
-      role: "CEO & Founder",
-      desc: "Former real estate executive with 15+ years of experience in property development and investment.",
-      image: ImageProvider.jorge,
-    },
-    {
-      name: "Michael Chen",
-      role: "CEO & Founder",
-      desc: "Tech entrepreneur passionate about using technology to democratize real estate investing.",
-      image: ImageProvider.chen,
-    },
-    {
-      name: "Emma Rodriguez",
-      role: "Head of Investments",
-      desc: "Investment banking background with expertise in real estate finance and risk assessment.",
-      image: ImageProvider.emma,
-    },
-    {
-      name: "Sophia Lee",
-      role: "Marketing Head",
-      desc: "Expert in digital marketing and brand management in real estate.",
-      image: ImageProvider.jorge,
-    },
-    {
-      name: "Liam Smith",
-      role: "Finance Lead",
-      desc: "Handles investment strategy and financial planning for all projects.",
-      image: ImageProvider.chen,
-    },
-    {
-      name: "Olivia Brown",
-      role: "Operations Manager",
-      desc: "Ensures smooth execution of projects and client satisfaction.",
-      image: ImageProvider.emma,
-    },
-  ];
 
   return (
     <div ref={sectionRef} className="py-6 lg:py-12">
@@ -100,15 +66,29 @@ const MeetOurTeam = () => {
         }}
         ref={cardRef}
       >
-        {teamData.map((member, idx) => (
+        {teamMembersData?.data?.map((member, idx) => (
           <SwiperSlide key={idx} className="my-6">
-            <div className="shadow-md hover:shadow-lg transition-all duration-200 ease-in-out rounded-md p-8 space-y-4 flex flex-col items-center">
-              <img src={member.image} alt={member.name} />
-              <h2 className="md:text-2xl text-[#111827] font-medium my-2">
+            <div className="shadow-md hover:shadow-lg transition-all duration-200 ease-in-out rounded-2xl p-8 space-y-4 flex flex-col items-center bg-white">
+              {/* ✅ Uniform Image Container */}
+              <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-42 md:h-42 rounded-full overflow-hidden  bg-gray-100 flex items-center justify-center">
+                <img
+                  src={member.image || ImageProvider.jorge}
+                  alt={member.name}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+
+              <h2 className="md:text-2xl text-lg text-[#111827] font-semibold mt-4 text-center">
                 {member.name}
               </h2>
-              <p className="text-sm text-[#00474F] py-1">{member.role}</p>
-              <p className="text-[#6B7280] text-center">{member.desc}</p>
+              <p className="text-sm text-[#00474F] font-medium">
+                {member.position}
+              </p>
+              <p
+                className="text-[#6B7280] text-center text-sm leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: member.description }}
+              ></p>
             </div>
           </SwiperSlide>
         ))}

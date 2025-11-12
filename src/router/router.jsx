@@ -40,6 +40,7 @@ import Projects from "@/pages/projects/Projects";
 import Blog from "@/pages/blog/Blog";
 import VerifyRegisterOTP from "@/pages/auth/VerifyRegisterOTP";
 import VerifyResetOTP from "@/pages/auth/VerifyResetOTP";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -87,7 +88,12 @@ const router = createBrowserRouter([
   // Admin routes
   {
     path: "/dashboard",
-    element: <AdminLayout />,
+    element:
+    <PrivateRoute>
+      <AdminLayout />
+
+    </PrivateRoute>
+     ,
     children: [
       {
         index: true,

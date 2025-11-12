@@ -1,10 +1,9 @@
 import axios from "axios";
 import { useAuth } from "./useAuth";
+import { useEmail } from "./useEmail";
 
 const useAxiosSecure = () => {
-  const auth = useAuth();
-  // Ensure that auth and user are defined before destructuring
-  const access_token = auth?.user?.token;
+ const {token}=useEmail();
 
   const axiosSecure = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
@@ -12,7 +11,8 @@ const useAxiosSecure = () => {
   });
 
   axiosSecure.interceptors.request.use((config) => {
-    if (access_token) {
+    if (token) {
+      const access_token = token;
       config.headers = {
         ...config.headers,
         Authorization: `Bearer ${access_token}`,

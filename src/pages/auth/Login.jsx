@@ -2,16 +2,20 @@ import React, { useState } from "react";
 import image from "../../assets/images/login.png";
 import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 import { MainIcon } from "@/assets/icon";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CommonBtn from "@/components/common/CommonButton";
 import { ImageProvider } from "@/components/common/ImageProvider";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { useEmail } from "@/hooks/useEmail";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
+  const { setToken} = useEmail();
+
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -27,7 +31,10 @@ const Login = () => {
       const res = await axiosPublic.post("/login", data);
       if (res) {
         toast.success("Login successful!", { id: toastId });
-
+        console.log(res?.data?.token)
+        localStorage.setItem("token", res?.data?.token);
+        setToken(res?.data?.token);
+        navigate("/");
       }
     } catch (error) {
       console.log("Login error:", error);

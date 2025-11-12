@@ -9,7 +9,7 @@ import { ScrollRestoration } from "react-router-dom";
 const About = () => {
   const {whoWeAreData,isLoading,error}=WhoWeAreQuery();
   const Data=whoWeAreData?.data?.banner_section
-  console.log(Data)
+  // console.log(Data)
   return (
     <div>
       <ScrollRestoration />
