@@ -11,11 +11,10 @@ import { MdOutlineVerifiedUser } from "react-icons/md";
 import React, { useState } from "react";
 import { ScrollRestoration } from "react-router-dom";
 import { Shield } from "lucide-react";
+import UpdateProfile from "./DigitalWallet/UpdateProfile";
+import ChangePassword from "./DigitalWallet/ChangePassword";
 
 const Settings = () => {
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [toggles, setToggles] = useState({
     email: false,
     investment: false,
@@ -43,50 +42,7 @@ const Settings = () => {
       </p>
       <div className="flex flex-col md:flex-row  justify-between">
         <div className="w-full md:w-[68%]">
-          <div className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  First Name
-                </label>
-                <input
-                  type="text"
-                  placeholder="John"
-                  className="w-full px-4 py-2 border bg-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Last Name
-                </label>
-                <input
-                  type="text"
-                  placeholder="Doe"
-                  className="w-full px-4 py-2 border border-gray-300 bg-white rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
-                />
-              </div>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Email
-              </label>
-              <input
-                type="email"
-                placeholder="john@example.com"
-                className="w-full px-4 py-2 border border-gray-300 bg-white rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Password
-              </label>
-              <input
-                type="password"
-                placeholder="••••••••"
-                className="w-full px-4 py-2 border border-gray-300 bg-white rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
-              />
-            </div>
-          </div>
+          <UpdateProfile />
           <div className="bg-white p-5 rounded-lg mt-6">
             <h2 className="flex items-center gap-4 text-lg font-bold cursor-pointer ">
               <Notificartion /> Notification Preferences
@@ -174,47 +130,7 @@ const Settings = () => {
             </div>
 
             {/* Change Password Section */}
-            <div>
-              <h2 className="text-base font-medium text-gray-900 mb-4">
-                Change Password
-              </h2>
-
-              <div className="space-y-4">
-                <div>
-                  <input
-                    type="password"
-                    placeholder="Current password"
-                    value={currentPassword}
-                    onChange={(e) => setCurrentPassword(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  />
-                </div>
-
-                <div>
-                  <input
-                    type="password"
-                    placeholder="New password"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  />
-                </div>
-
-                <div>
-                  <input
-                    type="password"
-                    placeholder="Confirm new password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  />
-                </div>
-
-                <button className="bg-custom-primary hover:bg-green-600 text-white px-6 py-3 rounded-md font-medium transition-colors">
-                  Update Password
-                </button>
-              </div>
-            </div>
+            <ChangePassword />
           </div>
         </div>
         <div className="w-full md:w-[30%]">

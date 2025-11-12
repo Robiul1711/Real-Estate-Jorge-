@@ -6,9 +6,10 @@ import CommonBtn from "@/components/common/CommonButton";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { ImageProvider } from "@/components/common/ImageProvider";
-import { useForm } from "react-hook-form"
+import { set, useForm } from "react-hook-form"
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import toast from "react-hot-toast";
+import { useEmail } from "@/hooks/useEmail";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,6 +19,7 @@ const SignUp = () => {
   const [isToggle1, setIsToggle1] = useState(false);
   const [phone, setPhone] = useState("");
   const [account_type, setAccount_type] = useState("");
+
   const [terms_accepted, setTerms_accepted] = useState(0);
 
   const axiosPublic = useAxiosPublic();
@@ -78,6 +80,7 @@ const SignUp = () => {
       const res = await axiosPublic.post("/register", payload);
       if (res) {
         localStorage.setItem("registration_email", data.email);
+       
         toast.success("Registration successful!", { id: toastId });
         navigate("/register-otp-verify");
       }
