@@ -66,7 +66,7 @@ const { projectsData, isLoading, error } = ProjectQuery();
             >
               <div className="overflow-hidden rounded-2xl relative">
                 <img
-                  className="w-full hover:scale-105 transform transition-all duration-500 ease-in-out"
+                  className="w-full h-48 sm:h-56 md:h-64 lg:h-72 hover:scale-105 transform transition-all duration-500 ease-in-out"
                   src={project.image || ImageProvider.project}
                   alt={project.title}
                 />

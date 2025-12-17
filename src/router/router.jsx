@@ -108,7 +108,7 @@ const router = createBrowserRouter([
         element: <ProjectViewdescription />,
       },
       {
-        path: "investment-verification/:id",
+        path: "investment-verification/:slug",
         element: <InvestmentVerification />,
       },
       // {

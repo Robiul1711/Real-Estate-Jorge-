@@ -13,9 +13,10 @@ import { useApiMutation } from "@/hooks/useApiMutation";
 import { toast } from "react-hot-toast";
 
 const InvestmentVerification = () => {
-  const { id } = useParams(); // 👈 project_id
+  const { slug } = useParams(); // 👈 project_id
+  console.log(slug)
   const [showWarning, setShowWarning] = useState(true);
-  const [investmentAmount, setInvestmentAmount] = useState(0);
+  const [investmentAmount, setInvestmentAmount] = useState("");
   const navigate = useNavigate();
 
   const { data: wallet } = useApiQuery({
@@ -71,17 +72,17 @@ const InvestmentVerification = () => {
 
     addMoneyMutation.mutate(
       {
-        project_id: Number(id),
+        project_slug: slug,
         payment_method: "wallet", // 👈 always same
         partial_amount: investmentAmount,
       },
       {
         onSuccess: () => {
-          toast.success("Investment successful");
+          // toast.success("Investment successful");
           navigate("/dashboard/investment-success");
         },
         onError: () => {
-          toast.error("Investment failed");
+          // toast.error("Investment failed");
         },
       }
     );
@@ -113,7 +114,7 @@ const InvestmentVerification = () => {
 
           <div className="bg-white rounded-full px-4 py-2 shadow-sm border border-gray-200">
             <span className="text-sm font-medium text-gray-700">
-              Investment: $50,000
+              Investment: ${investmentAmount}
             </span>
           </div>
         </div>
@@ -176,8 +177,8 @@ const InvestmentVerification = () => {
                     onChange={(e) =>
                       setInvestmentAmount(Number(e.target.value))
                     }
-                    className="w-full text-center text-3xl font-bold bg-transparent outline-none border-b-2 border-gray-300 focus:border-custom-primary mb-2"
-                    placeholder="0"
+                    className="w-full text-center text-3xl font-semibold bg-transparent outline-none border-2 rounded-lg border-gray-300 focus:border-custom-primary mb-2"
+                    placeholder="$0.00"
                   />
                   <div className="text-sm text-gray-600">
                     Investment Amount

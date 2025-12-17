@@ -43,7 +43,7 @@ const Settings = () => {
       <div className="flex flex-col md:flex-row  justify-between">
         <div className="w-full md:w-[68%]">
           <UpdateProfile />
-          <div className="bg-white p-5 rounded-lg mt-6">
+          {/* <div className="bg-white p-5 rounded-lg mt-6">
             <h2 className="flex items-center gap-4 text-lg font-bold cursor-pointer ">
               <Notificartion /> Notification Preferences
             </h2>
@@ -96,7 +96,7 @@ const Settings = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
 
           <div className="bg-white mt-5 rounded-2xl p-6">
             {/* Header */}

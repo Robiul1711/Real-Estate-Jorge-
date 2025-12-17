@@ -114,7 +114,7 @@ const OpportunitiesRightSide = ({ activeTab , project}) => {
           </div>
 
           <Link
-            to={`/dashboard/investment-verification/${project?.data?.id}`}
+            to={`/dashboard/investment-verification/${project?.data?.slug}`}
             className="block w-full mt-4 px-4 py-2 text-sm font-medium text-white bg-custom-primary border rounded-lg transition duration-200 hover:bg-black hover:text-white text-center"
           >
             Invest Now
