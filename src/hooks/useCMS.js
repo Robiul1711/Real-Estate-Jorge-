@@ -168,8 +168,40 @@ export const BlogQuery = () => {
 }
 
 
+export const AmbassadorsQuery = () => {
+     const axiosPublic = useAxiosPublic();
+    const {
+      data: ambassadorsData,
+      isLoading,
+      error,
+    } = useQuery({
+      queryKey: ["ambassadors"],
+      queryFn: async () => {
+        const res = await axiosPublic(`/ambassadors`);
+        return res?.data;
+      },
+    });
+  
+    return { ambassadorsData, isLoading, error };
+}
 
 
+export const InsvestmentCategoryQuery = () => {
+     const axiosPublic = useAxiosPublic();
+    const {
+      data: investmentCategoryData,
+      isLoading,
+      error,
+    } = useQuery({
+      queryKey: ["investmentCategory"],
+      queryFn: async () => {
+        const res = await axiosPublic(`/investment-categories`);
+        return res?.data;
+      },
+    });
+  
+    return { investmentCategoryData, isLoading, error };
+}
 
 //footer section
 export const FooterQuery = () => {

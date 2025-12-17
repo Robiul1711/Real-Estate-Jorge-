@@ -1,18 +1,16 @@
 import React from 'react';
 import ProjectTimeline from './ProjectTimeline';
 
-const Description = () => {
+const Description = ({data}) => {
+  console.log(data?.data?.tabs?.description)
   return (
     <div className=" p-6 bg-white rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">Project Summary</h1>
+      {/* <h1 className="text-2xl font-bold text-gray-800 mb-6">Project Summary</h1> */}
 
-      <div className="mb-8">
-        <h2 className="text-lg font-semibold text-gray-700 mb-2">Purpose</h2>
-        <p className="text-gray-600">
-          To finance the costs for the real estate development and construction of 4 dwellings and 13 parking spaces.
-        </p>
+      <div className="mb-8" dangerouslySetInnerHTML={{ __html: data?.data?.tabs?.description?.long }}>
+       
       </div>
-
+{/* 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         <div>
           <h2 className="text-lg font-semibold text-gray-700 mb-2">Location</h2>
@@ -40,9 +38,9 @@ const Description = () => {
         <p className="text-gray-600">
           Premium residential development with 24 luxury units in prime Manhattan location. This project offers exceptional investment opportunities with guaranteed returns and prime real estate positioning.
         </p>
-      </div>
+      </div> */}
 
-      <div className="mb-8">
+      {/* <div className="mb-8">
       <div className='grid grid-cols-2 gap-4'>
       <div className='flex flex-col items-start'>
         <h1 className='text-lg font-semibold text-gray-700 mb-1'>Scoring</h1>
@@ -61,10 +59,10 @@ const Description = () => {
         <p>15 months</p>
       </div>
       </div>
-      </div>
+      </div> */}
 
       <div>
-     <ProjectTimeline />
+     <ProjectTimeline data={data?.data?.tabs} />
       </div>
     </div>
   );

@@ -37,7 +37,8 @@ const investments = [
   },
 ];
 
-export default function RecentInvestment() {
+export default function RecentInvestment({data}) {
+  console.log(data?.recent_investments)
   return (
     <>
       {/* Header */}
@@ -57,14 +58,14 @@ export default function RecentInvestment() {
 
       {/* Investment Cards */}
       <div className="space-y-4 p-4">
-        {investments.map((item) => (
+        {data?.recent_investments?.map((item) => (
           <div
             key={item.id}
             className="flex flex-col sm:flex-row items-start sm:items-center bg-gray-50 rounded-xl shadow-sm p-4 gap-4"
           >
             {/* Image */}
             <img
-              src={item.img}
+              src={item?.project?.image}
               alt={item.title}
               className="w-full sm:w-32 sm:h-24 h-40 object-cover rounded-lg"
             />
@@ -74,14 +75,14 @@ export default function RecentInvestment() {
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
                 <div>
                   <h3 className="text-base md:text-lg font-semibold">
-                    {item.title}
+                    {item?.project?.title}
                   </h3>
                   <p className="text-xs md:text-sm text-gray-500">
                     {item.location}
                   </p>
                   <p className="text-xs md:text-sm text-gray-600">
                     Investment:{" "}
-                    <span className="font-medium">{item.investment}</span>
+                    <span className="font-medium">{item.investment_amount}</span>
                   </p>
                 </div>
 
@@ -93,9 +94,9 @@ export default function RecentInvestment() {
 
               {/* Total Investment / ROI */}
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center text-xs md:text-sm mt-2 gap-1">
-                {item.totalInvestment && (
+                {item.total_investment && (
                   <p className="text-gray-600">
-                    Total Investment: {item.totalInvestment}
+                    Total Investment: {item.total_investment}
                   </p>
                 )}
                 {item.roi && (
@@ -107,7 +108,7 @@ export default function RecentInvestment() {
               <div className="w-full bg-gray-200 rounded-full h-2 mt-3">
                 <div
                   className="bg-custom-primary h-2 rounded-full"
-                  style={{ width: `${item.progress}%` }}
+                  style={{ width: `${item.progress_percent}%` }}
                 ></div>
               </div>
             </div>

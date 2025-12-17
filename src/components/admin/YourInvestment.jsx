@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Calculator, TrendingUp, Clock } from "lucide-react";
 
-export default function YourInvestment() {
+export default function YourInvestment({ data }) {
+  console.log(data?.data?.tabs?.your_investment)
+  const ProjectSummery = data?.data?.tabs?.your_investment?.project_summary;
   const [investment, setInvestment] = useState(50000);
   const [period, setPeriod] = useState(18);
 

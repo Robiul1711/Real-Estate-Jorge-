@@ -1,17 +1,11 @@
 import { ImageProvider } from "@/components/common/ImageProvider";
+import { InsvestmentCategoryQuery } from "@/hooks/useCMS";
 import { ArrowLeft, ArrowRight, Calendar } from "lucide-react";
 import React, { useRef, useState } from "react";
 
 const InvestmentGuide = () => {
-  const tabs = [
-    { label: "All" },
-    { label: "Beginner" },
-    { label: "Strategy" },
-    { label: "Advanced" },
-    { label: "Local Market" },
-    { label: "Risk Management" },
-    { label: "Portfolio" },
-  ];
+  const {investmentCategoryData,isLoading} = InsvestmentCategoryQuery();
+
 
   const [activeTab, setActiveTab] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
@@ -131,45 +125,6 @@ const InvestmentGuide = () => {
     startIndex + itemsPerPage
   );
 
-  // Reset to page 1 when tab changes
-  React.useEffect(() => {
-    setCurrentPage(1);
-  }, [activeTab]);
-
-  // ---- DRAG SCROLL ----
-  const isDragging = useRef(false);
-  const startX = useRef(0);
-  const scrollLeft = useRef(0);
-
-  const onMouseDown = (e) => {
-    isDragging.current = true;
-    startX.current = e.pageX - scrollRef.current.offsetLeft;
-    scrollLeft.current = scrollRef.current.scrollLeft;
-  };
-  const onMouseMove = (e) => {
-    if (!isDragging.current) return;
-    e.preventDefault();
-    const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = x - startX.current;
-    scrollRef.current.scrollLeft = scrollLeft.current - walk;
-  };
-  const onMouseUp = () => {
-    isDragging.current = false;
-  };
-  const onTouchStart = (e) => {
-    isDragging.current = true;
-    startX.current = e.touches[0].pageX - scrollRef.current.offsetLeft;
-    scrollLeft.current = scrollRef.current.scrollLeft;
-  };
-  const onTouchMove = (e) => {
-    if (!isDragging.current) return;
-    const x = e.touches[0].pageX - scrollRef.current.offsetLeft;
-    const walk = x - startX.current;
-    scrollRef.current.scrollLeft = scrollLeft.current - walk;
-  };
-  const onTouchEnd = () => {
-    isDragging.current = false;
-  };
 
   return (
     <div className="pb-8">
@@ -185,27 +140,20 @@ const InvestmentGuide = () => {
       <div
         ref={scrollRef}
         className="overflow-x-auto hide-scrollbar px-4 sm:px-8 cursor-grab active:cursor-grabbing flex items-center text-center justify-start sm:justify-center my-4"
-        style={{ scrollBehavior: "smooth", userSelect: "none" }}
-        onMouseDown={onMouseDown}
-        onMouseMove={onMouseMove}
-        onMouseUp={onMouseUp}
-        onMouseLeave={onMouseUp}
-        onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
-        onTouchEnd={onTouchEnd}
+
       >
         <div className="flex flex-nowrap min-w-fit gap-3 sm:gap-4">
-          {tabs.map((tab, index) => (
+          {investmentCategoryData?.data?.map((tab, index) => (
             <button
-              key={`${tab.label}-${index}`}
-              onClick={() => setActiveTab(tab.label)}
+              key={`${tab.title}-${index}`}
+              onClick={() => setActiveTab(tab.title)}
               className={`flex-shrink-0 px-3 sm:px-4 py-2 rounded-full text-sm md:text-base font-medium transition cursor-pointer ${
-                activeTab === tab.label
+                activeTab === tab.title
                   ? "bg-custom-primary text-white"
                   : "text-[#0F172A] bg-[#30B7671A] hover:bg-green-200"
               }`}
             >
-              {tab.label}
+              {tab.title}
             </button>
           ))}
         </div>

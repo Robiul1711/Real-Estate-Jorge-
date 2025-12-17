@@ -13,6 +13,7 @@ const AuthProvider = ({ children }) => {
 
   // Fetch user function
   const fetchUser = async () => {
+    
     if (!token) return null;
     const res = await axios.get(`${API_URL}/profile/show`, {
       headers: { Authorization: `Bearer ${token}` },

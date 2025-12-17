@@ -1,7 +1,7 @@
 import React from 'react';
 import { FileText } from 'lucide-react';
 
-export default function DocumentSummary() {
+export default function DocumentSummary({data}) {
   const documentCategories = [
     { label: 'Legal Documents', count: 4 },
     { label: 'Financial Documents', count: 4 },

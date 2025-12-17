@@ -9,7 +9,10 @@ import ROICalculator from "./ROICalculator";
 import BenefitsDisclaimer from "./BenefitsDisclaimer";
 import DocumentSummary from "./DocumentSummary";
 
-const OpportunitiesRightSide = ({ activeTab }) => {
+const OpportunitiesRightSide = ({ activeTab , project}) => {
+  const ProjectSummery=project?.data?.tabs?.description?.investment_summary
+
+  
   return (
     <div className="flex flex-col gap-6">
       {/* Developer Card */}
@@ -52,19 +55,19 @@ const OpportunitiesRightSide = ({ activeTab }) => {
           {/* Progress Section */}
           <div className="flex justify-between items-center py-4 text-sm font-medium">
             <span className="text-gray-600">Funding Progress</span>
-            <span>68% Complete</span>
+            <span>{ProjectSummery?.funding_progress_percent} Complete</span>
           </div>
 
           <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden mb-2">
             <div
               className="h-full bg-custom-primary rounded-full transition-all duration-1000 ease-out"
-              style={{ width: "68%" }}
+              style={{ width: `${ProjectSummery?.funding_progress_percent}%` }}
             />
           </div>
 
           <div className="flex justify-between text-sm font-semibold text-gray-500 mt-1">
-            <p>$1.9M raised</p>
-            <p>$2.5M target</p>
+            <p>{ProjectSummery?.raised_amount} raised</p>
+            <p>{ProjectSummery?.target_amount} target</p>
           </div>
 
           {/* Return and Duration */}
@@ -74,14 +77,14 @@ const OpportunitiesRightSide = ({ activeTab }) => {
                 <AiOutlineRise className="text-custom-primary" />
                 Expected Return
               </p>
-              <p className="text-sm text-custom-primary">12-15%</p>
+              <p className="text-sm text-custom-primary">{ProjectSummery?.expected_return_range}%</p>
             </div>
             <div>
               <p className="font-semibold text-gray-500 flex items-center gap-1">
                 <FaCalendarAlt />
                 Duration
               </p>
-              <p className="text-sm">18 months</p>
+              <p className="text-sm">{ProjectSummery?.duration_months}</p>
             </div>
           </div>
 
@@ -92,13 +95,13 @@ const OpportunitiesRightSide = ({ activeTab }) => {
                 <MdOutlinePeopleOutline />
                 Investors
               </p>
-              <p className="text-sm">127</p>
+              <p className="text-sm">{ProjectSummery?.investors}</p>
             </div>
             <div>
               <p className="font-semibold text-gray-500 flex items-center gap-1">
                 <IoEyeOutline /> Views
               </p>
-              <p className="text-sm">2,850</p>
+              <p className="text-sm">{ProjectSummery?.views}</p>
             </div>
           </div>
 
@@ -107,11 +110,11 @@ const OpportunitiesRightSide = ({ activeTab }) => {
             <p className="font-semibold text-gray-600 text-base">
               Min. Investment
             </p>
-            <p className="font-bold text-base">$50,000</p>
+            <p className="font-bold text-base">{ProjectSummery?.min_investment}</p>
           </div>
 
           <Link
-            to="/dashboard/investment-verification"
+            to={`/dashboard/investment-verification/${project?.data?.id}`}
             className="block w-full mt-4 px-4 py-2 text-sm font-medium text-white bg-custom-primary border rounded-lg transition duration-200 hover:bg-black hover:text-white text-center"
           >
             Invest Now
@@ -121,9 +124,9 @@ const OpportunitiesRightSide = ({ activeTab }) => {
 
       {/* Dynamic Tab Content */}
       <div>
-        {activeTab === "Description" && <ROICalculator />}
-        {activeTab === "Your Investment" && <BenefitsDisclaimer />}
-        {activeTab === "Documentation" && <DocumentSummary />}
+        {activeTab === "Description" && <ROICalculator data={project?.data?.tabs?.description} />}
+        {activeTab === "Your Investment" && <BenefitsDisclaimer data={project} />}
+        {activeTab === "Documentation" && <DocumentSummary data={project} />}
       </div>
     </div>
   );

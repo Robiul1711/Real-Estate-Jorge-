@@ -4,6 +4,7 @@ import { ProjectQuery } from "@/hooks/useCMS";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import React, { useRef } from "react";
+import { Link } from "react-router-dom";
 
 const Projects = () => {
 const { projectsData, isLoading, error } = ProjectQuery();
@@ -59,7 +60,7 @@ const { projectsData, isLoading, error } = ProjectQuery();
       {isLoading
         ? [...Array(6)].map((_, i) => <SkeletonCard key={i} />)
         : projectsData?.data?.map((project) => (
-            <div
+            <Link to={`/dashboard/project-view-description/${project.slug}`}
               key={project.id}
               className="bg-[#F3F3F3] p-5 rounded-2xl shadow-md flex flex-col"
             >
@@ -147,7 +148,7 @@ const { projectsData, isLoading, error } = ProjectQuery();
                   View Property
                 </button>
               </div>
-            </div>
+            </Link>
           ))}
     </div>
   );

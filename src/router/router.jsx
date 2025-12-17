@@ -104,25 +104,25 @@ const router = createBrowserRouter([
         element: <BrowserOpportunities />,
       },
       {
-        path: "project-view-description/:id",
+        path: "project-view-description/:slug",
         element: <ProjectViewdescription />,
       },
       {
-        path: "investment-verification",
+        path: "investment-verification/:id",
         element: <InvestmentVerification />,
       },
-      {
-        path: "investment-terms-conditions",
-        element: <InvestmentTermsConditions />,
-      },
+      // {
+      //   path: "investment-terms-conditions",
+      //   element: <InvestmentTermsConditions />,
+      // },
       {
         path: "investment-success",
         element: <InvestmentSuccess />,
       },
-      {
-        path: "investment-confirmation",
-        element: <InvestmentConfirmation />,
-      },
+      // {
+      //   path: "investment-confirmation",
+      //   element: <InvestmentConfirmation />,
+      // },
       {
         path: "my-investments",
         element: <MyInvestments />,

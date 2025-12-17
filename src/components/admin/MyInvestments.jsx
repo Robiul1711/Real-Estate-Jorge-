@@ -1,12 +1,27 @@
 import { Filter, Sort } from "@/assets/icon";
 import { Calendar, Eye } from "lucide-react";
 import { CiLocationOn } from "react-icons/ci";
-import React from "react";
+import React, { useState } from "react";
 import { IoAdd } from "react-icons/io5";
 import { Link, ScrollRestoration } from "react-router-dom";
 import residential from "@/assets/images/residential.png";
+import { useApiQuery } from "@/hooks/getCmsUpdate";
+import PaginationComponent from "../common/PaginationComponent";
 
 const MyInvestments = () => {
+   const [page, setPage] = useState(1);
+    const {
+      data: myInvestmentsData,
+      isLoading,
+      error,
+      refetch,
+    } = useApiQuery({
+      queryKey:["my-investments", page],
+      url: "/investor/my-investments",
+      params: { page },
+      secure: true,
+    });
+    const meta = myInvestmentsData?.data?.meta;
   return (
     <div>
       <ScrollRestoration />
@@ -30,39 +45,41 @@ const MyInvestments = () => {
           </button>
         </div>
       </div>
-      <div className="bg-white p-5 rounded-lg my-4">
+      {
+        myInvestmentsData?.data?.map((item) => (
+      <div key={item.id} className="bg-white p-5 rounded-lg my-4">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 ">
           {/* Left Side */}
           <div className="flex items-center gap-3 flex-wrap">
             <img
-              src={residential}
+              src={item?.project?.image}
               alt="Sunrise Apartments"
               className="w-16 h-16 object-cover rounded-md"
             />
             <div>
               <h2 className="text-[#000000] text-lg font-semibold">
-                Sunrise Apartments
+                {item?.project?.title}
               </h2>
               <div className="flex flex-wrap gap-2 mt-1">
                 <span className="bg-[#DCFCE7] text-[#166534] text-xs md:text-sm font-medium px-3 py-1 rounded-2xl">
-                  Active
+                  {item?.project?.status}
                 </span>
                 <span className="bg-[#DBEAFE] text-[#1E40AF] text-xs md:text-sm font-medium px-3 py-1 rounded-2xl">
-                  Residential
+                  {item?.project?.type}
                 </span>
               </div>
             </div>
           </div>
 
           {/* Right Side */}
-          <button className="flex items-center gap-2 border border-gray-300 font-medium text-sm text-gray-700 bg-white rounded-md px-4 py-2 hover:bg-custom-primary hover:text-white transition">
+          <Link to={`/dashboard/project-view-description/${item?.project?.slug}`} className="flex items-center gap-2 border border-gray-300 font-medium text-sm text-gray-700 bg-white rounded-md px-4 py-2 hover:bg-custom-primary hover:text-white transition">
             <Eye size={18} /> View Details
-          </button>
+          </Link>
         </div>
 
         <div className="flex items-center justify-between ">
           <p className="text-sm text-[#4B5563] flex items-center gap-2">
-            <CiLocationOn /> Austin, TX
+            <CiLocationOn /> {item?.project?.location}
           </p>
           <Link
             to="/dashboard/communication"
@@ -77,36 +94,36 @@ const MyInvestments = () => {
               <h4 className="text-[12px] text-[#4B5563] font-medium">
                 Your Investment
               </h4>
-              <p className="text-sm text-[#000000] font-bold">$25,000</p>
+              <p className="text-sm text-[#000000] font-bold">${item?.your_investment}</p>
             </div>
             <div className="space-y-2">
               <h4 className="text-[12px] font-medium text-[#4B5563]">
                 %property
               </h4>
-              <p className="text-sm text-[#000000] font-bold">$28,125</p>
+              <p className="text-sm text-[#000000] font-bold">${item?.property_percentage}</p>
             </div>
             <div className="space-y-2">
               <h4 className="text-[12px] font-medium text-[#4B5563]">ROI</h4>
-              <p className="text-sm text-[#16A34A] font-bold">+12.5%</p>
+              <p className="text-sm text-[#16A34A] font-bold">{item?.roi}</p>
             </div>
             <div className="space-y-2">
               <h4 className="text-[12px] font-medium text-[#4B5563]">
                 Total Revenue
               </h4>
-              <p className="text-sm text-[#16A34A] font-bold">+$3,125</p>
+              <p className="text-sm text-[#16A34A] font-bold"> +${parseFloat(item?.total_revenue || 0).toFixed(3)}</p>
             </div>
           </div>
 
           <div className="my-4">
             <div className="flex justify-between text-sm pb-3 font-medium">
               <h3 className="text-[#4B5563]">Project Progress</h3>
-              <h3 className="text-[#4B5563]">85%</h3>
+              <h3 className="text-[#4B5563]">{item?.progress_percent}%</h3>
             </div>
 
             <div className="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
               <div
                 className="bg-custom-primary h-full rounded-full transition-all duration-1000 ease-out"
-                style={{ width: `80%` }}
+                style={{ width: `${item?.progress_percent}%` }}
               />
             </div>
           </div>
@@ -115,11 +132,24 @@ const MyInvestments = () => {
         <div className="my-4 flex items-center gap-4 text-[14px] text-[#4B5563">
           <div className="flex items-center gap-3">
             <Calendar size={18} />
-            <p>Started: 3/22/2024</p>
+            <p>Started: {item?.start_date}</p>
           </div>
-          <p>Expected Duration: 24 months</p>
+          <p>Expected Duration: {item?.expected_duration}</p>
         </div>
       </div>
+        ))
+      }
+              {/* PAGINATION */}
+        <div className="flex justify-end mt-4">
+
+        {meta && (
+          <PaginationComponent
+            pageCount={meta.last_page}  // ✅ total pages
+            setPageCount={setPage}      // ✅ set page
+            forcePage={page}            // ✅ active page
+          />
+        )}
+        </div>
     </div>
   );
 };

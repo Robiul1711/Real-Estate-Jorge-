@@ -6,7 +6,7 @@ import "swiper/css/pagination";
 
 import house from "@/assets/images/home.png";
 
-const OpportunitiesLeftSide = () => {
+const OpportunitiesLeftSide = ({project}) => {
   const slides = [house, house, house];
 
   return (
@@ -18,7 +18,7 @@ const OpportunitiesLeftSide = () => {
         loop={true}
         className="w-full h-full"
       >
-        {slides.map((img, index) => (
+        {project?.data?.gallery?.map((img, index) => (
           <SwiperSlide key={index}>
             <div className="relative w-full h-full">
               <img
@@ -27,7 +27,7 @@ const OpportunitiesLeftSide = () => {
                 className="w-full h-full object-cover"
               />
               <p className="absolute top-4 left-4 text-white text-sm sm:text-base font-semibold px-4 py-1.5 bg-black/70 rounded-full">
-                Residential
+                {index + 1} / {project?.data?.gallery?.length}
               </p>
             </div>
           </SwiperSlide>

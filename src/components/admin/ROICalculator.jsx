@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 
-const ROICalculator = () => {
-  const [investment, setInvestment] = useState(50000);
+const ROICalculator = ({data}) => {
+  // console.log(data?.roi_calculator)
+  const [investment, setInvestment] = useState(data?.roi_calculator?.input_amount);
 
-  // Calculate returns (assuming some ROI logic - here using 21% return as shown in image)
-  const totalReturns = investment * 0.21; // 21% return
-  const totalValue = investment + totalReturns;
+
 
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat("en-US", {
@@ -42,7 +41,7 @@ const ROICalculator = () => {
         {/* Total Returns Card */}
         <div className="flex-1 bg-custom-primary rounded-2xl p-4 text-white">
           <div className="text-2xl font-bold mb-1">
-            {formatCurrency(totalReturns)}
+            {formatCurrency(data?.roi_calculator?.total_returns)}
           </div>
           <div className="text-green-100 text-sm font-medium">
             Total Returns
@@ -52,7 +51,7 @@ const ROICalculator = () => {
         {/* Total Value Card */}
         <div className="flex-1 bg-white border-2 border-gray-200 rounded-2xl p-4">
           <div className="text-2xl font-bold text-gray-900 mb-1">
-            {formatCurrency(totalValue)}
+            {formatCurrency(data?.roi_calculator?.total_value)}
           </div>
           <div className="text-gray-500 text-sm font-medium">Total Value</div>
         </div>
