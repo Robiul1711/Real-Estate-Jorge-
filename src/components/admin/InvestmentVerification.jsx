@@ -13,8 +13,7 @@ import { useApiMutation } from "@/hooks/useApiMutation";
 import { toast } from "react-hot-toast";
 
 const InvestmentVerification = () => {
-  const { slug } = useParams(); // 👈 project_id
-  console.log(slug)
+  const { slug } = useParams();
   const [showWarning, setShowWarning] = useState(true);
   const [investmentAmount, setInvestmentAmount] = useState("");
   const navigate = useNavigate();
@@ -33,9 +32,51 @@ const InvestmentVerification = () => {
     url: `/project/investment/checkout`,
     method: "post",
     secure: true,
-       invalidateKeys: ["wallet-balance"], // auto refresh
+    invalidateKeys: ["wallet-balance"],
   });
 
+  const handleProceedToInvestment = (e) => {
+    e.preventDefault();
+
+    if (!investmentAmount) {
+      toast.error("Please enter investment amount");
+      return;
+    }
+
+    if (!hasSufficientBalance) {
+      toast.error("Insufficient balance");
+      return;
+    }
+
+    addMoneyMutation.mutate(
+      {
+        project_slug: slug,
+        payment_method: "wallet",
+        partial_amount: investmentAmount,
+      },
+      {
+        // 1. Capture the response data here
+        onSuccess: (data) => {
+          // toast.success("Investment successful");
+
+          // 2. Pass payment_id inside the state object
+          navigate("/dashboard/investment-success", {
+            state: {
+              paymentId: data.payment_id,
+              paidAmount: data.paid_amount,
+              remainingAmount: data.remaining_amount,
+              walletBalance: data.wallet_balance
+            },
+          });
+        },
+        onError: (error) => {
+          // toast.error(error?.response?.data?.message || "Investment failed");
+        },
+      }
+    );
+  };
+
+  // ... (rest of your profileStatus, eligibilityItems, warningPoints arrays) ...
   const profileStatus = [
     { title: "PROFILE COMPLETE", subtitle: "COMPLETED", status: "completed" },
     { title: "DOCUMENTS", subtitle: "UPLOADED", status: "completed" },
@@ -56,38 +97,6 @@ const InvestmentVerification = () => {
     "The value of investments can go down as well as up",
   ];
 
-  /* ✅ UPDATED PAYLOAD */
-  const handleProceedToInvestment = (e) => {
-    e.preventDefault();
-
-    if (!investmentAmount) {
-      toast.error("Please enter investment amount");
-      return;
-    }
-
-    if (!hasSufficientBalance) {
-      toast.error("Insufficient balance");
-      return;
-    }
-
-    addMoneyMutation.mutate(
-      {
-        project_slug: slug,
-        payment_method: "wallet", // 👈 always same
-        partial_amount: investmentAmount,
-      },
-      {
-        onSuccess: () => {
-          // toast.success("Investment successful");
-          navigate("/dashboard/investment-success");
-        },
-        onError: () => {
-          // toast.error("Investment failed");
-        },
-      }
-    );
-  };
-
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-7xl mx-auto">
@@ -95,7 +104,7 @@ const InvestmentVerification = () => {
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center space-x-4">
             <Link
-              to="/dashboard/project-view-description/:id"
+              to={`/dashboard/project-view-description/${slug}`}
               className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
             >
               <ArrowLeft className="h-4 w-4" />
@@ -165,9 +174,7 @@ const InvestmentVerification = () => {
                   <div className="text-3xl font-bold text-gray-900 mb-2">
                     ${availableBalance}
                   </div>
-                  <div className="text-sm text-gray-600">
-                    Available Balance
-                  </div>
+                  <div className="text-sm text-gray-600">Available Balance</div>
                 </div>
 
                 <div className="text-center bg-[#F9FAFB] rounded-xl p-4">
@@ -180,9 +187,7 @@ const InvestmentVerification = () => {
                     className="w-full text-center text-3xl font-semibold bg-transparent outline-none border-2 rounded-lg border-gray-300 focus:border-custom-primary mb-2"
                     placeholder="$0.00"
                   />
-                  <div className="text-sm text-gray-600">
-                    Investment Amount
-                  </div>
+                  <div className="text-sm text-gray-600">Investment Amount</div>
                 </div>
               </div>
 
@@ -236,8 +241,7 @@ const InvestmentVerification = () => {
 
                 <div className="bg-custom-primary rounded-xl p-4 text-white">
                   <p className="text-sm mb-3 font-medium">
-                    Please ensure you understand the following before
-                    proceeding:
+                    Please ensure you understand the following before proceeding:
                   </p>
                   <ul className="space-y-2">
                     {warningPoints.map((point, index) => (
@@ -280,23 +284,25 @@ const InvestmentVerification = () => {
                     key={index}
                     className="flex items-center justify-between"
                   >
-                    <span className="text-sm text-gray-700">
-                      {item.label}
-                    </span>
+                    <span className="text-sm text-gray-700">{item.label}</span>
                     <CheckCircle className="h-4 w-4 text-emerald-500" />
                   </div>
                 ))}
               </div>
 
-              <Link
-                to="/dashboard/investment-success"
+              <button
                 onClick={handleProceedToInvestment}
-                className="w-full block text-center bg-custom-primary text-white py-3 px-4 rounded-xl font-medium hover:bg-gray-800 transition-colors duration-200"
+                disabled={addMoneyMutation.isPending || !hasSufficientBalance}
+                className={`w-full block text-center py-3 px-4 rounded-xl font-medium transition-colors duration-200 ${
+                    addMoneyMutation.isPending || !hasSufficientBalance
+                    ? "bg-gray-400 cursor-not-allowed text-white"
+                    : "bg-custom-primary text-white hover:bg-gray-800"
+                }`}
               >
-                {addMoneyMutation.isLoading
+                {addMoneyMutation.isPending
                   ? "Processing..."
                   : "Proceed To Investment"}
-              </Link>
+              </button>
             </div>
           </div>
         </div>

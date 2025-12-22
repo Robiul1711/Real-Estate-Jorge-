@@ -1,16 +1,31 @@
 import { Filter, Legal, Upload } from "@/assets/icon";
+import { useApiQuery } from "@/hooks/getCmsUpdate";
 import { Eye } from "lucide-react";
 import React from "react";
 import { HiArrowDownTray } from "react-icons/hi2";
 import { ScrollRestoration } from "react-router-dom";
 
 const Documents = () => {
+  const { data: documents } = useApiQuery({
+    queryKey: "project-documents",
+    url: "/project/documents",
+    secure: true,
+  });
+
+  // Safe fallback to empty arrays
+  const documentsList = documents?.data?.summary?.document_types || [];
+  const recentDocuments = documents?.data?.recent_documents || [];
+  const summary = documents?.data?.summary || {};
+
   return (
     <div>
       <ScrollRestoration />
+      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:justify-between">
         <div>
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold sm:my-2">Documents</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold sm:my-2">
+            Documents
+          </h2>
           <p className="text-sm text-[#4B5563]">
             Access and manage your investment documents
           </p>
@@ -23,54 +38,44 @@ const Documents = () => {
         </div>
       </div>
 
+      {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8 mt-4 sm:mt-8">
         <div className="bg-white p-3 rounded-lg shadow-md hover:shadow-lg">
           <h2 className="my-2">Total Documents</h2>
-          <p className="text-lg font-bold">5</p>
+          <p className="text-lg font-bold">{summary?.total_documents || 0}</p>
         </div>
         <div className="bg-white p-3 rounded-lg shadow-md hover:shadow-lg">
-          <h2 className="my-2">Total Documents</h2>
-          <p className="text-lg text-[#CA8A04] font-bold">0</p>
+          <h2 className="my-2">Pending Signature</h2>
+          <p className="text-lg text-[#CA8A04] font-bold">
+            {summary?.pending_signature || 0}
+          </p>
         </div>
-        <div className="bg-white p-3 rounded-lg shadow-md hover:shadow-lg">
-          <h2 className="my-2">Total Documents</h2>
-          <p className="text-lg font-bold">8.2 MB</p>
-        </div>
+        {/* Removed the static 8.2MB card as it wasn't in your API data */}
       </div>
 
+      {/* Document Types Grid */}
       <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4 md:gap-8 mt-8">
-        <div className="flex flex-col items-center gap-2 justify-center bg-white p-3 rounded-lg shadow-md hover:shadow-lg">
-          <Legal />
-          <p className="font-medium text-black">Legal</p>
-          <p className="text-sm text-[#4B5563]">1 docs</p>
-        </div>
-        <div className="flex flex-col items-center gap-2 justify-center bg-white p-3 rounded-lg shadow-md hover:shadow-lg">
-          <Legal />
-          <p className="font-medium text-black">Financial</p>
-          <p className="text-sm text-[#4B5563]">1 docs</p>
-        </div>
-        <div className="flex flex-col items-center gap-2 justify-center bg-white p-3 rounded-lg shadow-md hover:shadow-lg">
-          <Legal />
-          <p className="font-medium text-black">Tax</p>
-          <p className="text-sm text-[#4B5563]">1 docs</p>
-        </div>
-        <div className="flex flex-col items-center gap-2 justify-center bg-white p-3 rounded-lg shadow-md hover:shadow-lg">
-          <Legal />
-          <p className="font-medium text-black">Due Diligence</p>
-          <p className="text-sm text-[#4B5563]">1 docs</p>
-        </div>
-        <div className="flex flex-col items-center gap-2 justify-center bg-white p-3 rounded-lg shadow-md hover:shadow-lg">
-          <Legal />
-          <p className="font-medium text-black">Updates</p>
-          <p className="text-sm text-[#4B5563]">1 docs</p>
-        </div>
+        {documentsList.map((docType, index) => (
+          <div
+            key={index}
+            className="flex flex-col items-center gap-2 justify-center bg-white p-3 rounded-lg shadow-md hover:shadow-lg"
+          >
+            <Legal />
+            <p className="font-medium text-black text-center">{docType?.name}</p>
+            <p className="text-sm text-[#4B5563]">{docType?.count} docs</p>
+          </div>
+        ))}
       </div>
-      <div className="flex items-center justify-between my-3">
+
+      {/* Recent Documents Header */}
+      <div className="flex items-center justify-between my-3 mt-8">
         <h2 className="text-2xl font-bold">Recent Documents</h2>
         <button className="px-4 py-2 text-[15px] bg-[#FFF] border rounded-lg my-1 cursor-pointer shadow-md">
           View All
         </button>
       </div>
+
+      {/* Search & Filter */}
       <div className="flex flex-col md:flex-row items-stretch md:items-center gap-4 w-full">
         <div className="flex-1 relative">
           <input
@@ -100,89 +105,69 @@ const Documents = () => {
             <Filter className="w-4 h-4" />
             Filter
           </button>
-          <button className="border border-gray-300 font-medium bg-white rounded-lg px-6 py-2.5 text-sm hover:bg-[#EFEFEF] cursor-pointer  ">
+          <button className="border border-gray-300 font-medium bg-white rounded-lg px-6 py-2.5 text-sm hover:bg-[#EFEFEF] cursor-pointer">
             All Categories
           </button>
         </div>
       </div>
 
-<div className="space-y-4 mt-4">
-  {[
-    {
-      title: "Investment Agreement - Sunrise Apartments",
-      type: "Contract",
-      size: "2.4 MB",
-      date: "6/15/2024",
-      tags: [
-        { text: "Signed", bg: "bg-[#DCFCE7]", color: "text-[#166534]" },
-        { text: "Legal", bg: "bg-[#FEE2E2]", color: "text-[#991B1B]" },
-      ],
-    },
-    {
-      title: "Property Inspection Report - Downtown Plaza",
-      type: "Report",
-      size: "1.8 MB",
-      date: "6/12/2024",
-      tags: [
-        { text: "Available", bg: "bg-[#DBEAFE]", color: "text-[#1E40AF]" },
-        { text: "Due Diligence", bg: "bg-[#FFEDD5]", color: "text-[#9A3412]" },
-      ],
-    },
-    {
-      title: "Tax Document - Q2 2024",
-      type: "Tax Form",
-      size: "0.5 MB",
-      date: "6/12/2024",
-      tags: [
-        { text: "Available", bg: "bg-[#DBEAFE]", color: "text-[#1E40AF]" },
-        { text: "Tax", bg: "bg-[#F3E8FF]", color: "text-[#6B21A8]" },
-      ],
-    },
-  ].map((doc, i) => (
-    <div
-      key={i}
-      className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
-    >
-      {/* Left Side */}
-      <div className="flex items-start sm:items-center gap-3 flex-1">
-        <Legal className="shrink-0" />
-        <div className="space-y-2">
-          <h2 className="text-[#000000] font-bold text-sm md:text-base">
-            {doc.title}
-          </h2>
+      {/* Recent Documents List */}
+      <div className="space-y-4 mt-4">
+        {recentDocuments.map((doc, i) => (
+          <div
+            key={i}
+            className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+          >
+            {/* Left Side */}
+            <div className="flex items-start sm:items-center gap-3 flex-1">
+              <Legal className="shrink-0" />
+              <div className="space-y-2">
+                <h2 className="text-[#000000] font-bold text-sm md:text-base">
+                  {doc?.project_title}
+                </h2>
 
-          <div className="flex flex-wrap gap-3 text-xs md:text-sm text-gray-600">
-            <p>{doc.type}</p>
-            <p>• {doc.size}</p>
-            <p>• {doc.date}</p>
-          </div>
+                <div className="flex flex-wrap gap-3 text-xs md:text-sm text-gray-600">
+                  <p>{doc?.file_size || "Unknown Size"}</p>
+                  <p>• {doc?.file_type || "PDF"}</p>
+                  <p>• {doc?.created_at}</p>
+                </div>
 
-          <div className="flex flex-wrap gap-3">
-            {doc.tags.map((tag, idx) => (
-              <button
-                key={idx}
-                className={`${tag.bg} ${tag.color} text-xs md:text-sm font-medium px-3 py-1 rounded-2xl`}
+                {/* FIXED: Removed doc.tags map and replaced with static status check */}
+                <div className="flex flex-wrap gap-3">
+                  {doc.is_verified === 1 ? (
+                    <span className="bg-green-100 text-green-700 text-xs md:text-sm font-medium px-3 py-1 rounded-2xl">
+                      Verified
+                    </span>
+                  ) : (
+                    <span className="bg-yellow-100 text-yellow-700 text-xs md:text-sm font-medium px-3 py-1 rounded-2xl">
+                      Pending Verification
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Right Side (Buttons) */}
+            <div className="flex gap-4 text-sm md:text-base">
+              <a
+                href={doc.file}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-1 cursor-pointer hover:text-custom-primary transition-colors"
               >
-                {tag.text}
-              </button>
-            ))}
+                <Eye size={18} /> View
+              </a>
+              <a
+                href={doc.file}
+                download
+                className="flex items-center gap-1 cursor-pointer hover:text-custom-primary transition-colors"
+              >
+                <HiArrowDownTray size={18} /> Download
+              </a>
+            </div>
           </div>
-        </div>
+        ))}
       </div>
-
-      {/* Right Side (Buttons) */}
-      <div className="flex gap-4 text-sm md:text-base">
-        <button className="flex items-center gap-1 cursor-pointer hover:text-custom-primary transition-colors">
-          <Eye size={18} /> View
-        </button>
-        <button className="flex items-center gap-1 cursor-pointer hover:text-custom-primary transition-colors">
-          <HiArrowDownTray size={18} /> Download
-        </button>
-      </div>
-    </div>
-  ))}
-</div>
-
     </div>
   );
 };

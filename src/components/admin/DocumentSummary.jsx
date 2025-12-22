@@ -2,12 +2,14 @@ import React from 'react';
 import { FileText } from 'lucide-react';
 
 export default function DocumentSummary({data}) {
-  const documentCategories = [
-    { label: 'Legal Documents', count: 4 },
-    { label: 'Financial Documents', count: 4 },
-    { label: 'Technical Documents', count: 4 },
-    { label: 'Compliance Documents', count: 4 }
-  ];
+  console.log(data?.data?.tabs?.documentation?.document_summary)
+  const documentCategories=data?.data?.tabs?.documentation?.document_summary || [];
+  // const documentCategories = [
+  //   { label: 'Legal Documents', count: 4 },
+  //   { label: 'Financial Documents', count: 4 },
+  //   { label: 'Technical Documents', count: 4 },
+  //   { label: 'Compliance Documents', count: 4 }
+  // ];
 
   const totalDocuments = documentCategories.reduce((sum, category) => sum + category.count, 0);
 
@@ -19,7 +21,7 @@ export default function DocumentSummary({data}) {
         {documentCategories.map((category, index) => (
           <div key={index} className="flex items-center justify-between py-1">
             <span className="text-sm text-gray-600 font-medium">
-              {category.label}
+              {category.type_name}
             </span>
             <span className="bg-gray-100 text-gray-700 text-sm font-medium px-2 py-1 rounded-full min-w-[24px] text-center">
               {category.count}

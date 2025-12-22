@@ -78,8 +78,8 @@ const handleAddMoney = () => {
           </p>
 
           <div className="flex items-center justify-between">
-            <p className="text-white text-2xl font-bold">
-              {isLoading ? "Loading..." : wallet?.balance || 0}
+            <p className="text-white text-xl font-semibold">
+              ${isLoading ? "Loading..." : wallet?.balance || 0}
             </p>
 
             <button

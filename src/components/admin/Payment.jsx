@@ -18,14 +18,73 @@ const typeClasses = {
 const Payment = () => {
   const [page, setPage] = useState(1);
 
-  const { data: walletData, isLoading, error } = useApiQuery({
+  const {
+    data: walletData,
+    isLoading,
+    error,
+  } = useApiQuery({
     queryKey: ["investor-wallet", page],
     url: "/investor/wallet",
     secure: true,
-    params: { page }, // ✅ backend pagination
+    params: { page },
   });
 
-  if (isLoading) return <div className="p-6">Loading...</div>;
+  // --- Skeleton Component ---
+  const PaymentSkeleton = () => (
+    <div>
+      <div className="bg-white rounded-lg shadow p-4 animate-pulse">
+        {/* HEADER SKELETON */}
+        <div className="mb-6 space-y-2">
+          <div className="h-8 bg-gray-200 rounded w-48"></div>
+          <div className="h-4 bg-gray-200 rounded w-64"></div>
+        </div>
+
+        {/* BALANCE SKELETON */}
+        <div className="bg-gray-200 p-6 rounded-lg mb-6 h-28 w-full"></div>
+
+        {/* TABLE SKELETON */}
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="bg-gray-50">
+              <tr>
+                {[1, 2, 3, 4, 5, 6].map((i) => (
+                  <th key={i} className="px-4 py-2">
+                    <div className="h-4 bg-gray-300 rounded w-16"></div>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y">
+              {[...Array(10)].map((_, index) => (
+                <tr key={index}>
+                  <td className="px-4 py-4">
+                    <div className="h-3 bg-gray-100 rounded w-20"></div>
+                  </td>
+                  <td className="px-4 py-4">
+                    <div className="h-3 bg-gray-100 rounded w-32"></div>
+                  </td>
+                  <td className="px-4 py-4">
+                    <div className="h-6 bg-gray-100 rounded-full w-20"></div>
+                  </td>
+                  <td className="px-4 py-4">
+                    <div className="h-3 bg-gray-100 rounded w-16"></div>
+                  </td>
+                  <td className="px-4 py-4">
+                    <div className="h-6 bg-gray-100 rounded-full w-24"></div>
+                  </td>
+                  <td className="px-4 py-4">
+                    <div className="h-4 bg-gray-100 rounded w-8"></div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+
+  if (isLoading) return <PaymentSkeleton />;
   if (error) return <div className="p-6 text-red-500">Error loading data</div>;
 
   const transactions = walletData?.data?.transactions || [];
@@ -110,19 +169,17 @@ const Payment = () => {
             </tbody>
           </table>
         </div>
-
       </div>
-        {/* PAGINATION */}
-        <div className="flex justify-end mt-4">
-
+      {/* PAGINATION */}
+      <div className="flex justify-end mt-4">
         {meta && (
           <PaginationComponent
-            pageCount={meta.last_page}  // ✅ total pages
-            setPageCount={setPage}      // ✅ set page
-            forcePage={page}            // ✅ active page
+            pageCount={meta.last_page} // ✅ total pages
+            setPageCount={setPage} // ✅ set page
+            forcePage={page} // ✅ active page
           />
         )}
-        </div>
+      </div>
     </div>
   );
 };

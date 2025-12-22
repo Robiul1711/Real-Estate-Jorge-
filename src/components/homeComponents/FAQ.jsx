@@ -1,3 +1,4 @@
+import { useApiQuery } from "@/hooks/getCmsUpdate";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -25,50 +26,11 @@ const FAQ = () => {
       },
     });
   });
-  const accordingData = [
-    {
-      title: "What is the process for buying a property?",
-      description:
-        "Wireframing outlines the basic structure and layout of a design, serving as a visual guide before detailed development.",
-    },
-    {
-      title: "How do I determine how much I can afford?",
-      description:
-        "User-centered design ensures products meet the needs and preferences of the end-users, enhancing usability and satisfaction.",
-    },
-    {
-      title: "What documents are required for renting a property?",
-      description:
-        "Contrast in graphic design emphasizes differences, making elements stand out and improving visual hierarchy.",
-    },
-
-    {
-      title: `Can I terminate a lease agreement early?`,
-      description:
-        "Responsive design ensures web pages adapt to various screen sizes, providing an optimal user experience on different devices.",
-    },
-
-    {
-      title: "What are the risks of investing in real estate?",
-      description:
-        "Color theory guides the selection and combination of colors to evoke specific emotions, enhance readability, and create visually appealing designs.",
-    },
-    {
-      title: "How do I choose the right property to invest in?",
-      description:
-        "Color theory guides the selection and combination of colors to evoke specific emotions, enhance readability, and create visually appealing designs.",
-    },
-    {
-      title: "Do high-end properties support virtual tours?",
-      description:
-        "Color theory guides the selection and combination of colors to evoke specific emotions, enhance readability, and create visually appealing designs.",
-    },
-    {
-      title: "How long does the property transfer process take?",
-      description:
-        "Color theory guides the selection and combination of colors to evoke specific emotions, enhance readability, and create visually appealing designs.",
-    },
-  ];
+    const { data: faqData } = useApiQuery({
+      queryKey: "faqs",
+      url: "/faqs",
+      secure: true,
+    });
 
   const [isPlusAccording, setIsPlusAccording] = useState(null);
 
@@ -95,14 +57,14 @@ const FAQ = () => {
         ref={cardRef}
         className="flex gap-6 flex-col w-full md:w-2/3 mx-auto mt-8 md:mt-12"
       >
-        {accordingData?.map((according, index) => (
+        {faqData?.data?.map((according, index) => (
           <article key={index} className="border-b dark:border-b-slate-800 p-3">
             <div
               className="flex gap-2 cursor-pointer items-center justify-between w-full"
               onClick={() => handleBorderClick(index)}
             >
               <h2 className="text-black font-[500] text-[1.3rem]">
-                {according.title}
+                {according?.question}
               </h2>
               <p>
                 <FaPlus
@@ -120,8 +82,8 @@ const FAQ = () => {
                   : "grid-rows-[0fr] opacity-0"
               }`}
             >
-              <p className="text-[#424242] dark:text-[#abc2d3] text-[0.9rem] overflow-hidden">
-                {according.description}
+              <p className="text-[#424242] dark:text-[#abc2d3] text-[0.9rem] overflow-hidden" dangerouslySetInnerHTML={{__html:according?.answer}}>
+               
               </p>
             </div>
           </article>

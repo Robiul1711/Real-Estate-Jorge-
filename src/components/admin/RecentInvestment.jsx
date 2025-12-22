@@ -2,43 +2,40 @@ import React from "react";
 import residential from "@/assets/images/residential.png";
 import { MdOutlineArrowForward } from "react-icons/md";
 
-// Sample Data Array
-const investments = [
-  {
-    id: 1,
-    title: "Skyline Residences",
-    location: "Manhattan, NY",
-    investment: "$25,000",
-    totalInvestment: "$255,000",
-    roi: "18% ROI",
-    status: "Active",
-    img: residential,
-    progress: 60,
-  },
-  {
-    id: 2,
-    title: "Skyline Residences",
-    location: "Manhattan, NY",
-    investment: "$25,000",
-    roi: "18% ROI",
-    status: "Active",
-    img: residential,
-    progress: 50,
-  },
-  {
-    id: 3,
-    title: "Skyline Residences",
-    location: "Manhattan, NY",
-    investment: "$25,000",
-    roi: "18% ROI",
-    status: "Active",
-    img: residential,
-    progress: 40,
-  },
-];
+export default function RecentInvestment({ data, isLoading }) {
+  // Skeleton Loader Component
+  const InvestmentSkeleton = () => (
+    <div className="flex flex-col sm:flex-row items-start sm:items-center bg-gray-50 rounded-xl shadow-sm p-4 gap-4 animate-pulse">
+      {/* Image Skeleton */}
+      <div className="w-full sm:w-32 sm:h-24 h-40 bg-gray-200 rounded-lg shrink-0"></div>
 
-export default function RecentInvestment({data}) {
-  console.log(data?.recent_investments)
+      {/* Details Skeleton */}
+      <div className="flex-1 w-full space-y-3">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
+          <div className="space-y-2 w-full">
+            {/* Title */}
+            <div className="h-5 bg-gray-200 rounded w-3/4 md:w-1/2"></div>
+            {/* Location */}
+            <div className="h-3 bg-gray-200 rounded w-1/3"></div>
+            {/* Investment Amount */}
+            <div className="h-3 bg-gray-200 rounded w-1/4 mt-1"></div>
+          </div>
+          {/* Status Badge */}
+          <div className="h-6 w-16 bg-gray-200 rounded-md self-start sm:self-auto"></div>
+        </div>
+
+        {/* Bottom Row (ROI & Total) */}
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mt-2">
+          <div className="h-3 bg-gray-200 rounded w-1/3 sm:w-1/4"></div>
+          <div className="h-3 bg-gray-200 rounded w-16"></div>
+        </div>
+
+        {/* Progress Bar Skeleton */}
+        <div className="w-full bg-gray-200 rounded-full h-2 mt-3"></div>
+      </div>
+    </div>
+  );
+
   return (
     <>
       {/* Header */}
@@ -56,64 +53,76 @@ export default function RecentInvestment({data}) {
         </button>
       </div>
 
-      {/* Investment Cards */}
+      {/* Investment Cards or Skeletons */}
       <div className="space-y-4 p-4">
-        {data?.recent_investments?.map((item) => (
-          <div
-            key={item.id}
-            className="flex flex-col sm:flex-row items-start sm:items-center bg-gray-50 rounded-xl shadow-sm p-4 gap-4"
-          >
-            {/* Image */}
-            <img
-              src={item?.project?.image}
-              alt={item.title}
-              className="w-full sm:w-32 sm:h-24 h-40 object-cover rounded-lg"
-            />
+        {isLoading ? (
+          // Render 3 Skeleton cards while loading
+          [...Array(4)].map((_, index) => <InvestmentSkeleton key={index} />)
+        ) : (
+          // Render Actual Data
+          <>
+            {data?.recent_investments?.map((item) => (
+              <div
+                key={item.id}
+                className="flex flex-col sm:flex-row items-start sm:items-center bg-gray-50 rounded-xl shadow-sm p-4 gap-4"
+              >
+                {/* Image */}
+                <img
+                  src={item?.project?.image || residential} // Fallback image if needed
+                  alt={item.title}
+                  className="w-full sm:w-32 sm:h-24 h-40 object-cover rounded-lg"
+                />
 
-            {/* Details */}
-            <div className="flex-1 w-full">
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-                <div>
-                  <h3 className="text-base md:text-lg font-semibold">
-                    {item?.project?.title}
-                  </h3>
-                  <p className="text-xs md:text-sm text-gray-500">
-                    {item.location}
-                  </p>
-                  <p className="text-xs md:text-sm text-gray-600">
-                    Investment:{" "}
-                    <span className="font-medium">{item.investment_amount}</span>
-                  </p>
+                {/* Details */}
+                <div className="flex-1 w-full">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
+                    <div>
+                      <h3 className="text-base md:text-lg font-semibold">
+                        {item?.project?.title}
+                      </h3>
+                      <p className="text-xs md:text-sm text-gray-500">
+                        {item.location}
+                      </p>
+                      <p className="text-xs md:text-sm text-gray-600">
+                        Investment:{" "}
+                        <span className="font-medium">
+                          {item.investment_amount}
+                        </span>
+                      </p>
+                    </div>
+
+                    {/* Status */}
+                    <span className="text-[10px] md:text-xs px-2 py-1 rounded-md bg-blue-100 text-blue-600 font-medium self-start sm:self-auto">
+                      {item.status}
+                    </span>
+                  </div>
+
+                  {/* Total Investment / ROI */}
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center text-xs md:text-sm mt-2 gap-1">
+                    {item.total_investment && (
+                      <p className="text-gray-600">
+                        Total Investment: {item.total_investment}
+                      </p>
+                    )}
+                    {item.roi && (
+                      <p className="text-custom-primary font-medium">
+                        {item.roi}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Progress Bar */}
+                  <div className="w-full bg-gray-200 rounded-full h-2 mt-3">
+                    <div
+                      className="bg-custom-primary h-2 rounded-full"
+                      style={{ width: `${item.progress_percent}%` }}
+                    ></div>
+                  </div>
                 </div>
-
-                {/* Status */}
-                <span className="text-[10px] md:text-xs px-2 py-1 rounded-md bg-blue-100 text-blue-600 font-medium self-start sm:self-auto">
-                  {item.status}
-                </span>
               </div>
-
-              {/* Total Investment / ROI */}
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center text-xs md:text-sm mt-2 gap-1">
-                {item.total_investment && (
-                  <p className="text-gray-600">
-                    Total Investment: {item.total_investment}
-                  </p>
-                )}
-                {item.roi && (
-                  <p className="text-custom-primary font-medium">{item.roi}</p>
-                )}
-              </div>
-
-              {/* Progress Bar */}
-              <div className="w-full bg-gray-200 rounded-full h-2 mt-3">
-                <div
-                  className="bg-custom-primary h-2 rounded-full"
-                  style={{ width: `${item.progress_percent}%` }}
-                ></div>
-              </div>
-            </div>
-          </div>
-        ))}
+            ))}
+          </>
+        )}
       </div>
     </>
   );

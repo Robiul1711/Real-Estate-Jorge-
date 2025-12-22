@@ -1,38 +1,20 @@
 import { Chat, Complete, Email, Process, Question } from "@/assets/icon";
+import { useApiQuery } from "@/hooks/getCmsUpdate";
 import { Book, Phone } from "lucide-react";
 import React, { useState } from "react";
+import { FaPlus } from "react-icons/fa";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { ScrollRestoration } from "react-router-dom";
-const faqs = [
-  {
-    question: "How do I make my first investment?",
-    short:
-      "Browse our opportunities section, select a property, and follow the investment process...",
-    full: "Browse our opportunities section, select a property, and follow the investment process through your dashboard. You’ll be guided with easy steps and can track your progress anytime.",
-  },
-  {
-    question: "When will I receive dividend payments?",
-    short: "Dividend payments are typically distributed quarterly...",
-    full: "Dividend payments are typically distributed quarterly, depending on the specific investment agreement. You’ll be notified and can view all payout details in your account.",
-  },
-  {
-    question: "Can I withdraw my investment early?",
-    short: "Early withdrawal terms depend on the specific investment...",
-    full: "Early withdrawal terms depend on the specific investment. Some allow early exits with notice or fees, while others require holding till maturity. Please review the terms before investing.",
-  },
-  {
-    question: "When will I receive dividend payments?",
-    short: "Dividend payments are typically distributed quarterly...",
-    full: "Dividend payments are typically distributed quarterly, depending on the specific investment agreement. You’ll be notified and can view all payout details in your account.",
-  },
-];
-
 const Support = () => {
+  const [isPlusAccording, setIsPlusAccording] = useState(null);
   const [openIndex, setOpenIndex] = useState(null);
-
-  const toggleAnswer = (index) => {
-    setOpenIndex((prev) => (prev === index ? null : index));
-  };
+    const { data: faqData } = useApiQuery({
+      queryKey: "faqs",
+      url: "/faqs",
+      secure: true,
+    });
+ const handleBorderClick = (index) =>
+    setIsPlusAccording((prevIndex) => (prevIndex === index ? null : index));
   return (
     <div>
       <ScrollRestoration />
@@ -162,32 +144,43 @@ const Support = () => {
               <Book size={18} /> View All
             </button>
           </div>
-          <div className="space-y-4">
-            {faqs.map((item, index) => {
-              const isOpen = openIndex === index;
-
-              return (
-                <div key={index} className="bg-white p-5 rounded-2xl shadow-md">
-                  <h2 className="text-lg font-bold mb-2">{item.question}</h2>
-                  <p className="text-sm text-[#4B5563]">
-                    {isOpen ? item.full : item.short}
-                  </p>
-                  <button
-                    onClick={() => toggleAnswer(index)}
-                    className="flex items-center gap-1 text-[15px] text-black font-medium cursor-pointer mt-2"
-                  >
-                    {isOpen ? "Show Less" : "Read More"}
-                    <IoIosArrowRoundForward
-                      size={20}
-                      className={`transform transition-all ease-in-out duration-300 ${
-                        isOpen ? "rotate-90" : "rotate-0"
-                      }`}
-                    />
-                  </button>
+              {/* accordian */}
+                <div
+                  
+                  className=""
+                >
+                  {faqData?.data?.map((according, index) => (
+                    <article key={index} className="border-b dark:border-b-slate-800 p-3">
+                      <div
+                        className="flex gap-2 cursor-pointer items-center justify-between w-full"
+                        onClick={() => handleBorderClick(index)}
+                      >
+                        <h2 className="text-black font-[500] text-[1rem]">
+                          {according?.question}
+                        </h2>
+                        <p>
+                          <FaPlus
+                            className={`text-[1rem] lg:text-[1.2rem] text-slate-600 text-text transition-all duration-300 ${
+                              isPlusAccording === index &&
+                              "rotate-[45deg] !text-custom-secondary"
+                            }`}
+                          />
+                        </p>
+                      </div>
+                      <div
+                        className={`grid transition-all duration-300 overflow-hidden ease-in-out ${
+                          isPlusAccording === index
+                            ? "grid-rows-[1fr] opacity-100 mt-4"
+                            : "grid-rows-[0fr] opacity-0"
+                        }`}
+                      >
+                        <p className="text-[#424242] dark:text-[#abc2d3] text-[0.9rem] overflow-hidden" dangerouslySetInnerHTML={{__html:according?.answer}}>
+                         
+                        </p>
+                      </div>
+                    </article>
+                  ))}
                 </div>
-              );
-            })}
-          </div>
         </div>
       </div>
     </div>

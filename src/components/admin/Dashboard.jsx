@@ -62,7 +62,7 @@ console.log(data?.data)
       </div>
       <div className="flex flex-col lg:flex-row items-start gap-6 w-full my-8">
         <div className="w-full lg:w-[68%] bg-white  rounded-2xl space-y-1 shadow-md">
-          <RecentInvestment data={data?.data}/>
+          <RecentInvestment data={data?.data} isLoading={isLoading}/>
         </div>
         <div className="w-full lg:w-[30%] bg-white p-4 rounded-2xl shadow-md">
           {/* Header */}

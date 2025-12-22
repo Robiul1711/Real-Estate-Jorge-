@@ -10,7 +10,8 @@ import BenefitsDisclaimer from "./BenefitsDisclaimer";
 import DocumentSummary from "./DocumentSummary";
 
 const OpportunitiesRightSide = ({ activeTab , project}) => {
-  const ProjectSummery=project?.data?.tabs?.description?.investment_summary
+  const ProjectSummery=project?.data?.investment_summary
+  console.log(ProjectSummery)
 
   
   return (
@@ -77,7 +78,7 @@ const OpportunitiesRightSide = ({ activeTab , project}) => {
                 <AiOutlineRise className="text-custom-primary" />
                 Expected Return
               </p>
-              <p className="text-sm text-custom-primary">{ProjectSummery?.expected_return_range}%</p>
+              <p className="text-sm text-custom-primary">{ProjectSummery?.expected_return}%</p>
             </div>
             <div>
               <p className="font-semibold text-gray-500 flex items-center gap-1">
@@ -101,7 +102,7 @@ const OpportunitiesRightSide = ({ activeTab , project}) => {
               <p className="font-semibold text-gray-500 flex items-center gap-1">
                 <IoEyeOutline /> Views
               </p>
-              <p className="text-sm">{ProjectSummery?.views}</p>
+              <p className="text-sm">{ProjectSummery?.investors}</p>
             </div>
           </div>
 

@@ -11,24 +11,30 @@ import {
 } from "recharts";
 import { TrendingUp, DollarSign, Target, Clock } from "lucide-react";
 
-const FinancialInformation = () => {
-  // Data for project cost breakdown
-  const costData = [
-    { name: "Land Acquisition", value: 1200000, color: "#30B767" },
-    { name: "Construction", value: 1800000, color: "#008156" },
-    { name: "Legal & Admin", value: 150000, color: "#005820" },
-    { name: "Marketing", value: 850000, color: "#00260E" },
-  ];
+const FinancialInformation = ({ data }) => {
+  // 1. Safely access the nested data structure
+  // This checks both your deep structure and a direct prop pass for flexibility
+  const financialData = data?.data?.tabs?.financial_information || data?.financial_information || {};
 
-  // Data for revenue projection
+  // 2. Transform the 'financials' array for the Pie Chart
+  // We need to strip the "$" and "," from strings like "$12,000,000" to make them numbers
+  const COLORS = ["#30B767", "#008156", "#005820", "#00260E", "#86EFAC"];
+  
+  const formattedPieData = financialData?.financials?.map((item, index) => ({
+    name: item.title,
+    value: Number(item.cost.toString().replace(/[^0-9.-]+/g, "")) || 0, // Clean string to number
+    color: COLORS[index % COLORS.length],
+    displayCost: item.cost // Keep original string for display
+  })) || [];
+
+  // Note: Your provided JSON did not include 'revenueData', so keeping this 
+  // hardcoded for the Bar Chart to prevent the UI from breaking.
   const revenueData = [
     { month: "Month 6", projected: 400000, actual: 350000, target: 200000 },
     { month: "Month 12", projected: 800000, actual: 450000, target: 300000 },
     { month: "Month 15", projected: 1200000, actual: 550000, target: 500000 },
     { month: "Month 18", projected: 1500000, actual: 750000, target: 800000 },
   ];
-
-  const totalCost = costData.reduce((sum, item) => sum + item.value, 0);
 
   return (
     <div className="">
@@ -43,7 +49,7 @@ const FinancialInformation = () => {
                   Total Project Cost
                 </p>
                 <p className="text-2xl font-bold text-gray-900 group-hover:text-white">
-                  $3.2M
+                  ${(financialData?.summary_cards?.total_project_cost || 0).toLocaleString()}
                 </p>
               </div>
               <DollarSign className="h-8 w-8 text-gray-400 group-hover:text-white" />
@@ -58,7 +64,7 @@ const FinancialInformation = () => {
                   Projected Revenue
                 </p>
                 <p className="text-2xl font-bold text-gray-900 group-hover:text-white">
-                  $4.8M
+                  ${(financialData?.summary_cards?.project_revenue || 0).toLocaleString()}
                 </p>
               </div>
               <TrendingUp className="h-8 w-8 text-gray-400 group-hover:text-white" />
@@ -73,10 +79,10 @@ const FinancialInformation = () => {
                   ROI
                 </p>
                 <p className="text-2xl font-bold text-gray-900 group-hover:text-white">
-                  50%
+                  {financialData?.summary_cards?.roi}%
                 </p>
                 <p className="text-xs text-gray-500 group-hover:text-gray-400">
-                  Profit Margin
+                   Margin: {financialData?.summary_cards?.profit_margin}%
                 </p>
               </div>
               <Target className="h-8 w-8 text-blue-500 group-hover:text-white" />
@@ -91,7 +97,7 @@ const FinancialInformation = () => {
                   IRR
                 </p>
                 <p className="text-2xl font-bold text-gray-900 group-hover:text-white">
-                  13.5%
+                  {financialData?.summary_cards?.irr}%
                 </p>
               </div>
               <Clock className="h-8 w-8 text-gray-400 group-hover:text-white" />
@@ -99,7 +105,7 @@ const FinancialInformation = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1  gap-6">
+        <div className="grid grid-cols-1 gap-6">
           {/* Project Cost Breakdown */}
           <div className="bg-white rounded-lg p-6 shadow-sm">
             <h3 className="text-lg font-semibold text-gray-900 mb-6">
@@ -110,7 +116,7 @@ const FinancialInformation = () => {
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
-                      data={costData}
+                      data={formattedPieData}
                       cx="50%"
                       cy="50%"
                       innerRadius={60}
@@ -118,7 +124,7 @@ const FinancialInformation = () => {
                       paddingAngle={2}
                       dataKey="value"
                     >
-                      {costData.map((entry, index) => (
+                      {formattedPieData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={entry.color} />
                       ))}
                     </Pie>
@@ -127,7 +133,7 @@ const FinancialInformation = () => {
               </div>
 
               <div className="flex-1 w-full sm:w-auto mt-2 sm:mt-0 ml-8 space-y-4">
-                {costData.map((item, index) => (
+                {formattedPieData.map((item, index) => (
                   <div
                     key={index}
                     className="flex items-center justify-between"
@@ -140,7 +146,7 @@ const FinancialInformation = () => {
                       <span className="text-sm text-gray-700">{item.name}</span>
                     </div>
                     <span className="text-sm font-medium text-gray-900">
-                      ${(item.value / 1000000).toFixed(1)}M
+                      {item.displayCost}
                     </span>
                   </div>
                 ))}
@@ -203,23 +209,31 @@ const FinancialInformation = () => {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900 mb-1">15.2%</div>
+              <div className="text-3xl font-bold text-gray-900 mb-1">
+                {financialData?.key_metrics?.roi}%
+              </div>
               <div className="text-sm text-gray-600">ROI</div>
             </div>
 
             <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900 mb-1">2.1x</div>
+              <div className="text-3xl font-bold text-gray-900 mb-1">
+                ${(financialData?.key_metrics?.revenue_multiple || 0).toLocaleString()}
+              </div>
               <div className="text-sm text-gray-600">Revenue Multiple</div>
             </div>
 
             <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900 mb-1">18 mo</div>
+              <div className="text-3xl font-bold text-gray-900 mb-1">
+                {financialData?.key_metrics?.duration_months} mo
+              </div>
               <div className="text-sm text-gray-600">Payback Period</div>
             </div>
 
             <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900 mb-1">AAA</div>
-              <div className="text-sm text-gray-600">Credit Rating</div>
+              <div className="text-3xl font-bold text-gray-900 mb-1">
+                {financialData?.key_metrics?.annual_yield}
+              </div>
+              <div className="text-sm text-gray-600">Annual Yield</div>
             </div>
           </div>
         </div>

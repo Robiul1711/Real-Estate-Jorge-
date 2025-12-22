@@ -3,50 +3,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-
-import blog1 from "../../assets/images/blog.png";
-import blog2 from "../../assets/images/blog1.png";
-import blog3 from "../../assets/images/blog2.png";
 import { MoveLeft, MoveRight } from "lucide-react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { BlogQuery } from "@/hooks/useCMS";
 gsap.registerPlugin(ScrollTrigger);
 
-const blogData = [
-  {
-    image: blog1,
-    title: "The Powerful Thinking Skill Nobody Ever Taught You",
-    text: "I am writing this series of letters on the art of investing, addressed to a young investor, with the aim to provide timeless wisdom and practical advice that helped me when I was starting out. My goal is to help young investors navigate the complexities of the financial world, avoid misinformation, and harness the power of",
-  },
-  {
-    image: blog2,
-    title: "The Powerful Thinking Skill Nobody Ever Taught You",
-    text: "I am writing this series of letters on the art of investing, addressed to a young investor, with the aim to provide timeless wisdom and practical advice that helped me when I was starting out. My goal is to help young investors navigate the complexities of the financial world, avoid misinformation, and harness the power of",
-  },
-  {
-    image: blog3,
-    title: "The Powerful Thinking Skill Nobody Ever Taught You",
-    text: "I am writing this series of letters on the art of investing, addressed to a young investor, with the aim to provide timeless wisdom and practical advice that helped me when I was starting out. My goal is to help young investors navigate the complexities of the financial world, avoid misinformation, and harness the power of",
-  },
-  {
-    image: blog1,
-    title: "The Powerful Thinking Skill Nobody Ever Taught You",
-    text: "I am writing this series of letters on the art of investing, addressed to a young investor, with the aim to provide timeless wisdom and practical advice that helped me when I was starting out. My goal is to help young investors navigate the complexities of the financial world, avoid misinformation, and harness the power of",
-  },
-  {
-    image: blog3,
-    title: "The Powerful Thinking Skill Nobody Ever Taught You",
-    text: "I am writing this series of letters on the art of investing, addressed to a young investor, with the aim to provide timeless wisdom and practical advice that helped me when I was starting out. My goal is to help young investors navigate the complexities of the financial world, avoid misinformation, and harness the power of",
-  },
-  {
-    image: blog2,
-    title: "The Powerful Thinking Skill Nobody Ever Taught You",
-    text: "I am writing this series of letters on the art of investing, addressed to a young investor, with the aim to provide timeless wisdom and practical advice that helped me when I was starting out. My goal is to help young investors navigate the complexities of the financial world, avoid misinformation, and harness the power of",
-  },
-];
-
 const OurBlog = () => {
+      const { blogData } = BlogQuery();
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const sectionRef = useRef(null);
@@ -121,7 +86,7 @@ const OurBlog = () => {
         }}
         className="mt-12"
       >
-        {blogData.map((item, index) => (
+        {blogData?.data?.map((item, index) => (
           <SwiperSlide key={index}>
             <div className="h-full border rounded-lg">
               <div className="overflow-hidden rounded-t-lg">
@@ -133,10 +98,10 @@ const OurBlog = () => {
               </div>
 
               <div className="p-6">
-                <h2 className="text-xl md:text-2xl font-semibold my-4">
+                <h2 className="text-xl line-clamp-1 md:text-2xl font-semibold my-4">
                   {item.title}
                 </h2>
-                <p className="text-[#656565]">{item.text}</p>
+                         <p className="text-[#656565] line-clamp-3" dangerouslySetInnerHTML={{__html:item.description}}></p>
               </div>
             </div>
           </SwiperSlide>
