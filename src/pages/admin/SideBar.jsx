@@ -111,10 +111,10 @@ const handleAddMoney = () => {
         </div>
 
         {/* Logout */}
-        <div className="flex items-center gap-3 px-4 py-2 cursor-pointer text-black">
+        {/* <div className="flex items-center gap-3 px-4 py-2 cursor-pointer text-black">
           <IoLogOutOutline />
           <p className="font-medium">Log Out</p>
-        </div>
+        </div> */}
       </div>
 
       {/* Add Money Modal */}

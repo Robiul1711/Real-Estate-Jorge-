@@ -31,7 +31,7 @@ const CommonBanner = () => {
     });
   });
   return (
-    <div className="relative my-6">
+    <div className="relative ">
       {/* Banner Image */}
       <img
         src={Data?.image}

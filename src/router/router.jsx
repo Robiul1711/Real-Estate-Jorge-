@@ -128,8 +128,8 @@ const router = createBrowserRouter([
         element: <MyInvestments />,
       },
       {
-        path: "communication",
-        element: <Communications />,
+        path: "communication/:slug",
+        element: <Communications />
       },
       // Digital wallet start
       {

@@ -5,7 +5,8 @@ import gsap from "gsap";
 import React, { useRef } from "react";
 
 const Blog = () => {
-    const { blogData } = BlogQuery();
+    const { blogData,isLoading } = BlogQuery();
+    
   const cardRef = useRef(null);
   useGSAP(() => {
     gsap.from([cardRef.current], {
@@ -17,6 +18,7 @@ const Blog = () => {
       stagger: 0.1,
     });
   }, []);
+
   return (
     <div
       ref={cardRef}

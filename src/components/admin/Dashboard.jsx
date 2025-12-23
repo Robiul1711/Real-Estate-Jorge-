@@ -10,7 +10,7 @@ const Dashboard = () => {
   url: "/investor/dashboard/get",
   secure: true, // 🔐 uses axiosSecure
 });
-console.log(data?.data)
+
   return (
     <>
       <ScrollRestoration />
@@ -60,12 +60,12 @@ console.log(data?.data)
           </p>
         </div>
       </div>
-      <div className="flex flex-col lg:flex-row items-start gap-6 w-full my-8">
-        <div className="w-full lg:w-[68%] bg-white  rounded-2xl space-y-1 shadow-md">
+      <div className="">
+        <div className="w-full  bg-white  rounded-2xl space-y-1 shadow-md">
           <RecentInvestment data={data?.data} isLoading={isLoading}/>
         </div>
-        <div className="w-full lg:w-[30%] bg-white p-4 rounded-2xl shadow-md">
-          {/* Header */}
+        {/* <div className="w-full lg:w-[30%] bg-white p-4 rounded-2xl shadow-md">
+      
           <div>
             <h2 className="text-xl md:text-2xl font-semibold text-[#0F172A]">
               New Opportunities
@@ -76,7 +76,7 @@ console.log(data?.data)
           </div>
 
           {/* Card 1 */}
-          <div className="my-6 p-4 md:p-5 border border-gray-200 rounded-lg">
+          {/* <div className="my-6 p-4 md:p-5 border border-gray-200 rounded-lg">
             <h2 className="text-lg md:text-2xl font-semibold text-[#0F172A]">
               Downtown Office Complex
             </h2>
@@ -87,14 +87,13 @@ console.log(data?.data)
               <h3 className="text-custom-primary">ROI</h3>
             </div>
 
-            {/* Investment */}
+       
             <div>
               <div className="flex justify-between pb-2 md:pb-3 text-xs md:text-sm font-medium">
                 <h3 className="text-[#4B5563]">Min. Investment</h3>
                 <h3 className="text-custom-primary">$15,000</h3>
               </div>
 
-              {/* Progress Bar */}
               <div className="w-full bg-gray-200 h-2 md:h-3 rounded-full overflow-hidden">
                 <div
                   className="bg-custom-primary h-full rounded-full transition-all duration-1000 ease-out"
@@ -108,10 +107,10 @@ console.log(data?.data)
             <button className="bg-custom-primary text-[#FFF] text-center w-full font-semibold text-xs md:text-sm px-3 py-2 md:py-2.5 rounded mt-3 relative overflow-hidden before:absolute before:w-full before:h-full before:top-0 before:left-0 before:bg-[#111827] before:translate-x-[-200px] hover:before:translate-x-0 before:translate-y-12 hover:before:translate-y-0 before:duration-300 before:z-[-1] z-0 cursor-pointer">
               View Details
             </button>
-          </div>
+          </div> */}
 
           {/* Card 2 */}
-          <div className="my-6 p-4 md:p-5 border border-gray-200 rounded-lg">
+          {/* <div className="my-6 p-4 md:p-5 border border-gray-200 rounded-lg">
             <h2 className="text-lg md:text-2xl font-semibold text-[#0F172A]">
               Luxury Condominiums
             </h2>
@@ -122,14 +121,13 @@ console.log(data?.data)
               <h3 className="text-custom-primary">ROI</h3>
             </div>
 
-            {/* Investment */}
+          
             <div>
               <div className="flex justify-between pb-2 md:pb-3 text-xs md:text-sm font-medium">
                 <h3 className="text-[#4B5563]">Min. Investment</h3>
                 <h3 className="text-custom-primary">$10,000</h3>
               </div>
 
-              {/* Progress Bar */}
               <div className="w-full bg-gray-200 h-2 md:h-3 rounded-full overflow-hidden">
                 <div
                   className="bg-custom-primary h-full rounded-full transition-all duration-1000 ease-out"
@@ -143,8 +141,8 @@ console.log(data?.data)
             <button className="bg-custom-primary text-[#FFF] text-center w-full font-semibold text-xs md:text-sm px-3 py-2 md:py-2.5 rounded mt-3 relative overflow-hidden before:absolute before:w-full before:h-full before:top-0 before:left-0 before:bg-[#111827] before:translate-x-[-200px] hover:before:translate-x-0 before:translate-y-12 hover:before:translate-y-0 before:duration-300 before:z-[-1] z-0 cursor-pointer">
               View Details
             </button>
-          </div>
-        </div>
+          </div> */}
+        {/* </div>  */}
       </div>
     </>
   );

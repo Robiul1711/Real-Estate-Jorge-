@@ -48,9 +48,9 @@ export default function RecentInvestment({ data, isLoading }) {
             Your latest investment activities
           </p>
         </div>
-        <button className="bg-custom-primary text-white text-sm md:text-base font-medium px-4 py-2 md:py-2.5 rounded-lg flex items-center gap-2 relative overflow-hidden before:absolute before:w-full before:h-full before:top-0 before:left-0 before:bg-[#111827] before:translate-x-[-200px] hover:before:translate-x-0 before:translate-y-12 hover:before:translate-y-0 before:duration-300 before:z-[-1] z-0 cursor-pointer">
+        {/* <button className="bg-custom-primary text-white text-sm md:text-base font-medium px-4 py-2 md:py-2.5 rounded-lg flex items-center gap-2 relative overflow-hidden before:absolute before:w-full before:h-full before:top-0 before:left-0 before:bg-[#111827] before:translate-x-[-200px] hover:before:translate-x-0 before:translate-y-12 hover:before:translate-y-0 before:duration-300 before:z-[-1] z-0 cursor-pointer">
           View All <MdOutlineArrowForward size={18} />
-        </button>
+        </button> */}
       </div>
 
       {/* Investment Cards or Skeletons */}

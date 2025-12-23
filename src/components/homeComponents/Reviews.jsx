@@ -206,9 +206,9 @@ const Reviews = () => {
           </Swiper>
         </div>
       </div>
-      <div ref={buttonRef} className="flex justify-center mt-8">
-        <CommonBtn>Start Investing Now</CommonBtn>
-      </div>
+      {/* <div ref={buttonRef} className="flex justify-center mt-8">
+        <CommonBtn path="/dashboard/browse-opportunities">Start Investing Now</CommonBtn>
+      </div> */}
     </div>
   );
 };

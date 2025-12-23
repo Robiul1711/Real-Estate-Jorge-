@@ -88,7 +88,7 @@ const MyInvestments = () => {
           Track and manage your real estate investment portfolio
         </p>
       </div>
-      <div className="flex items-center md:justify-end my-4">
+      {/* <div className="flex items-center md:justify-end my-4">
         <div className="flex items-center gap-4">
           <button className="flex items-center gap-4 border text-sm font-medium bg-white rounded px-6 py-2">
             <Filter />
@@ -99,7 +99,7 @@ const MyInvestments = () => {
             Sort by ROI
           </button>
         </div>
-      </div>
+      </div> */}
 
       {/* Content Area: Loading vs Data */}
       {isLoading ? (
@@ -145,7 +145,7 @@ const MyInvestments = () => {
                 <CiLocationOn /> {item?.project?.location}
               </p>
               <Link
-                to="/dashboard/communication"
+                to={`/dashboard/communication/${item?.project?.slug}`}
                 className="flex items-center gap-2 border border-gray-300 font-medium text-sm text-gray-700 bg-white rounded-md px-4 py-2 hover:bg-custom-primary hover:text-white transition"
               >
                 Communication

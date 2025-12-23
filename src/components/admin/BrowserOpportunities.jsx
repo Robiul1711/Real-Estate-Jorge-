@@ -6,7 +6,7 @@ import { useApiQuery } from "@/hooks/getCmsUpdate";
 
 const BrowserOpportunities = () => {
   // 2. Create state for sort order
-  const [sortOrder, setSortOrder] = useState("asc");
+  const [sortOrder, setSortOrder] = useState("desc");
  const {
     data: project,
     isLoading,
@@ -98,10 +98,10 @@ const BrowserOpportunities = () => {
           </p>
         </div>
 <div className="flex flex-col sm:flex-row items-center gap-4">
-          <button className="flex items-center gap-4 border font-medium bg-white text-xs sm:text-sm rounded px-6 py-2">
+          <p className="flex items-center gap-4 border font-medium bg-white text-xs sm:text-sm rounded px-6 py-2">
             <Filter />
             Filter
-          </button>
+          </p>
           
           {/* 5. Update Button onClick */}
           <button

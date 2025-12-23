@@ -108,7 +108,7 @@ const Settings = () => {
             </div>
 
             {/* Two-Factor Authentication Section */}
-            <div className="mb-8">
+            {/* <div className="mb-8">
               <div className="flex items-center justify-between mb-2">
                 <div>
                   <h2 className="text-base font-medium text-gray-900 mb-1">
@@ -127,13 +127,13 @@ const Settings = () => {
                   </button>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* Change Password Section */}
             <ChangePassword />
           </div>
         </div>
-        <div className="w-full md:w-[30%]">
+        {/* <div className="w-full md:w-[30%]">
           <div className="space-y-2 bg-white p-5 rounded-lg">
             <h2 className="text-lg font-bold">Account Summary</h2>
             <div className="flex justify-between items-center">
@@ -191,7 +191,7 @@ const Settings = () => {
             </div>
 
             {/* Verification Card */}
-            <div className="bg-green-50 border border-green-100 rounded-lg p4 sm:p-6">
+            {/* <div className="bg-green-50 border border-green-100 rounded-lg p4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-500/20 rounded-full flex items-center justify-center">
@@ -213,7 +213,7 @@ const Settings = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div>  */}
       </div>
     </div>
   );

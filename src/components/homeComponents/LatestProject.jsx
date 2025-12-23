@@ -154,7 +154,7 @@ const LatestProject = () => {
         ))}
       </Swiper>
       <div className="flex justify-center">
-        <CommonBtn>Start Investing Now</CommonBtn>
+        <CommonBtn path="/dashboard/browse-opportunities">Start Investing Now</CommonBtn>
       </div>
     </div>
   );
