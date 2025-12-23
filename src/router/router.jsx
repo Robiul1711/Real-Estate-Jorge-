@@ -41,6 +41,8 @@ import Blog from "@/pages/blog/Blog";
 import VerifyRegisterOTP from "@/pages/auth/VerifyRegisterOTP";
 import VerifyResetOTP from "@/pages/auth/VerifyResetOTP";
 import PrivateRoute from "./PrivateRoute";
+import SuccessPage from "@/pages/SuccessAndCancel/SuccessPage";
+import CancelPage from "@/pages/SuccessAndCancel/CancelPage";
 
 const router = createBrowserRouter([
   {
@@ -82,6 +84,14 @@ const router = createBrowserRouter([
       {
         path: "/blog",
         element: <Blog />,
+      },
+      {
+        path: "/success",
+        element: <SuccessPage />,
+      },
+      {
+        path: "/cancel",
+        element: <CancelPage />,
       },
     ],
   },
