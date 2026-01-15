@@ -4,6 +4,7 @@ import { MdOutlineArrowForward } from "react-icons/md";
 import { ScrollRestoration } from "react-router-dom";
 import RecentInvestment from "./RecentInvestment";
 import { useApiQuery } from "@/hooks/getCmsUpdate";
+import CommonBtn from "../common/CommonButton";
 const Dashboard = () => {
   const { data, isLoading } = useApiQuery({
   queryKey: "dashboard",
@@ -64,6 +65,11 @@ const Dashboard = () => {
         <div className="w-full  bg-white  rounded-2xl space-y-1 shadow-md">
           <RecentInvestment data={data?.data} isLoading={isLoading}/>
         </div>
+              <div className="flex justify-center mt-5">
+        <CommonBtn path="/dashboard/browse-opportunities">
+       Investing Now
+        </CommonBtn>
+      </div>
         {/* <div className="w-full lg:w-[30%] bg-white p-4 rounded-2xl shadow-md">
       
           <div>
@@ -143,6 +149,7 @@ const Dashboard = () => {
             </button>
           </div> */}
         {/* </div>  */}
+
       </div>
     </>
   );

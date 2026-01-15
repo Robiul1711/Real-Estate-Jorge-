@@ -43,6 +43,9 @@ import VerifyResetOTP from "@/pages/auth/VerifyResetOTP";
 import PrivateRoute from "./PrivateRoute";
 import SuccessPage from "@/pages/SuccessAndCancel/SuccessPage";
 import CancelPage from "@/pages/SuccessAndCancel/CancelPage";
+import BlogDetails from "@/pages/blog/BlogDetails";
+import TearmsAndCondition from "@/pages/terms/TearmsAndCondition";
+import PrivacyPolicy from "@/pages/terms/PrivacyPolicy";
 
 const router = createBrowserRouter([
   {
@@ -86,12 +89,24 @@ const router = createBrowserRouter([
         element: <Blog />,
       },
       {
+        path: "/blog-details/:id",
+        element: <BlogDetails />,
+      },
+      {
         path: "/success",
         element: <SuccessPage />,
       },
       {
         path: "/cancel",
         element: <CancelPage />,
+      },
+      {
+        path: "/terms-and-conditions",
+        element: <TearmsAndCondition />,
+      },
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPolicy />,
       },
     ],
   },

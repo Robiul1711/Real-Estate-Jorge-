@@ -3,74 +3,129 @@ import { ImageProvider } from "../common/ImageProvider";
 import CommonBtn from "../common/CommonButton";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { useApiMutation } from "@/hooks/useApiMutation";
+import { useForm } from "react-hook-form";
 
 const ContactUs = () => {
   const sectionRef = useRef(null);
   const buttonRef = useRef(null);
   const cardRef = useRef(null);
+
+  // 1. Initialize React Hook Form
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  // 2. Setup Mutation
+  const { mutate, isPending } = useApiMutation({
+    url: "/contact",
+    method: "post",
+    secure: true,
+    successMessage: "Message sent successfully!",
+    onSuccess: () => {
+      reset(); // Clear form after successful submission
+    },
+  });
+
+  const onSubmit = (data) => {
+    console.log(data);
+    mutate(data);
+  };
+
+  // 3. GSAP Animations
   useGSAP(() => {
-    gsap.from([buttonRef.current, cardRef.current, sectionRef.current], {
+    gsap.from([cardRef.current, buttonRef.current], {
       y: 50,
       opacity: 0,
       duration: 1,
       ease: "power3.out",
-      delay: 0.2,
       stagger: 0.2,
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top 80%",
-        toggleActions: "play none none none",
       },
     });
   });
+
   return (
     <div ref={sectionRef} className="section-padding-x py-10">
       <div
         ref={cardRef}
-        className="bg-white shadow rounded-xl p-6 md:p-10 flex flex-col md:flex-row gap-6"
+        className="bg-white shadow-xl border border-gray-100 rounded-xl p-6 md:p-10 flex flex-col md:flex-row gap-6"
       >
         {/* Form Section */}
         <div className="flex-1">
           <h2 className="text-xl md:text-2xl lg:text-[32px] font-semibold">
             Do You Have Any Questions?
           </h2>
-          <p className="text-gray-600 mt-2   mb-6 text-xl">
+          <p className="text-gray-600 mt-2 mb-6 text-lg">
             We will be happy to assist you
           </p>
 
-          <form className="space-y-4">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="flex gap-4">
-              <input
-                type="text"
-                placeholder="Last Name"
-                className="w-1/2 border rounded-md px-3 py-3 bg-gray-50"
-              />
-              <input
-                type="text"
-                placeholder="First Name"
-                className="w-1/2 border rounded-md px-3 py-3 bg-gray-50"
-              />
+              <div className="w-1/2">
+                <input
+                  {...register("last_name", { required: "Last name is required" })}
+                  type="text"
+                  placeholder="Last Name"
+                  className={`w-full border rounded-md px-3 py-3 bg-gray-50 focus:outline-none focus:ring-1 ${errors.last_name ? 'border-red-500' : 'border-gray-200'}`}
+                />
+                {errors.last_name && <p className="text-red-500 text-xs mt-1">{errors.last_name.message}</p>}
+              </div>
+              <div className="w-1/2">
+                <input
+                  {...register("first_name", { required: "First name is required" })}
+                  type="text"
+                  placeholder="First Name"
+                  className={`w-full border rounded-md px-3 py-3 bg-gray-50 focus:outline-none focus:ring-1 ${errors.first_name ? 'border-red-500' : 'border-gray-200'}`}
+                />
+                {errors.first_name && <p className="text-red-500 text-xs mt-1">{errors.first_name.message}</p>}
+              </div>
             </div>
-            <input
-              type="email"
-              placeholder="Email"
-              className="w-full border rounded-md px-3 py-3 bg-gray-50"
-            />
-            <input
-              type="tel"
-              placeholder="Phone Number"
-              className="w-full border rounded-md px-3 py-3 bg-gray-50"
-            />
-            <textarea
-              rows="4"
-              placeholder="Message"
-              className="w-full border rounded-md px-3 py-3 bg-gray-50"
-            />
+
+            <div>
+              <input
+                {...register("email", { 
+                  required: "Email is required",
+                  pattern: { value: /^\S+@\S+$/i, message: "Invalid email address" }
+                })}
+                type="email"
+                placeholder="Email"
+                className={`w-full border rounded-md px-3 py-3 bg-gray-50 focus:outline-none focus:ring-1 ${errors.email ? 'border-red-500' : 'border-gray-200'}`}
+              />
+              {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
+            </div>
+
+            <div>
+              <input
+                {...register("phone", { required: "Phone number is required" })}
+                type="tel"
+                placeholder="Phone Number"
+                className={`w-full border rounded-md px-3 py-3 bg-gray-50 focus:outline-none focus:ring-1 ${errors.phone ? 'border-red-500' : 'border-gray-200'}`}
+              />
+              {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>}
+            </div>
+
+            <div>
+              <textarea
+                {...register("message", { required: "Please enter your message", minLength: { value: 10, message: "Message is too short" } })}
+                rows="4"
+                placeholder="Message"
+                className={`w-full border rounded-md px-3 py-3 bg-gray-50 focus:outline-none focus:ring-1 ${errors.message ? 'border-red-500' : 'border-gray-200'}`}
+              />
+              {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>}
+            </div>
+
             <button
+              disabled={isPending}
               type="submit"
-              className="w-full bg-custom-primary text-white py-3 rounded-md hover:bg-green-700 transition cursor-pointer"
+              className="w-full bg-custom-primary text-white py-3 rounded-md hover:bg-green-700 transition cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed flex justify-center items-center"
             >
-              Connect with Us
+              {isPending ? "Sending..." : "Connect with Us"}
             </button>
           </form>
         </div>
@@ -79,14 +134,14 @@ const ContactUs = () => {
         <div className="flex-1 relative overflow-hidden rounded-xl">
           <img
             src={ImageProvider.signup}
-            alt="image"
-            className="w-full h-[490px] object-cover rounded-xl hover:scale-105 transition duration-300 ease-in-out"
+            alt="Contact support"
+            className="w-full h-full min-h-[400px] object-cover rounded-xl hover:scale-105 transition duration-500 ease-in-out"
           />
         </div>
       </div>
 
       {/* Bottom Button */}
-      <div ref={buttonRef} className="flex  justify-center mt-8">
+      <div ref={buttonRef} className="flex justify-center mt-8">
         <CommonBtn>Start Investing Now</CommonBtn>
       </div>
     </div>

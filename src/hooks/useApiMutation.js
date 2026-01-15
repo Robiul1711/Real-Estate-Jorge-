@@ -6,17 +6,16 @@ import { showLoadingToast, updateToastError, updateToastSuccess } from "@/lib/ut
 
 export const useApiMutation = ({
   url,
-  method = "post",              // "post", "put", "patch", "delete"
-  secure = false,                // 🔥 NEW — auto axios selection
-  invalidateKeys = [],           // ["wallet-balance", "user-profile"]
-  successMessage = "Success!",   // default success message
+  method = "post",
+  secure = false,
+  invalidateKeys = [],
+  successMessage = "Success!",
   errorMessage = "Something went wrong",
+  onSuccess: externalOnSuccess, // <--- 1. Capture the external callback
 }) => {
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
-
   const axiosClient = secure ? axiosSecure : axiosPublic;
-
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -24,28 +23,27 @@ export const useApiMutation = ({
       const response = await axiosClient[method](url, data);
       return response.data;
     },
-
     onMutate: () => {
       const toastId = showLoadingToast("Processing...");
       return { toastId };
     },
-
     onSuccess: (response, variables, context) => {
       updateToastSuccess(
         context.toastId,
         response?.message || successMessage
       );
 
-      // 🔥 invalidate related queries
       invalidateKeys.forEach((key) => {
         queryClient.invalidateQueries([key]);
       });
+
+      // 🔥 2. Call the external callback if it exists
+      if (externalOnSuccess) {
+        externalOnSuccess(response, variables, context);
+      }
     },
-
     onError: (error, variables, context) => {
-      const message =
-        error?.response?.data?.message || errorMessage;
-
+      const message = error?.response?.data?.message || errorMessage;
       updateToastError(context.toastId, message);
     },
   });

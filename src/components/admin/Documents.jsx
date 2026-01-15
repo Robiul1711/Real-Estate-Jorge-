@@ -21,15 +21,12 @@ const Documents = () => {
     };
   }, [searchTerm]);
 
-  const {
-    data: documents,
-    isLoading,
-  } = useApiQuery({
+  const { data: documents, isLoading } = useApiQuery({
     // 4. Update Query Key: Include debouncedSearch so it refetches when changed
-    queryKey: ["project-documents", debouncedSearch], 
+    queryKey: ["project-documents", debouncedSearch],
     url: "/project/documents",
     // 5. Pass the dynamic search term to params
-    params: { project_title: debouncedSearch }, 
+    params: { project_title: debouncedSearch },
     secure: true,
   });
 
@@ -37,7 +34,29 @@ const Documents = () => {
   const documentsList = documents?.data?.summary?.document_types || [];
   const recentDocuments = documents?.data?.recent_documents || [];
   const summary = documents?.data?.summary || {};
+  const handleDownload = async (fileUrl, fileName) => {
+    try {
+      const response = await fetch(fileUrl);
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
 
+      // Set the filename (extract from URL or use project title)
+      link.setAttribute("download", fileName || "document.pdf");
+
+      document.body.appendChild(link);
+      link.click();
+
+      // Cleanup
+      link.parentNode.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Download failed:", error);
+      // Fallback: just open in new tab if fetch fails
+      window.open(fileUrl, "_blank");
+    }
+  };
   // --- SKELETON LOADER COMPONENT ---
   if (isLoading) {
     return (
@@ -51,7 +70,10 @@ const Documents = () => {
         {/* Summary Cards Skeleton */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8">
           {[1, 2].map((i) => (
-            <div key={i} className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 h-24 flex flex-col justify-center">
+            <div
+              key={i}
+              className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 h-24 flex flex-col justify-center"
+            >
               <div className="h-4 bg-gray-200 rounded w-1/2 mb-3"></div>
               <div className="h-6 bg-gray-200 rounded w-1/4"></div>
             </div>
@@ -61,7 +83,10 @@ const Documents = () => {
         {/* Document Types Grid Skeleton */}
         <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4 md:gap-8">
           {[1, 2, 3, 4, 5].map((i) => (
-            <div key={i} className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 h-28 flex flex-col items-center justify-center gap-2">
+            <div
+              key={i}
+              className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 h-28 flex flex-col items-center justify-center gap-2"
+            >
               <div className="w-8 h-8 bg-gray-200 rounded-full"></div>
               <div className="h-3 bg-gray-200 rounded w-2/3"></div>
               <div className="h-2 bg-gray-200 rounded w-1/2"></div>
@@ -81,7 +106,10 @@ const Documents = () => {
         {/* Recent Documents List Skeleton */}
         <div className="space-y-4">
           {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div
+              key={i}
+              className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+            >
               <div className="flex items-center gap-3 flex-1">
                 <div className="w-10 h-10 bg-gray-200 rounded shrink-0"></div>
                 <div className="space-y-2 w-full">
@@ -126,7 +154,9 @@ const Documents = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8 mt-4 sm:mt-8">
         <div className="bg-white p-3 rounded-lg shadow-md hover:shadow-lg transition-shadow">
           <h2 className="my-2 text-gray-600 font-medium">Total Documents</h2>
-          <p className="text-lg font-bold text-gray-900">{summary?.total_documents || 0}</p>
+          <p className="text-lg font-bold text-gray-900">
+            {summary?.total_documents || 0}
+          </p>
         </div>
         <div className="bg-white p-3 rounded-lg shadow-md hover:shadow-lg transition-shadow">
           <h2 className="my-2 text-gray-600 font-medium">Pending Signature</h2>
@@ -144,14 +174,20 @@ const Documents = () => {
             className="flex flex-col items-center gap-2 justify-center bg-white p-3 rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer"
           >
             <Legal className="text-custom-primary" />
-            <p className="font-medium text-black text-center text-sm sm:text-base">{docType?.name}</p>
-            <p className="text-xs sm:text-sm text-[#4B5563]">{docType?.count} docs</p>
+            <p className="font-medium text-black text-center text-sm sm:text-base">
+              {docType?.name}
+            </p>
+            <p className="text-xs sm:text-sm text-[#4B5563]">
+              {docType?.count} docs
+            </p>
           </div>
         ))}
       </div>
 
       {/* Search & Filter */}
-      <h1 className="text-lg font-semibold mt-4 sm:mt-8 mb-4">Recent Documents</h1> 
+      <h1 className="text-lg font-semibold mt-4 sm:mt-8 mb-4">
+        Recent Documents
+      </h1>
       <div className="flex flex-col md:flex-row items-stretch md:items-center gap-4 w-full ">
         <div className="flex-1 relative">
           {/* 6. Bind Input to State */}
@@ -193,9 +229,11 @@ const Documents = () => {
       {/* Recent Documents List */}
       <div className="space-y-4 mt-4">
         {recentDocuments.length === 0 ? (
-           <div className="text-center py-10 text-gray-500 bg-white rounded-lg border border-dashed border-gray-300">
-             {searchTerm ? `No documents found matching "${searchTerm}"` : "No documents found."}
-           </div>
+          <div className="text-center py-10 text-gray-500 bg-white rounded-lg border border-dashed border-gray-300">
+            {searchTerm
+              ? `No documents found matching "${searchTerm}"`
+              : "No documents found."}
+          </div>
         ) : (
           recentDocuments.map((doc, i) => (
             <div
@@ -232,6 +270,7 @@ const Documents = () => {
 
               {/* Right Side (Buttons) */}
               <div className="flex gap-4 text-sm md:text-base">
+                {console.log(doc)}
                 <a
                   href={doc.file}
                   target="_blank"
@@ -240,13 +279,14 @@ const Documents = () => {
                 >
                   <Eye size={18} /> View
                 </a>
-                <a
-                  href={doc.file}
-                  download
-                  className="flex items-center gap-1 cursor-pointer hover:text-custom-primary transition-colors font-medium"
+                <button
+                  onClick={() =>
+                    handleDownload(doc.file, `${doc.project_title}.pdf`)
+                  }
+                  className="flex items-center gap-1 cursor-pointer hover:text-custom-primary transition-colors font-medium bg-transparent border-none outline-none"
                 >
                   <HiArrowDownTray size={18} /> Download
-                </a>
+                </button>
               </div>
             </div>
           ))

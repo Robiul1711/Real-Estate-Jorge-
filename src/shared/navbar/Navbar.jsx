@@ -82,7 +82,7 @@ const {user,logout}=useAuth();
         {/* Logo */}
         <Link to="/" onClick={closeMobileMenu} className="text-center">
           <p>
-            <img src={ImageProvider.civia} alt="image" />
+            <img src={ImageProvider.civia} alt="image" className="w-28 sm:w-32 md:w-36 lg:w-44" />
           </p>
         </Link>
 

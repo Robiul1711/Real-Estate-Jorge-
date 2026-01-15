@@ -5,6 +5,7 @@ import { ProjectQuery } from "@/hooks/useCMS"; // Ensure this hook accepts param
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import React, { useRef, useState } from "react";
+import { HiHomeModern } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 
 const Projects = () => {
@@ -75,9 +76,14 @@ const Projects = () => {
 
                   {/* Top badge + profit */}
                   <div className="absolute top-2 flex justify-between w-full px-2">
-                    <button className="bg-custom-primary py-1 px-2 text-white rounded-lg text-sm h-fit capitalize">
-                      {project.project_status?.replace('_', ' ')}
-                    </button>
+                          <div className="flex flex-col gap-2 items-start">
+                                       <button className="bg-custom-primary py-1 px-2 text-white rounded-lg text-sm h-fit">
+                                         {project.project_status}%
+                                       
+                                       </button>
+                                       <p className="bg-custom-primary py-1 px-2 text-white rounded-lg text-sm h-fit flex items-center gap-1"><HiHomeModern />{project.type}</p>
+                 
+                                       </div>
                     <div className="bg-white p-2 rounded-lg border shadow-sm">
                       <h2 className="text-custom-primary text-xs uppercase font-semibold">EST. Profit</h2>
                       <p className="text-custom-primary text-lg font-bold">

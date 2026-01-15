@@ -287,13 +287,13 @@ const SignUp = () => {
                   />
                   <p className="text-[#757575] text-sm">
                     By creating your account, you agree to our{" "}
-                    <span className="text-primary underline cursor-pointer">
+                    <Link to="/terms-and-conditions" className="text-primary underline cursor-pointer">
                       Terms and Conditions
-                    </span>{" "}
+                    </Link>{" "}
                     &{" "}
-                    <span className="text-primary underline cursor-pointer">
+                    <Link to="/privacy-policy" className="text-primary underline cursor-pointer">
                       Privacy Policy
-                    </span>
+                    </Link>
                     .
                   </p>
                 </div>

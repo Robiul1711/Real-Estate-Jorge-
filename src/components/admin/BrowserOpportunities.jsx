@@ -3,11 +3,11 @@ import React, { useState } from "react";
 // import image from "../../assets/images/project.png"; // Unused in provided snippet
 import { Link, ScrollRestoration } from "react-router-dom";
 import { useApiQuery } from "@/hooks/getCmsUpdate";
-
+import { HiHomeModern } from "react-icons/hi2";
 const BrowserOpportunities = () => {
   // 2. Create state for sort order
   const [sortOrder, setSortOrder] = useState("desc");
- const {
+  const {
     data: project,
     isLoading,
     error,
@@ -81,7 +81,7 @@ const BrowserOpportunities = () => {
       </div>
     </div>
   );
-// 4. Toggle Handler
+  // 4. Toggle Handler
   const handleSort = () => {
     setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
   };
@@ -97,12 +97,12 @@ const BrowserOpportunities = () => {
             Discover your next profitable investment
           </p>
         </div>
-<div className="flex flex-col sm:flex-row items-center gap-4">
+        <div className="flex flex-col sm:flex-row items-center gap-4">
           <p className="flex items-center gap-4 border font-medium bg-white text-xs sm:text-sm rounded px-6 py-2">
             <Filter />
             Filter
           </p>
-          
+
           {/* 5. Update Button onClick */}
           <button
             onClick={handleSort}
@@ -115,102 +115,109 @@ const BrowserOpportunities = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
-        {isLoading ? (
-          // Render 6 Skeleton cards while loading
-          [...Array(6)].map((_, index) => <ProjectSkeleton key={index} />)
-        ) : (
-          // Render Actual Data
-          project?.data?.map((project, index) => {
-            return (
-              <Link
-                to={`/dashboard/project-view-description/${project.slug}`}
-                key={index}
-                className="bg-[#F3F3F3] p-5 rounded-2xl "
-              >
-                <div className="overflow-hidden rounded-2xl relative">
-                  <div className="w-full h-48 sm:h-56 md:h-64 lg:h-72 overflow-hidden rounded-xl">
-                    <img
-                      className="w-full h-full object-cover hover:scale-105 transition-all duration-500 ease-in-out"
-                      src={project.image}
-                      alt={project.title}
-                    />
+        {isLoading
+          ? // Render 6 Skeleton cards while loading
+            [...Array(6)].map((_, index) => <ProjectSkeleton key={index} />)
+          : // Render Actual Data
+            project?.data?.map((project, index) => {
+              return (
+                <Link
+                  to={`/dashboard/project-view-description/${project.slug}`}
+                  key={index}
+                  className="bg-[#F3F3F3] p-5 rounded-2xl "
+                >
+                  <div className="overflow-hidden rounded-2xl relative">
+                    <div className="w-full h-48 sm:h-56 md:h-64 lg:h-72 overflow-hidden rounded-xl">
+                      <img
+                        className="w-full h-full object-cover hover:scale-105 transition-all duration-500 ease-in-out"
+                        src={project.image}
+                        alt={project.title}
+                      />
+                    </div>
+
+                    {/* Top badge + profit */}
+                    <div className="absolute top-2 flex justify-between w-full px-2">
+                      <div className="flex flex-col gap-2 items-start">
+                      <button className="bg-custom-primary py-1 px-2 text-white rounded-lg text-sm h-fit">
+                        {project.project_status}
+                      
+                      </button>
+                      <p className="bg-custom-primary py-1 px-2 text-white rounded-lg text-sm h-fit flex items-center gap-1"><HiHomeModern />{project.type}</p>
+
+                      </div>
+                      <div className="bg-white p-2 rounded-lg border">
+                        <h2 className="text-custom-primary text-sm">
+                          EST. Profit
+                        </h2>
+                        <p className="text-custom-primary text-lg font-bold">
+                          {project.estimated_profit}%
+                        </p>
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Top badge + profit */}
-                  <div className="absolute top-2 flex justify-between w-full px-2">
-                    <button className="bg-custom-primary py-1 px-2 text-white rounded-lg text-sm h-fit">
-                      {project.project_status}
+                  <div className="flex flex-col flex-1">
+                    <div className="flex flex-col sm:flex-row justify-between mt-4 font-bold text-lg lg:text-[20px]">
+                      <h2>{project.title}</h2>
+                      <h2>{project.price}</h2>
+                    </div>
+                    <p
+                      className="text-[#4B5563] py-2"
+                      dangerouslySetInnerHTML={{ __html: project.description }}
+                    ></p>
+
+                    <div className="flex items-center gap-4 flex-wrap">
+                      <div className="flex items-center gap-2">
+                        <Location />
+                        <p className="text-sm text-[#4B5563]">
+                          {project.location}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Unit />
+                        <p className="text-sm text-[#4B5563]">
+                          {project.units}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between py-3 font-medium text-[17px]">
+                      <h3 className="text-[#4B5563]">Funding Progress</h3>
+                      <h3>
+                        {project?.user_investment?.progress_percent}% Complete
+                      </h3>
+                    </div>
+                    <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
+                      <div
+                        className="bg-custom-primary h-full rounded-full transition-all duration-1000 ease-out"
+                        style={{
+                          width: `${project?.user_investment?.progress_percent}%`,
+                        }}
+                      />
+                    </div>
+
+                    <div className="flex justify-between flex-wrap py-2 gap-y-3">
+                      <div className="py-3 font-medium">
+                        <h3 className="text-[#4B5563]">Total Return</h3>
+                        <h2>{project.total_return}</h2>
+                      </div>
+                      <div className="py-3 font-medium">
+                        <h3 className="text-[#4B5563]">Min Investment</h3>
+                        <h2>{project.min_investment}</h2>
+                      </div>
+                      <div className="py-3 font-medium">
+                        <h3 className="text-[#4B5563]">Terms</h3>
+                        <h2>{project.term}</h2>
+                      </div>
+                    </div>
+
+                    <button className="mt-auto py-2.5 lg:py-3 text-[15px] font-medium bg-custom-primary text-white border hover:bg-custom-primary/80 rounded-lg cursor-pointer w-full text-center transform transition-all duration-200 ease-in-out">
+                      View Property
                     </button>
-                    <div className="bg-white p-2 rounded-lg border">
-                      <h2 className="text-custom-primary text-sm">
-                        EST. Profit
-                      </h2>
-                      <p className="text-custom-primary text-lg font-bold">
-                        {project.estimated_profit}
-                      </p>
-                    </div>
                   </div>
-                </div>
-
-                <div className="flex flex-col flex-1">
-                  <div className="flex flex-col sm:flex-row justify-between mt-4 font-bold text-lg lg:text-[20px]">
-                    <h2>{project.title}</h2>
-                    <h2>{project.price}</h2>
-                  </div>
-                  <p
-                    className="text-[#4B5563] py-2"
-                    dangerouslySetInnerHTML={{ __html: project.description }}
-                  ></p>
-
-                  <div className="flex items-center gap-4 flex-wrap">
-                    <div className="flex items-center gap-2">
-                      <Location />
-                      <p className="text-sm text-[#4B5563]">
-                        {project.location}
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Unit />
-                      <p className="text-sm text-[#4B5563]">{project.units}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex justify-between py-3 font-medium text-[17px]">
-                    <h3 className="text-[#4B5563]">Funding Progress</h3>
-                    <h3>{project?.user_investment?.progress_percent}% Complete</h3>
-                  </div>
-                  <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
-                    <div
-                      className="bg-custom-primary h-full rounded-full transition-all duration-1000 ease-out"
-                      style={{
-                        width: `${project?.user_investment?.progress_percent}%`,
-                      }}
-                    />
-                  </div>
-
-                  <div className="flex justify-between flex-wrap py-2 gap-y-3">
-                    <div className="py-3 font-medium">
-                      <h3 className="text-[#4B5563]">Total Return</h3>
-                      <h2>{project.total_return}</h2>
-                    </div>
-                    <div className="py-3 font-medium">
-                      <h3 className="text-[#4B5563]">Min Investment</h3>
-                      <h2>{project.min_investment}</h2>
-                    </div>
-                    <div className="py-3 font-medium">
-                      <h3 className="text-[#4B5563]">Terms</h3>
-                      <h2>{project.term}</h2>
-                    </div>
-                  </div>
-
-                  <button className="mt-auto py-2.5 lg:py-3 text-[15px] font-medium bg-custom-primary text-white border hover:bg-custom-primary/80 rounded-lg cursor-pointer w-full text-center transform transition-all duration-200 ease-in-out">
-                    View Property
-                  </button>
-                </div>
-              </Link>
-            );
-          })
-        )}
+                </Link>
+              );
+            })}
       </div>
     </div>
   );
