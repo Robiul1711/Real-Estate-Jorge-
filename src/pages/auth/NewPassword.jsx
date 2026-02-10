@@ -16,9 +16,9 @@ const NewPassword = () => {
   const { resetToken } = useEmail();
 
   // 👁️ Password visibility states
+  // 👁️ Password visibility states
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [passwordValue, setPasswordValue] = useState("");
 
   // ✅ Form setup
   const {
@@ -33,11 +33,12 @@ const NewPassword = () => {
 
   // ✅ Strength calculation
   const getPasswordStrength = () => {
+    if (!newPassword) return 0;
     let strength = 0;
-    if (passwordValue.length >= 8) strength++;
-    if (/[a-z]/.test(passwordValue)) strength++;
-    if (/[A-Z]/.test(passwordValue)) strength++;
-    if (/[0-9]/.test(passwordValue)) strength++;
+    if (newPassword.length >= 8) strength++;
+    if (/[a-z]/.test(newPassword)) strength++;
+    if (/[A-Z]/.test(newPassword)) strength++;
+    if (/[0-9]/.test(newPassword)) strength++;
     return strength;
   };
 
@@ -126,8 +127,6 @@ const NewPassword = () => {
                         message: "Password must be at least 8 characters",
                       },
                     })}
-                    value={passwordValue}
-                    onChange={(e) => setPasswordValue(e.target.value)}
                   />
                   <div
                     className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
@@ -185,9 +184,7 @@ const NewPassword = () => {
                   />
                   <div
                     className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
-                    onClick={() =>
-                      setShowConfirmPassword(!showConfirmPassword)
-                    }
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   >
                     {showConfirmPassword ? (
                       <Eye size={20} />
@@ -235,7 +232,11 @@ const NewPassword = () => {
 
       {/* Right Side - Image */}
       <div className="md:w-1/2 w-full h-[300px] md:h-screen">
-        <img src={image} alt="Reset Password" className="w-full h-full object-cover" />
+        <img
+          src={image}
+          alt="Reset Password"
+          className="w-full h-full object-cover"
+        />
       </div>
     </div>
   );

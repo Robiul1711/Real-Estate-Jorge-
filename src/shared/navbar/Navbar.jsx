@@ -32,7 +32,7 @@ const navLinks = [
 
 const Navbar = () => {
   const { token } = useEmail();
-const {user,logout}=useAuth();
+  const { user, logout } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
   const menuRef = useRef(null);
@@ -82,7 +82,11 @@ const {user,logout}=useAuth();
         {/* Logo */}
         <Link to="/" onClick={closeMobileMenu} className="text-center">
           <p>
-            <img src={ImageProvider.civia} alt="image" className="w-28 sm:w-32 md:w-36 lg:w-44" />
+            <img
+              src={ImageProvider.civia}
+              alt="image"
+              className="w-28 sm:w-32 md:w-36 lg:w-44"
+            />
           </p>
         </Link>
 
@@ -172,7 +176,7 @@ const {user,logout}=useAuth();
               </Link>
 
               <Link to="/sign-up">
-                <button className="text-[15px] lg:text-[17px] font-medium px-4 lg:px-6 rounded-md py-[5px] lg:py-[7px] text-custom-primary border border-custom-primary relative before:absolute overflow-hidden before:translate-x-[-200px] hover:before:translate-x-0 before:z-[-1] before:translate-y-12 dark:text-custom-primary dark:border-custom-primary dark:z-0 dark:before:bg-custom-primary before:transition hover:before:translate-y-0 before:duration-300 hover:text-secondary  before:w-full before:h-full before:bg-custom-primary before:top-0 before:left-0 cursor-pointer">
+                <button className="text-[15px] lg:text-[17px] font-medium px-4 lg:px-6 rounded-md py-[5px] lg:py-[7px] bg-custom-primary text-white border border-custom-primary hover:bg-transparent hover:text-custom-primary transition duration-300 cursor-pointer">
                   Signup
                 </button>
               </Link>
@@ -264,7 +268,7 @@ const {user,logout}=useAuth();
           </Link>
 
           <Link to="/sign-up">
-            <button className="text-[15px] lg:text-[17px] font-medium px-4 lg:px-6 rounded-md py-[5px] lg:py-[7px] text-custom-primary border border-custom-primary relative before:absolute overflow-hidden before:translate-x-[-200px] hover:before:translate-x-0 before:z-[-1] before:translate-y-12 dark:text-custom-primary dark:border-custom-primary dark:z-0 dark:before:bg-custom-primary before:transition hover:before:translate-y-0 before:duration-300 hover:text-secondary  before:w-full before:h-full before:bg-custom-primary before:top-0 before:left-0 cursor-pointer">
+            <button className="text-[15px] lg:text-[17px] font-medium px-4 lg:px-6 rounded-md py-[5px] lg:py-[7px] bg-custom-primary text-white border border-custom-primary hover:bg-transparent hover:text-custom-primary transition duration-300 cursor-pointer">
               Signup
             </button>
           </Link>

@@ -12,8 +12,7 @@ import { useEmail } from "@/hooks/useEmail";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState("");
-  const { setToken} = useEmail();
+  const { setToken } = useEmail();
 
   const navigate = useNavigate();
   const {
@@ -21,7 +20,7 @@ const Login = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm()
+  } = useForm();
 
   const axiosPublic = useAxiosPublic();
 
@@ -31,7 +30,7 @@ const Login = () => {
       const res = await axiosPublic.post("/login", data);
       if (res) {
         toast.success("Login successful!", { id: toastId });
-        console.log(res?.data?.token)
+        console.log(res?.data?.token);
         localStorage.setItem("token", res?.data?.token);
         setToken(res?.data?.token);
         navigate("/");
@@ -40,7 +39,7 @@ const Login = () => {
       console.log("Login error:", error);
       toast.error(error.response.data.message, { id: toastId });
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
@@ -76,7 +75,11 @@ const Login = () => {
                   className="w-full px-4 py-2 md:py-3 border rounded-md outline-none"
                   placeholder="Enter your email"
                 />
-                {errors.email && (<div className="text-red-500 text-sm mt-1">Email is required</div>)}
+                {errors.email && (
+                  <div className="text-red-500 text-sm mt-1">
+                    Email is required
+                  </div>
+                )}
               </div>
 
               {/* Password */}
@@ -88,8 +91,6 @@ const Login = () => {
                     type={showPassword ? "text" : "password"}
                     className="w-full px-4 py-2 md:py-3 border rounded-md pr-10"
                     placeholder="Enter password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
                   />
                   <div
                     className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
@@ -98,7 +99,11 @@ const Login = () => {
                     {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
                   </div>
                 </div>
-                {errors.password && (<div className="text-red-500 text-sm mt-1">Password is required</div>)}
+                {errors.password && (
+                  <div className="text-red-500 text-sm mt-1">
+                    Password is required
+                  </div>
+                )}
               </div>
 
               {/* Forgot Password */}
@@ -111,7 +116,9 @@ const Login = () => {
               </div>
 
               {/* Submit Button */}
-              <CommonBtn type="submit" className="w-full !rounded-lg">Login</CommonBtn>
+              <CommonBtn type="submit" className="w-full !rounded-lg">
+                Login
+              </CommonBtn>
             </form>
 
             {/* Already have account */}

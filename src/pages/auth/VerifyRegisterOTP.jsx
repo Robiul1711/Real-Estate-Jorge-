@@ -5,17 +5,36 @@ import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useNavigate } from "react-router-dom";
 import OTPInput from "otp-input-react";
 
-const VerifyRegisterOTP = () => {
-  const [OTP, setOTP] = useState("");
+import { useForm, Controller } from "react-hook-form";
 
+const VerifyRegisterOTP = () => {
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
-  const handleVerify = async () => {
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: { otp: "" },
+  });
+
+  const handleVerify = async (data) => {
     const email = localStorage.getItem("registration_email");
+    if (!email) {
+      toast.error("Email not found. Please register again.");
+      return;
+    }
+
+    if (data.otp.length < 4) {
+      toast.error("Please enter a 4-digit OTP.");
+      return;
+    }
+
     const toastId = toast.loading("Verifying OTP...");
     const payload = {
       email,
-      otp: OTP,
+      otp: data.otp,
     };
     try {
       const res = await axiosPublic.post("/verify/registration", payload);
@@ -27,14 +46,22 @@ const VerifyRegisterOTP = () => {
       }
     } catch (error) {
       console.error("OTP verification error:", error);
-      toast.error("OTP verification failed. Please try again.", {
-        id: toastId,
-      });
+      toast.error(
+        error?.response?.data?.message ||
+          "OTP verification failed. Please try again.",
+        {
+          id: toastId,
+        },
+      );
     }
   };
 
   const resendOTP = async () => {
     const email = localStorage.getItem("registration_email");
+    if (!email) {
+      toast.error("Email not found.");
+      return;
+    }
     const toastId = toast.loading("Resending OTP...");
     try {
       const res = await axiosPublic.post("/resend/registration/otp", { email });
@@ -42,11 +69,14 @@ const VerifyRegisterOTP = () => {
         toast.success(res?.data?.message || "OTP resent successfully!", {
           id: toastId,
         });
-        localStorage.removeItem("registration_email");
       }
     } catch (error) {
       console.error("OTP resend error:", error);
-      toast.error("OTP resend failed. Please try again.", { id: toastId });
+      toast.error(
+        error?.response?.data?.message ||
+          "OTP resend failed. Please try again.",
+        { id: toastId },
+      );
     }
   };
 
@@ -64,46 +94,53 @@ const VerifyRegisterOTP = () => {
               we have sent OTP to your email Please check your inbox
             </p>
 
-            <div className="flex justify-center">
-              <OTPInput
-                value={OTP}
-                onChange={setOTP}
-                autoFocus
-                OTPLength={4}
-                otpType="number"
-                disabled={false}
-                secure
-                inputStyles={{
-                  width: "4rem",
-                  height: "4rem",
-                  margin: "0 0.5rem",
-                  fontSize: "1.5rem",
-                  borderRadius: "0.5rem",
-                  border: "2px solid #d1d5db",
-                  textAlign: "center",
-                  outline: "none",
-                }}
-                focusStyles={{
-                  border: "2px solid #3b82f6",
-                  boxShadow: "0 0 0 3px rgba(59, 130, 246, 0.5)",
-                }}
-                className="otp-input-container text-center"
-              />
-            </div>
-
-            {/* Display the OTP value  */}
-            <div className="text-center mt-4">
-              <p className="text-sm text-gray-400">Entered OTP: {OTP}</p>
-            </div>
-            {/* Submit btn  */}
-            <button
-              onClick={handleVerify}
-              className="w-full mt-6 py-3 bg-custom-primary cursor-pointer  hover:bg-opacity-90 text-white font-semibold rounded-lg transition-all"
+            <form
+              onSubmit={handleSubmit(handleVerify)}
+              className="w-full flex flex-col items-center"
             >
-              Verify
-            </button>
+              <div className="flex justify-center">
+                <Controller
+                  name="otp"
+                  control={control}
+                  rules={{ required: true, minLength: 4 }}
+                  render={({ field }) => (
+                    <OTPInput
+                      value={field.value}
+                      onChange={field.onChange}
+                      autoFocus
+                      OTPLength={4}
+                      otpType="number"
+                      disabled={false}
+                      secure
+                      inputStyles={{
+                        width: "4rem",
+                        height: "4rem",
+                        margin: "0 0.5rem",
+                        fontSize: "1.5rem",
+                        borderRadius: "0.5rem",
+                        border: "2px solid #d1d5db",
+                        textAlign: "center",
+                        outline: "none",
+                      }}
+                      focusStyles={{
+                        border: "2px solid #3b82f6",
+                        boxShadow: "0 0 0 3px rgba(59, 130, 246, 0.5)",
+                      }}
+                      className="otp-input-container text-center"
+                    />
+                  )}
+                />
+              </div>
 
-            <p className="text-sm">
+              <button
+                type="submit"
+                className="w-full mt-6 py-3 bg-custom-primary cursor-pointer  hover:bg-opacity-90 text-white font-semibold rounded-lg transition-all"
+              >
+                Verify
+              </button>
+            </form>
+
+            <p className="text-sm mt-6">
               Didn’t received the email yet?{" "}
               <span
                 onClick={resendOTP}

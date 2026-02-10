@@ -78,7 +78,7 @@ const Projects = () => {
                   <div className="absolute top-2 flex justify-between w-full px-2">
                           <div className="flex flex-col gap-2 items-start">
                                        <button className="bg-custom-primary py-1 px-2 text-white rounded-lg text-sm h-fit">
-                                         {project.project_status}%
+                                         {project.project_status}
                                        
                                        </button>
                                        <p className="bg-custom-primary py-1 px-2 text-white rounded-lg text-sm h-fit flex items-center gap-1"><HiHomeModern />{project.type}</p>

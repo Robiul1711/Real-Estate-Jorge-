@@ -6,7 +6,7 @@ import CommonBtn from "@/components/common/CommonButton";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { ImageProvider } from "@/components/common/ImageProvider";
-import { set, useForm } from "react-hook-form"
+import { useForm, Controller } from "react-hook-form";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import { useEmail } from "@/hooks/useEmail";
@@ -14,10 +14,8 @@ import { useEmail } from "@/hooks/useEmail";
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [password, setPassword] = useState("");
   const [isToggle, setIsToggle] = useState(false);
   const [isToggle1, setIsToggle1] = useState(false);
-  const [phone, setPhone] = useState("");
   const [account_type, setAccount_type] = useState("");
 
   const [terms_accepted, setTerms_accepted] = useState(0);
@@ -28,8 +26,11 @@ const SignUp = () => {
     register,
     handleSubmit,
     watch,
+    control,
     formState: { errors },
-  } = useForm()
+  } = useForm();
+
+  const password = watch("password", "");
 
   const getPasswordStrength = () => {
     let strength = 0;
@@ -74,13 +75,13 @@ const SignUp = () => {
       password_confirmation: data.password_confirmation,
       account_type: account_type,
       terms_accepted: data.terms_accepted ? 1 : 0,
-    }
+    };
 
     try {
       const res = await axiosPublic.post("/register", payload);
       if (res) {
         localStorage.setItem("registration_email", data.email);
-       
+
         toast.success("Registration successful!", { id: toastId });
         navigate("/register-otp-verify");
       }
@@ -88,7 +89,7 @@ const SignUp = () => {
       console.log(error);
       toast.error(error.response.data.message, { id: toastId });
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
@@ -118,10 +119,11 @@ const SignUp = () => {
                   onClick={() => handleToggle("individual")}
                 >
                   <div
-                    className={`${isToggle
-                      ? "bg-custom-primary scale-[0.8]"
-                      : "bg-transparent scale-[0.6]"
-                      } w-[16px] lg:w-[25px] h-[16px] lg:h-[25px] transition-all duration-200 rounded-full`}
+                    className={`${
+                      isToggle
+                        ? "bg-custom-primary scale-[0.8]"
+                        : "bg-transparent scale-[0.6]"
+                    } w-[16px] lg:w-[25px] h-[16px] lg:h-[25px] transition-all duration-200 rounded-full`}
                   ></div>
                 </div>
                 <p
@@ -137,10 +139,11 @@ const SignUp = () => {
                   onClick={() => handleToggle("enterprise")}
                 >
                   <div
-                    className={`${isToggle1
-                      ? "bg-custom-primary scale-[0.8]"
-                      : "bg-transparent scale-[0.6]"
-                      } w-[16px] lg:w-[25px] h-[16px] lg:h-[25px] transition-all duration-200 rounded-full`}
+                    className={`${
+                      isToggle1
+                        ? "bg-custom-primary scale-[0.8]"
+                        : "bg-transparent scale-[0.6]"
+                    } w-[16px] lg:w-[25px] h-[16px] lg:h-[25px] transition-all duration-200 rounded-full`}
                   ></div>
                 </div>
                 <p
@@ -165,7 +168,9 @@ const SignUp = () => {
                     placeholder="Enter first name"
                   />
 
-                  {errors.name && <span className="text-red-500">First name is required</span>}
+                  {errors.name && (
+                    <span className="text-red-500">First name is required</span>
+                  )}
                 </div>
                 <div>
                   <label className="block mb-1 font-medium">Surname</label>
@@ -175,23 +180,32 @@ const SignUp = () => {
                     className="w-full px-4 py-2 md:py-3 border rounded-md outline-none"
                     placeholder="Enter surname"
                   />
-                  {errors.surname && <span className="text-red-500">Surname is required</span>}
+                  {errors.sur_name && (
+                    <span className="text-red-500">Surname is required</span>
+                  )}
                 </div>
               </div>
 
               {/* Phone Number */}
               <div>
                 <label className="block mb-1 font-medium">Phone Number</label>
-                <PhoneInput
-                  international
-                  defaultCountry="BD"
-                  {...register("phone", { required: true })}
-                  value={phone}
-                  onChange={setPhone}
-                  className="w-full px-4 py-2 md:py-3 border rounded-md outline-none"
-                  placeholder="Enter phone number"
+                <Controller
+                  name="phone"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <PhoneInput
+                      {...field}
+                      international
+                      defaultCountry="BD"
+                      className="w-full px-4 py-2 md:py-3 border rounded-md outline-none"
+                      placeholder="Enter phone number"
+                    />
+                  )}
                 />
-                {errors.phone && <span className="text-red-500">Phone number is required</span>}
+                {errors.phone && (
+                  <span className="text-red-500">Phone number is required</span>
+                )}
               </div>
 
               {/* Email */}
@@ -203,7 +217,9 @@ const SignUp = () => {
                   className="w-full px-4 py-2 md:py-3 border rounded-md outline-none"
                   placeholder="Enter your email"
                 />
-                {errors.email && <span className="text-red-500">Email is required</span>}
+                {errors.email && (
+                  <span className="text-red-500">Email is required</span>
+                )}
               </div>
 
               {/* Password */}
@@ -214,9 +230,7 @@ const SignUp = () => {
                     type={showPassword ? "text" : "password"}
                     className="w-full px-4 py-2 md:py-3 border rounded-md pr-10"
                     placeholder="Enter password"
-                    value={password}
                     {...register("password", { required: true })}
-                    onChange={(e) => setPassword(e.target.value)}
                   />
                   <div
                     className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
@@ -224,7 +238,9 @@ const SignUp = () => {
                   >
                     {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
                   </div>
-                  {errors.password && <span className="text-red-500">Password is required</span>}
+                  {errors.password && (
+                    <span className="text-red-500">Password is required</span>
+                  )}
                 </div>
                 <p className="text-sm text-gray-500 mt-2">
                   Min 8 Characters with a combination of letters and numbers
@@ -236,10 +252,11 @@ const SignUp = () => {
                     {[...Array(4)].map((_, i) => (
                       <div
                         key={i}
-                        className={`h-2 flex-1 rounded-full ${i < strengthLevel
-                          ? strengthColors[strengthLevel - 1]
-                          : "bg-gray-200"
-                          }`}
+                        className={`h-2 flex-1 rounded-full ${
+                          i < strengthLevel
+                            ? strengthColors[strengthLevel - 1]
+                            : "bg-gray-200"
+                        }`}
                       ></div>
                     ))}
                   </div>
@@ -273,7 +290,11 @@ const SignUp = () => {
                       <EyeOff size={20} />
                     )}
                   </div>
-                  {errors.password_confirmation && <span className="text-red-500">Confirm password is required</span>}
+                  {errors.password_confirmation && (
+                    <span className="text-red-500">
+                      Confirm password is required
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -287,20 +308,32 @@ const SignUp = () => {
                   />
                   <p className="text-[#757575] text-sm">
                     By creating your account, you agree to our{" "}
-                    <Link to="/terms-and-conditions" className="text-primary underline cursor-pointer">
+                    <Link
+                      to="/terms-and-conditions"
+                      className="text-primary underline cursor-pointer"
+                    >
                       Terms and Conditions
                     </Link>{" "}
                     &{" "}
-                    <Link to="/privacy-policy" className="text-primary underline cursor-pointer">
+                    <Link
+                      to="/privacy-policy"
+                      className="text-primary underline cursor-pointer"
+                    >
                       Privacy Policy
                     </Link>
                     .
                   </p>
                 </div>
-                {errors.terms_accepted && <span className="text-red-500">You must accept the terms</span>}
+                {errors.terms_accepted && (
+                  <span className="text-red-500">
+                    You must accept the terms
+                  </span>
+                )}
               </div>
               {/* Submit Button */}
-              <CommonBtn type="submit" className="w-full !rounded-lg">Sign Up</CommonBtn>
+              <CommonBtn type="submit" className="w-full !rounded-lg">
+                Sign Up
+              </CommonBtn>
             </form>
 
             {/* Already have account */}
