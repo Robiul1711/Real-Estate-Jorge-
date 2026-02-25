@@ -1,4 +1,5 @@
 import { ImageProvider } from "@/components/common/ImageProvider";
+import { useApiQuery } from "@/hooks/getCmsUpdate";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -21,6 +22,13 @@ import {
 gsap.registerPlugin(ScrollTrigger);
 
 const MarketLeader = () => {
+      const {
+        data: performanceStatsData,
+        isLoading,
+      } = useApiQuery({
+        queryKey: ["performance-stats",],
+        url: "/performance/stats",
+      });
   const sectionRef = useRef(null);
   const buttonRef = useRef(null);
   const cardRef = useRef(null);
@@ -54,10 +62,10 @@ const MarketLeader = () => {
 
   // Data for the revenue chart
   const revenueData = [
-    { value: "+210", label: "Projects Financed" },
-    { value: "+$470M", label: "Capital Financed" },
-    { value: "+$87M", label: "Capital Returned" },
-    { value: "+12.60%", label: "Average Annual Return" },
+    { value: performanceStatsData?.data?.projects_financed_formatted, label: "Projects Financed" },
+    { value: performanceStatsData?.data?.capital_financed_formatted, label: "Capital Financed" },
+    { value: performanceStatsData?.data?.capital_returned_formatted, label: "Capital Returned" },
+    { value: performanceStatsData?.data?.avg_annual_return_formatted, label: "Average Annual Return" },
   ];
   const platformData = [
     { name: "Our Platform", value: 51.7, color: "#19AB9A" },
@@ -163,14 +171,14 @@ const MarketLeader = () => {
     <div className="section-padding-x relative bg-[#F9FAFB]">
       <div
         ref={cardRef}
-        className="hidden absolute -mt-60 left-1/2 -translate-x-1/2 w-full max-w-[88%] mx-auto px-30 xl:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 bg-custom-primary text-white rounded-sm"
+        className="hidden absolute -mt-50 left-1/2 -translate-x-1/2 w-full max-w-[88%] mx-auto px-30 xl:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 bg-custom-primary text-white rounded-sm"
       >
         {revenueData.map((value, index) => (
           <div
             key={index}
             className="p-6 sm:p-8 space-y-4 flex flex-col items-center text-center"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-[44px] lg:text-[64px] font-bold my-2">
+            <h2 className="text-2xl sm:text-3xl md:text-[44px]  font-bold my-2">
               {value.value}
             </h2>
             <p className="uppercase">{value.label}</p>

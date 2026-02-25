@@ -22,7 +22,7 @@ const Footer = () => {
           {Data?.location}
         </p>
         <p className="text-[#C7C7C7] text-lg">
-          © Copyright 2025. All Rights Reserved by Lorem
+          © Copyright 2025. All Rights Reserved by Civia
         </p>
       </div>
     </div>

@@ -22,7 +22,7 @@ const ProjectViewdescription = () => {
     secure: true,
     enabled: !!slug,
   });
-console.log(projectDetails)
+// console.log(projectDetails)
   const [activeTab, setActiveTab] = useState("Description");
 
   const tabs = [

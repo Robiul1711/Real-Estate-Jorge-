@@ -58,7 +58,7 @@ const Login = () => {
             </Link>
 
             <h2 className="text-2xl md:text-4xl font-bold">
-              Welcome to Logo Ipsum
+              Welcome to Civia
             </h2>
             <p className="text-sm md:text-lg text-gray-500 mt-2 mb-6">
               Login to your account

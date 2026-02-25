@@ -35,9 +35,9 @@ const CommonNavbar = ({ open, setOpen }) => {
           <h1 className="md:text-3xl font-semibold">
             Welcome Back, {user?.data?.name}
           </h1>
-          <p className="mt-1 text-sm sm:text-base text-[#666666]">
+          {/* <p className="mt-1 text-sm sm:text-base text-[#666666]">
             Elevate your financial future with smart property investments.
-          </p>
+          </p> */}
         </div>
       </div>
 

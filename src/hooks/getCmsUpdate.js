@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 
@@ -17,12 +17,12 @@ export const useApiQuery = ({
 
   return useQuery({
     queryKey,
-    enabled,
+    enabled, // ✅ prevent auto-fetch if false
     queryFn: async () => {
-      const res = await axiosClient.get(url, { params });
-      return res.data;
+      const { data } = await axiosClient.get(url, { params });
+      return data;
     },
     select,
-    keepPreviousData: true, // ✅ smooth pagination
+    placeholderData: keepPreviousData, // ✅ smooth pagination
   });
 };

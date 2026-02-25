@@ -92,7 +92,6 @@ const Projects = () => {
                     </div>
                   </div>
                 </div>
-
                 <div className="flex flex-col flex-1">
                   <div className="flex flex-col sm:flex-row justify-between gap-3 mt-4 font-bold text-lg lg:text-[20px]">
                     <h2 className="line-clamp-1">{project.title}</h2>
@@ -125,6 +124,7 @@ const Projects = () => {
 
                   <div className="flex justify-between py-3 font-medium text-[15px] mt-2">
                     <h3 className="text-[#4B5563]">Funding Progress</h3>
+                    {console.log(project)}
                     <h3>{project.funding_progress}%</h3>
                   </div>
 

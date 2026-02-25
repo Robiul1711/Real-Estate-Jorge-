@@ -55,7 +55,7 @@ const CommonBanner = () => {
           
           </p>
           <div ref={cardRef} className="mt-8">
-            <CommonBtn>{Data?.button_text}</CommonBtn>
+            <CommonBtn path="/dashboard/browse-opportunities">{Data?.button_text}</CommonBtn>
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@ import { useApiQuery } from "@/hooks/getCmsUpdate";
 import { Download } from "lucide-react";
 import { Link, ScrollRestoration } from "react-router-dom";
 import PaginationComponent from "../common/PaginationComponent";
+import AddMoneyModal from "./DigitalWallet/AddMoneyModal";
 
 const statusClasses = {
   Confirmed: "text-green-600 bg-green-100 border border-green-200",
@@ -17,6 +18,7 @@ const typeClasses = {
 
 const Payment = () => {
   const [page, setPage] = useState(1);
+  const [openAddMoneyModal, setOpenAddMoneyModal] = useState(false);
 
   const {
     data: walletData,
@@ -104,24 +106,38 @@ const Payment = () => {
         </div>
 
         {/* BALANCE */}
-        <div className="bg-custom-primary p-6 rounded-lg text-white mb-6">
-          <h2 className="text-sm text-green-100">Available Balance</h2>
+        <div className="bg-custom-primary p-6 rounded-lg text-white mb-6 flex item-center justify-between">
           <div className="text-4xl font-bold">
-            ${walletData?.data?.balance?.toLocaleString()}
+            <h2 className="text-sm text-green-100">Available Balance</h2>$
+            {walletData?.data?.balance?.toLocaleString()}
+          </div>
+          <div className="flex flex-col gap-2">
+            <button
+              onClick={() => setOpenAddMoneyModal(true)}
+              className="bg-white text-custom-primary px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 w-32 text-center transition-all active:scale-95"
+            >
+              Deposit
+            </button>
+            <Link
+              to="/dashboard/withdraw-funds"
+              className="bg-white text-custom-primary px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 w-32 text-center"
+            >
+              Withdraw
+            </Link>
           </div>
         </div>
 
         {/* TABLE */}
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-gray-50">
+            <thead className="bg-gray-50 text-gray-700 uppercase text-xs">
               <tr>
-                <th className="px-4 py-2">Date</th>
-                <th className="px-4 py-2">Title</th>
-                <th className="px-4 py-2">Type</th>
-                <th className="px-4 py-2">Amount</th>
-                <th className="px-4 py-2">Status</th>
-                <th className="px-4 py-2">Receipt</th>
+                <th className="px-4 py-3 text-left">Date</th>
+                <th className="px-4 py-3 text-left">Title</th>
+                <th className="px-4 py-3 text-left">Type</th>
+                <th className="px-4 py-3 text-left">Amount</th>
+                <th className="px-4 py-3 text-left">Status</th>
+                <th className="px-4 py-3 text-left">Receipt</th>
               </tr>
             </thead>
 
@@ -159,10 +175,15 @@ const Payment = () => {
                       {txn.status}
                     </span>
                   </td>
-
+{/* {console.log(txn)} */}
                   <td className="px-4 py-2 flex gap-2">
-                    {txn.receipt}
-                    <Download size={16} />
+                    {txn.receipt_url ? (
+                      <a href={txn.receipt_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2"> 
+                       Download <Download size={16} />
+                      </a>
+                    ) : (
+                      "No Receipt"
+                    )}
                   </td>
                 </tr>
               ))}
@@ -180,6 +201,12 @@ const Payment = () => {
           />
         )}
       </div>
+
+      {/* Reusable Add Money Modal */}
+      <AddMoneyModal
+        isOpen={openAddMoneyModal}
+        onClose={() => setOpenAddMoneyModal(false)}
+      />
     </div>
   );
 };

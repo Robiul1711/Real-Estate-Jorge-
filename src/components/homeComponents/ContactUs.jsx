@@ -4,7 +4,9 @@ import CommonBtn from "../common/CommonButton";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useApiMutation } from "@/hooks/useApiMutation";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
 
 const ContactUs = () => {
   const sectionRef = useRef(null);
@@ -16,6 +18,7 @@ const ContactUs = () => {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors },
   } = useForm();
 
@@ -31,7 +34,7 @@ const ContactUs = () => {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     mutate(data);
   };
 
@@ -51,7 +54,7 @@ const ContactUs = () => {
   });
 
   return (
-    <div ref={sectionRef} className="section-padding-x py-10">
+    <div id="contact" ref={sectionRef} className="section-padding-x py-10">
       <div
         ref={cardRef}
         className="bg-white shadow-xl border border-gray-100 rounded-xl p-6 md:p-10 flex flex-col md:flex-row gap-6"
@@ -69,55 +72,97 @@ const ContactUs = () => {
             <div className="flex gap-4">
               <div className="w-1/2">
                 <input
-                  {...register("last_name", { required: "Last name is required" })}
+                  {...register("last_name", {
+                    required: "Last name is required",
+                  })}
                   type="text"
                   placeholder="Last Name"
-                  className={`w-full border rounded-md px-3 py-3 bg-gray-50 focus:outline-none focus:ring-1 ${errors.last_name ? 'border-red-500' : 'border-gray-200'}`}
+                  className={`w-full border rounded-md px-3 py-3 bg-gray-50 focus:outline-none focus:ring-1 ${errors.last_name ? "border-red-500" : "border-gray-200"}`}
                 />
-                {errors.last_name && <p className="text-red-500 text-xs mt-1">{errors.last_name.message}</p>}
+                {errors.last_name && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.last_name.message}
+                  </p>
+                )}
               </div>
               <div className="w-1/2">
                 <input
-                  {...register("first_name", { required: "First name is required" })}
+                  {...register("first_name", {
+                    required: "First name is required",
+                  })}
                   type="text"
                   placeholder="First Name"
-                  className={`w-full border rounded-md px-3 py-3 bg-gray-50 focus:outline-none focus:ring-1 ${errors.first_name ? 'border-red-500' : 'border-gray-200'}`}
+                  className={`w-full border rounded-md px-3 py-3 bg-gray-50 focus:outline-none focus:ring-1 ${errors.first_name ? "border-red-500" : "border-gray-200"}`}
                 />
-                {errors.first_name && <p className="text-red-500 text-xs mt-1">{errors.first_name.message}</p>}
+                {errors.first_name && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.first_name.message}
+                  </p>
+                )}
               </div>
             </div>
 
             <div>
               <input
-                {...register("email", { 
+                {...register("email", {
                   required: "Email is required",
-                  pattern: { value: /^\S+@\S+$/i, message: "Invalid email address" }
+                  pattern: {
+                    value: /^\S+@\S+$/i,
+                    message: "Invalid email address",
+                  },
                 })}
                 type="email"
                 placeholder="Email"
-                className={`w-full border rounded-md px-3 py-3 bg-gray-50 focus:outline-none focus:ring-1 ${errors.email ? 'border-red-500' : 'border-gray-200'}`}
+                className={`w-full border rounded-md px-3 py-3 bg-gray-50 focus:outline-none focus:ring-1 ${errors.email ? "border-red-500" : "border-gray-200"}`}
               />
-              {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
+              {errors.email && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
 
             <div>
-              <input
-                {...register("phone", { required: "Phone number is required" })}
-                type="tel"
-                placeholder="Phone Number"
-                className={`w-full border rounded-md px-3 py-3 bg-gray-50 focus:outline-none focus:ring-1 ${errors.phone ? 'border-red-500' : 'border-gray-200'}`}
+              <Controller
+                name="phone"
+                control={control}
+                rules={{ required: "Phone number is required" }}
+                render={({ field }) => (
+                  <div
+                    className={`flex items-center w-full border rounded-md px-3 bg-gray-50 focus-within:ring-1 focus-within:ring-custom-primary ${errors.phone ? "border-red-500" : "border-gray-200"}`}
+                  >
+                    <PhoneInput
+                      {...field}
+                      international
+                      defaultCountry="BD"
+                      placeholder="Phone Number"
+                      className="w-full flex items-center [&_input]:border-none [&_input]:bg-transparent [&_input]:py-3 [&_input]:px-2 [&_input]:outline-none [&_input]:flex-1 [&_.PhoneInputCountry]:flex [&_.PhoneInputCountry]:items-center [&_.PhoneInputCountry]:gap-1"
+                    />
+                  </div>
+                )}
               />
-              {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>}
+              {errors.phone && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.phone.message}
+                </p>
+              )}
             </div>
 
             <div>
               <textarea
-                {...register("message", { required: "Please enter your message", minLength: { value: 10, message: "Message is too short" } })}
+                {...register("message", {
+                  required: "Please enter your message",
+                  minLength: { value: 10, message: "Message is too short" },
+                })}
                 rows="4"
                 placeholder="Message"
-                className={`w-full border rounded-md px-3 py-3 bg-gray-50 focus:outline-none focus:ring-1 ${errors.message ? 'border-red-500' : 'border-gray-200'}`}
+                className={`w-full border rounded-md px-3 py-3 bg-gray-50 focus:outline-none focus:ring-1 ${errors.message ? "border-red-500" : "border-gray-200"}`}
               />
-              {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>}
+              {errors.message && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.message.message}
+                </p>
+              )}
             </div>
 
             <button

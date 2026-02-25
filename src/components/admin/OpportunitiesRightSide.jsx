@@ -10,8 +10,9 @@ import BenefitsDisclaimer from "./BenefitsDisclaimer";
 import DocumentSummary from "./DocumentSummary";
 
 const OpportunitiesRightSide = ({ activeTab , project}) => {
+  // console.log(project?.data?.developer)
+  const developer=project?.data?.developer
   const ProjectSummery=project?.data?.investment_summary
-  console.log(ProjectSummery)
 
   
   return (
@@ -22,10 +23,11 @@ const OpportunitiesRightSide = ({ activeTab , project}) => {
 
         {/* Company Info */}
         <div className="flex items-center gap-4 mt-4">
-          <MdCorporateFare className="text-5xl p-2 bg-custom-primary text-white rounded-full" />
+          <img src={developer?.developer_image || "https://cdn-icons-png.flaticon.com/512/149/149071.png"} alt="" className="w-12 h-12 rounded-full" />
+          {/* <MdCorporateFare className="text-5xl p-2 bg-custom-primary text-white rounded-full" /> */}
           <div>
-            <p className="font-semibold">Premium Development Corp</p>
-            <p className="text-sm text-gray-500">4.8</p>
+            <p className="font-semibold">{developer?.developer_name}</p>
+            {/* <p className="text-sm text-gray-500">4.8</p> */}
           </div>
         </div>
 
@@ -33,17 +35,17 @@ const OpportunitiesRightSide = ({ activeTab , project}) => {
         <div className="grid grid-cols-2 gap-4 mt-4">
           <div>
             <p className="font-semibold text-gray-500">Experience</p>
-            <p className="text-sm">8 years</p>
+            <p className="text-sm">{developer?.developer_experience} years</p>
           </div>
           <div>
             <p className="font-semibold text-gray-500">Projects</p>
-            <p className="text-sm">15</p>
+            <p className="text-sm">{developer?.developer_projects}</p>
           </div>
         </div>
 
-        <button className="w-full mt-4 px-4 py-2 text-sm font-medium bg-white border border-black text-black hover:bg-black hover:text-white rounded-lg transition">
+        {/* <button className="w-full mt-4 px-4 py-2 text-sm font-medium bg-white border border-black text-black hover:bg-black hover:text-white rounded-lg transition">
           View Profile
-        </button>
+        </button> */}
       </div>
 
       {/* Investment Summary Card */}
@@ -125,7 +127,7 @@ const OpportunitiesRightSide = ({ activeTab , project}) => {
 
       {/* Dynamic Tab Content */}
       <div>
-        {activeTab === "Description" && <ROICalculator data={project?.data?.tabs?.description} />}
+        {activeTab === "Description" && <ROICalculator data={project?.data} />}
         {activeTab === "Your Investment" && <BenefitsDisclaimer data={project} />}
         {activeTab === "Documentation" && <DocumentSummary data={project} />}
       </div>

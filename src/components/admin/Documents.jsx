@@ -270,7 +270,7 @@ const Documents = () => {
 
               {/* Right Side (Buttons) */}
               <div className="flex gap-4 text-sm md:text-base">
-                {console.log(doc)}
+                {/* {console.log(doc)} */}
                 <a
                   href={doc.file}
                   target="_blank"
@@ -281,7 +281,7 @@ const Documents = () => {
                 </a>
                 <button
                   onClick={() =>
-                    handleDownload(doc.file, `${doc.project_title}.pdf`)
+                    handleDownload(doc.file_url, `${doc.project_title}.pdf`)
                   }
                   className="flex items-center gap-1 cursor-pointer hover:text-custom-primary transition-colors font-medium bg-transparent border-none outline-none"
                 >

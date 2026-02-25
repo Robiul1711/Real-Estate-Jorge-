@@ -31,7 +31,7 @@ const FAQ = () => {
       url: "/faqs",
       secure: true,
     });
-
+console.log(faqData)
   const [isPlusAccording, setIsPlusAccording] = useState(null);
 
   const handleBorderClick = (index) =>

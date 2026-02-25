@@ -8,7 +8,7 @@ import {
   Shield,
   MessageCircle,
 } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function InvestmentSuccess() {
   const location = useLocation();
@@ -197,13 +197,13 @@ export default function InvestmentSuccess() {
                 to help.
               </p>
 
-              <button
-                onClick={handleContactSupport}
+              <Link
+                to="/#contact"
                 className="w-full flex items-center justify-center gap-2 bg-gray-100 text-gray-700 py-3 rounded-lg hover:bg-gray-200 transition-colors"
               >
                 <MessageCircle size={16} />
                 Contact Support
-              </button>
+              </Link>
             </div>
           </div>
         </div>

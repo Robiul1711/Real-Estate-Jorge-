@@ -7,10 +7,23 @@ import LatestProject from "@/components/homeComponents/LatestProject";
 import OurBlog from "@/components/homeComponents/OurBlog";
 import Reviews from "@/components/homeComponents/Reviews";
 import WhyChooseUs from "@/components/homeComponents/WhyChooseUs";
-import React from "react";
-import { ScrollRestoration } from "react-router-dom";
+import React, { useEffect } from "react";
+import { ScrollRestoration, useLocation } from "react-router-dom";
 
 const Home = () => {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const element = document.getElementById(hash.replace("#", ""));
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    }
+  }, [hash]);
+
   return (
     <>
       <ScrollRestoration />

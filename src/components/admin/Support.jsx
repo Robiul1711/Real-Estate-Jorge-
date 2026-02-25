@@ -160,9 +160,9 @@ const Support = () => {
                   <p>Created: {item?.created_at}</p>
                   <p>Updated: {item?.updated_at}</p>
                 </div>
-                <button className="px-3 py-2 text-[15px] bg-[#FFF] border hover:text-white hover:bg-black rounded-lg mt-2 cursor-pointer">
+                {/* <button className="px-3 py-2 text-[15px] bg-[#FFF] border hover:text-white hover:bg-black rounded-lg mt-2 cursor-pointer">
                   View Details
-                </button>
+                </button> */}
               </div>
             ))}
           </div>
@@ -174,9 +174,9 @@ const Support = () => {
             <h2 className="text-lg md:text-[22px] font-bold">
               Frequently Asked Questions
             </h2>
-            <button className="px-3 py-2 text-[15px] bg-custom-primary duration-300 text-white border  hover:bg-black rounded-lg mt-2 cursor-pointer flex items-center gap-2">
+            {/* <button className="px-3 py-2 text-[15px] bg-custom-primary duration-300 text-white border  hover:bg-black rounded-lg mt-2 cursor-pointer flex items-center gap-2">
               <Book size={18} /> View All
-            </button>
+            </button> */}
           </div>
           <div className="">
             {faqData?.data?.map((according, index) => (

@@ -98,10 +98,10 @@ const BrowserOpportunities = () => {
           </p>
         </div>
         <div className="flex flex-col sm:flex-row items-center gap-4">
-          <p className="flex items-center gap-4 border font-medium bg-white text-xs sm:text-sm rounded px-6 py-2">
+          {/* <p className="flex items-center gap-4 border font-medium bg-white text-xs sm:text-sm rounded px-6 py-2">
             <Filter />
             Filter
-          </p>
+          </p> */}
 
           {/* 5. Update Button onClick */}
           <button

@@ -3,9 +3,17 @@ import { ImageProvider } from "../common/ImageProvider";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useApiQuery } from "@/hooks/getCmsUpdate";
 gsap.registerPlugin(ScrollTrigger);
 
 const TotalRevenue = () => {
+    const {
+      data: homeStatsData,
+      isLoading,
+    } = useApiQuery({
+      queryKey: ["home-stats",],
+      url: "/home/stats",
+    });
   const sectionRef = useRef(null);
   const cardRef = useRef(null);
   useGSAP(() => {
@@ -26,22 +34,22 @@ const TotalRevenue = () => {
   const revenueData = [
     {
       image: ImageProvider.found,
-      value: "500+",
+      value: homeStatsData?.data?.projects_funded_formatted,
       label: "Projects Funded",
     },
     {
       image: ImageProvider.investor,
-      value: "10,000+",
+      value: homeStatsData?.data?.investors_formatted,
       label: "Investors",
     },
     {
       image: ImageProvider.investment,
-      value: "$50M+",
+      value: homeStatsData?.data?.total_investment_formatted,
       label: "Total Investment",
     },
     {
       image: ImageProvider.rate,
-      value: "95%",
+      value: homeStatsData?.data?.success_rate_formatted,
       label: "Success Rate",
     },
   ];

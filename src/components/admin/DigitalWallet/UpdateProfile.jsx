@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
 import { useMutation } from "@tanstack/react-query";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import toast from "react-hot-toast";
@@ -12,6 +14,7 @@ const UpdateProfile = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
     reset,
   } = useForm();
@@ -55,9 +58,7 @@ const UpdateProfile = () => {
               }`}
             />
             {errors.name && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.name.message}
-              </p>
+              <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
             )}
           </div>
 
@@ -88,21 +89,27 @@ const UpdateProfile = () => {
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Phone
             </label>
-            <input
-              type="tel"
-              placeholder="+1 (123) 456-7890"
-              {...register("phone", {
-                required: "Phone number is required",
-                pattern: {
-                  value: /^\+?\d{7,15}$/,
-                  message: "Enter a valid phone number",
-                },
-              })}
-              className={`w-full px-4 py-2 border bg-white rounded-lg focus:outline-none focus:ring-2 ${
-                errors.phone
-                  ? "border-red-500 focus:ring-red-500"
-                  : "border-gray-300 focus:ring-black"
-              }`}
+            <Controller
+              name="phone"
+              control={control}
+              rules={{ required: "Phone number is required" }}
+              render={({ field }) => (
+                <div
+                  className={`flex items-center w-full border bg-white rounded-lg focus-within:ring-2 ${
+                    errors.phone
+                      ? "border-red-500 focus-within:ring-red-500"
+                      : "border-gray-300 focus-within:ring-black"
+                  }`}
+                >
+                  <PhoneInput
+                    {...field}
+                    international
+                    defaultCountry="BD"
+                    placeholder="Enter phone number"
+                    className="w-full flex items-center [&_input]:border-none [&_input]:bg-transparent [&_input]:py-2 [&_input]:px-2 [&_input]:outline-none [&_input]:flex-1 [&_.PhoneInputCountry]:flex [&_.PhoneInputCountry]:items-center [&_.PhoneInputCountry]:gap-1 [&_.PhoneInputCountry]:ml-3"
+                  />
+                </div>
+              )}
             />
             {errors.phone && (
               <p className="text-red-500 text-sm mt-1">
@@ -118,9 +125,7 @@ const UpdateProfile = () => {
           disabled={updateProfileMutation.isPending}
           className="bg-custom-primary hover:bg-green-600 text-white px-6 py-2 rounded-lg font-medium flex items-center gap-2 transition-colors disabled:opacity-70"
         >
-          {updateProfileMutation.isPending
-            ? "Updating..."
-            : "Update Profile"}
+          {updateProfileMutation.isPending ? "Updating..." : "Update Profile"}
         </button>
       </form>
     </div>
