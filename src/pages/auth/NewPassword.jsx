@@ -9,6 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import { useEmail } from "@/hooks/useEmail";
+import { ImageProvider } from "@/components/common/ImageProvider";
 
 const NewPassword = () => {
   const axiosSecure = useAxiosSecure();
@@ -90,16 +91,14 @@ const NewPassword = () => {
         <div className="w-full max-w-xl flex flex-col min-h-full">
           {/* Header */}
           <div className="flex-1 flex flex-col justify-center">
-            <Link
-              to="/login"
-              className="flex items-center justify-center mb-4 gap-2"
-            >
-              <ArrowLeft
-                className="text-custom-primary cursor-pointer"
-                size={24}
-              />
-              <MainIcon className="w-44 lg:w-auto" />
-            </Link>
+         {/* Logo + Back */}
+                   <Link
+                     to="/"
+                     className="flex items-center justify-center mb-6 gap-2"
+                   >
+                     <ArrowLeft className="text-slate-700" size={24} />
+                     <img src={ImageProvider.civia} alt="image" />
+                   </Link>
 
             <div className="text-center">
               <h2 className="text-2xl md:text-[36px] font-bold">
