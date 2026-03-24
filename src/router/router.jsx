@@ -46,6 +46,7 @@ import CancelPage from "@/pages/SuccessAndCancel/CancelPage";
 import BlogDetails from "@/pages/blog/BlogDetails";
 import TearmsAndCondition from "@/pages/terms/TearmsAndCondition";
 import PrivacyPolicy from "@/pages/terms/PrivacyPolicy";
+import NotFound from "@/pages/NotFound/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -107,6 +108,10 @@ const router = createBrowserRouter([
       {
         path: "/privacy-policy",
         element: <PrivacyPolicy />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },

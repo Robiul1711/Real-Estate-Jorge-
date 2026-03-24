@@ -134,7 +134,7 @@ const ContactUs = () => {
                     <PhoneInput
                       {...field}
                       international
-                      defaultCountry="BD"
+                      defaultCountry="ES"
                       placeholder="Phone Number"
                       className="w-full flex items-center [&_input]:border-none [&_input]:bg-transparent [&_input]:py-3 [&_input]:px-2 [&_input]:outline-none [&_input]:flex-1 [&_.PhoneInputCountry]:flex [&_.PhoneInputCountry]:items-center [&_.PhoneInputCountry]:gap-1"
                     />

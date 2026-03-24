@@ -197,7 +197,7 @@ const SignUp = () => {
                     <PhoneInput
                       {...field}
                       international
-                      defaultCountry="BD"
+                      defaultCountry="ES"
                       className="w-full px-4 py-2 md:py-3 border rounded-md outline-none"
                       placeholder="Enter phone number"
                     />

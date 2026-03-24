@@ -6,6 +6,7 @@ import { ImageProvider } from "@/components/common/ImageProvider";
 import { useAuth } from "@/hooks/useAuth";
 import UserDropdown from "./UserDropdown";
 import { useEmail } from "@/hooks/useEmail";
+import LanguageArea from "@/components/common/LanguageArea";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -74,7 +75,7 @@ const Navbar = () => {
     <header
       className={`fixed top-0 left-0 section-padding-x right-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? "bg-white shadow-md py-1"
+          ? "bg-white shadow-md py-4"
           : "bg-white xl:bg-transparent py-4 "
       }`}
     >
@@ -162,40 +163,51 @@ const Navbar = () => {
             </nav>
           )}
         </div>
-        {token ? (
-          <div>
-            <UserDropdown userData={user} logout={logout} />
-          </div>
-        ) : (
-          <div className="flex items-center gap-4">
-            <div className="hidden sm:flex items-center gap-4">
-              <Link to="/login">
-                <button className="text-[15px] lg:text-[17px] font-medium px-4 lg:px-6 rounded-md py-[5px] lg:py-[7px] text-custom-primary border border-custom-primary relative before:absolute overflow-hidden before:translate-x-[-200px] hover:before:translate-x-0 before:z-[-1] before:translate-y-12 dark:text-custom-primary dark:border-custom-primary dark:z-0 dark:before:bg-custom-primary before:transition hover:before:translate-y-0 before:duration-300 hover:text-secondary  before:w-full before:h-full before:bg-custom-primary before:top-0 before:left-0 cursor-pointer">
-                  Login
-                </button>
-              </Link>
-
-              <Link to="/sign-up">
-                <button className="text-[15px] lg:text-[17px] font-medium px-4 lg:px-6 rounded-md py-[5px] lg:py-[7px] bg-custom-primary text-white border border-custom-primary hover:bg-transparent hover:text-custom-primary transition duration-300 cursor-pointer">
-                  Signup
-                </button>
-              </Link>
+        <div className="flex items-center gap-4">
+          <LanguageArea />
+          {token ? (
+            <div>
+              <UserDropdown userData={user} logout={logout} />
             </div>
-            {/* Mobile Toggle */}
-            <button
-              className="lg:hidden text-custom-primary z-50"
-              onClick={toggleMobileMenu}
-            >
-              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        )}
+          ) : (
+            <div className="flex items-center gap-4">
+              <div className="hidden sm:flex items-center gap-4">
+                <Link to="/login">
+                  <button className="text-[15px] lg:text-[17px] font-medium px-4 lg:px-6 rounded-md py-[5px] lg:py-[7px] text-custom-primary border border-custom-primary relative before:absolute overflow-hidden before:translate-x-[-200px] hover:before:translate-x-0 before:z-[-1] before:translate-y-12 dark:text-custom-primary dark:border-custom-primary dark:z-0 dark:before:bg-custom-primary before:transition hover:before:translate-y-0 before:duration-300 hover:text-secondary  before:w-full before:h-full before:bg-custom-primary before:top-0 before:left-0 cursor-pointer">
+                    Login
+                  </button>
+                </Link>
+
+                <Link to="/sign-up">
+                  <button className="text-[15px] lg:text-[17px] font-medium px-4 lg:px-6 rounded-md py-[5px] lg:py-[7px] bg-custom-primary text-white border border-custom-primary hover:bg-transparent hover:text-custom-primary transition duration-300 cursor-pointer">
+                    Signup
+                  </button>
+                </Link>
+              </div>
+              {/* Mobile Toggle */}
+              <button
+                className="lg:hidden text-custom-primary z-50"
+                onClick={toggleMobileMenu}
+              >
+                {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
+          )}
+        </div>
       </div>
+
+      {/* Mobile Slide Menu Overlay */}
+      <div
+        className={`fixed inset-0 top-[72px] bg-black/20 backdrop-blur-sm z-40 transition-all duration-300 lg:hidden ${
+          mobileOpen ? "opacity-100 visible" : "opacity-0 invisible"
+        }`}
+        onClick={closeMobileMenu}
+      />
 
       {/* Mobile Slide Menu */}
       <div
         ref={menuRef}
-        className={`fixed top-[72px] left-0 h-auto rounded-br-lg w-72 bg-Primary z-50 p-6 transform transition-transform duration-300 ease-in-out bg-white border ${
+        className={`fixed top-[72px] left-0 bottom-0 h-[calc(100vh-72px)] overflow-y-auto w-72 z-50 p-6 transform transition-transform duration-300 ease-in-out bg-white border-r shadow-2xl ${
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
